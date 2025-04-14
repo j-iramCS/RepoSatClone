@@ -1,33 +1,19 @@
 <template>
     <div class="w-full">
-        <label
-            v-if="label"
-            :for="id"
-            class="block mb-1 text-sm font-medium text-white"
-        >
+        <label v-if="label" :for="id" class="block mb-1 text-sm font-medium text-white">
             {{ label }}
             <span v-if="required" class="text-red-500">*</span>
         </label>
 
         <div class="relative">
             <!-- Icono izquierdo -->
-            <div
-                v-if="leftIcon"
-                class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
-            >
+            <div v-if="leftIcon" class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <span class="text-white">{{ leftIcon }}</span>
             </div>
 
             <!-- Input para número con formato -->
-            <input
-                v-if="type === 'number'"
-                :id="id"
-                ref="inputRef"
-                :value="displayValue"
-                :placeholder="placeholder"
-                :disabled="disabled"
-                :readonly="readonly"
-                :class="[
+            <input v-if="type === 'number'" :id="id" ref="inputRef" :value="displayValue" :placeholder="placeholder"
+                :disabled="disabled" :readonly="readonly" :class="[
                     'w-full px-3 py-2 border rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors',
                     leftIcon ? 'pl-10' : '',
                     rightIcon || clearable ? 'pr-10' : '',
@@ -38,27 +24,12 @@
                         ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
                         : 'border-gray-500',
                     customClass,
-                ]"
-                type="text"
-                inputmode="numeric"
-                @input="handleNumberInput"
-                @blur="handleBlur"
-                @focus="handleFocus"
-            />
+                ]" type="text" inputmode="numeric" @input="handleNumberInput" @blur="handleBlur"
+                @focus="handleFocus" />
 
             <!-- Input para otros tipos -->
-            <input
-                v-else
-                :id="id"
-                ref="inputRef"
-                :value="modelValue"
-                :type="type"
-                :placeholder="placeholder"
-                :disabled="disabled"
-                :readonly="readonly"
-                @input="handleInput"
-                @blur="handleBlur"
-                @focus="handleFocus"
+            <input v-else :id="id" ref="inputRef" :value="modelValue" :type="type" :placeholder="placeholder"
+                :disabled="disabled" :readonly="readonly" @input="handleInput" @blur="handleBlur" @focus="handleFocus"
                 :class="[
                     'w-full px-3 py-2 border rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors',
                     leftIcon ? 'pl-10' : '',
@@ -70,41 +41,25 @@
                         ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
                         : 'border-gray-500',
                     customClass,
-                ]"
-            />
+                ]" />
 
             <!-- Botón para limpiar el input -->
-            <div
-                v-if="clearable && modelValue"
-                class="absolute inset-y-0 top-2 right-0 flex items-center pr-3 cursor-pointer"
-                @click="clearInput"
-            >
-                <span
-                    class="p-1 bg-slate-800 rounded-full hover:bg-red-400 transition-colors"
-                >
-                    <Icon
-                        icon="material-symbols:close"
-                        class="text-white text-xl"
-                    />
+            <div v-if="clearable && (modelValue !== null && modelValue !== undefined && modelValue !== '')"
+                class="absolute inset-y-0 top-2 right-0 flex items-center pr-3 cursor-pointer" @click="clearInput">
+                <span class="p-1 bg-slate-800 rounded-full hover:bg-red-400 transition-colors">
+                    <Icon icon="material-symbols:close" class="text-white text-xl" />
                 </span>
             </div>
 
             <!-- Icono derecho -->
-            <div
-                v-else-if="rightIcon"
-                class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"
-            >
+            <div v-else-if="rightIcon" class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                 <span class="text-gray-500">{{ rightIcon }}</span>
             </div>
         </div>
 
         <!-- Mensajes de error de validación -->
         <template v-if="v$.$error">
-            <p
-                v-for="error in v$.$errors"
-                :key="error.$uid"
-                class="mt-1 text-sm text-red-600"
-            >
+            <p v-for="error in v$.$errors" :key="error.$uid" class="mt-1 text-sm text-red-600">
                 {{ getErrorMessage(error.$validator, error.$params) }}
             </p>
         </template>
@@ -248,7 +203,7 @@ const rules = computed(() => {
 
 const v$ = useVuelidate(rules, { internalValue });
 
-// Inicializar con el valor por defecto si modelValue está vacío
+// Inicializar con el valor por defecto solo si se proporciona uno
 if (
     (props.modelValue === "" ||
         props.modelValue === undefined ||
@@ -266,33 +221,57 @@ const displayValue = computed(() => {
         return internalValue.value;
     }
 
-    return formatNumber(Number(internalValue.value) || 0);
+    // Si no hay valor, devolver cadena vacía en lugar de 0
+    if (internalValue.value === "" || internalValue.value === null || internalValue.value === undefined) {
+        return "";
+    }
+
+    // Formatear solo si hay un valor numérico
+    return formatNumber(Number(internalValue.value));
 });
 
 // Función para formatear números
 const formatNumber = (value: number): string => {
     if (isNaN(value)) return "";
 
-    const options: Intl.NumberFormatOptions = {
-        minimumFractionDigits: props.decimalPlaces,
-        maximumFractionDigits: props.decimalPlaces,
-        useGrouping: true,
-    };
+    // Creamos nuestro propio formato personalizado en lugar de usar Intl.NumberFormat
+    let result = value.toFixed(props.decimalPlaces); // Esto da "287.00" para value=287
 
-    // Formateamos el número utilizando Intl.NumberFormat
-    const formatter = new Intl.NumberFormat("es-ES", options);
-    return formatter.format(value);
+    // Convertimos a string y separamos la parte entera de la decimal
+    const parts = result.split('.');
+    const integerPart = parts[0];
+    const decimalPart = parts.length > 1 ? parts[1] : '';
+
+    // Formatear la parte entera con separadores de miles
+    let formattedInteger = '';
+    for (let i = 0; i < integerPart.length; i++) {
+        if (i > 0 && (integerPart.length - i) % 3 === 0) {
+            formattedInteger += props.thousandsSeparator;
+        }
+        formattedInteger += integerPart[i];
+    }
+
+    // Juntar todo con el separador decimal apropiado
+    return decimalPart ?
+        formattedInteger + props.decimalSeparator + decimalPart :
+        formattedInteger;
 };
 
 // Función para parsear números formateados
-const parseFormattedNumber = (value: string): number => {
+const parseFormattedNumber = (value: string): number | null => {
+    // Si el valor está vacío, devolver null (no 0)
+    if (!value || value.trim() === "") {
+        return null;
+    }
+
     // Eliminar todos los separadores de miles
     const cleanValue = value
         .replace(new RegExp(`\\${props.thousandsSeparator}`, "g"), "")
         // Reemplazar el separador decimal si es diferente del punto
         .replace(props.decimalSeparator, ".");
 
-    return parseFloat(cleanValue);
+    const parsed = parseFloat(cleanValue);
+    return isNaN(parsed) ? null : parsed;
 };
 
 // Manejadores de eventos
@@ -318,6 +297,15 @@ const handleNumberInput = async (event: Event) => {
     const target = event.target as HTMLInputElement;
     const rawValue = target.value;
 
+    // Si el valor está vacío, manejarlo como tal
+    if (!rawValue || rawValue.trim() === "") {
+        internalValue.value = "";
+        emit("update:modelValue", "");
+        await v$.value.$validate();
+        emit("input", "");
+        return;
+    }
+
     // Permitir solo números, separador decimal y separador de miles
     const validChars = `0123456789${props.decimalSeparator}${props.thousandsSeparator}`;
     const filteredValue = rawValue
@@ -330,22 +318,34 @@ const handleNumberInput = async (event: Event) => {
         target.value = filteredValue;
         const numericValue = parseFormattedNumber(filteredValue);
 
+        // Si el valor es null (vacío), mantenerlo como cadena vacía
+        if (numericValue === null) {
+            internalValue.value = "";
+            emit("update:modelValue", "");
+        }
         // Aplicar restricciones min/max si están definidas
-        if (props.min !== undefined && numericValue < props.min) {
+        else if (props.min !== undefined && numericValue < props.min) {
             internalValue.value = props.min;
             emit("update:modelValue", props.min);
         } else if (props.max !== undefined && numericValue > props.max) {
             internalValue.value = props.max;
             emit("update:modelValue", props.max);
         } else {
-            internalValue.value = isNaN(numericValue) ? "" : numericValue;
-            emit("update:modelValue", isNaN(numericValue) ? "" : numericValue);
+            internalValue.value = numericValue;
+            emit("update:modelValue", numericValue);
         }
     } else {
         // Formatear el número
         const numericValue = parseFormattedNumber(filteredValue);
-        internalValue.value = isNaN(numericValue) ? "" : numericValue;
-        emit("update:modelValue", isNaN(numericValue) ? "" : numericValue);
+
+        // Si el valor es null (vacío), mantenerlo como cadena vacía
+        if (numericValue === null) {
+            internalValue.value = "";
+            emit("update:modelValue", "");
+        } else {
+            internalValue.value = numericValue;
+            emit("update:modelValue", numericValue);
+        }
     }
 
     await v$.value.$validate();
@@ -360,10 +360,29 @@ const handleBlur = async (event: FocusEvent) => {
     if (props.type === "number" && props.numberFormat) {
         // Al perder el foco, aseguramos que el valor se muestre formateado
         const target = event.target as HTMLInputElement;
+
+        // Si el campo está vacío, mantenerlo vacío
+        if (!target.value || target.value.trim() === "") {
+            internalValue.value = "";
+            emit("update:modelValue", "");
+            return;
+        }
+
+        // Parseamos el valor actual
         const numericValue = parseFormattedNumber(target.value);
 
-        if (!isNaN(numericValue)) {
+        // Si el valor es null o NaN, mantenerlo como cadena vacía
+        if (numericValue === null) {
+            internalValue.value = "";
+            target.value = "";
+            emit("update:modelValue", "");
+        } else {
+            // Actualizamos el valor interno
+            internalValue.value = numericValue;
+            // Formateamos para mostrar
             target.value = formatNumber(numericValue);
+            // Emitimos el valor correcto
+            emit("update:modelValue", numericValue);
         }
     }
 };
@@ -375,9 +394,15 @@ const handleFocus = (event: FocusEvent) => {
     if (props.type === "number" && props.numberFormat) {
         // Al enfocar, mostramos el valor sin formato para facilitar la edición
         const target = event.target as HTMLInputElement;
+
+        // Si el campo está vacío, mantenerlo vacío
+        if (!target.value || target.value.trim() === "") {
+            return;
+        }
+
         const numericValue = parseFormattedNumber(target.value);
 
-        if (!isNaN(numericValue)) {
+        if (numericValue !== null) {
             // Mostramos el valor sin formato para facilitar la edición
             target.value = String(numericValue);
         } else {
@@ -406,8 +431,13 @@ watch(
         await v$.value.$validate();
 
         if (props.type === "number" && inputRef.value && !isFocused.value) {
-            // Si no está enfocado, mostrar el valor formateado
-            inputRef.value.value = formatNumber(Number(newValue) || 0);
+            // Si el valor es vacío, mantener el input vacío
+            if (newValue === "" || newValue === null || newValue === undefined) {
+                inputRef.value.value = "";
+            } else {
+                // Si hay un valor numérico, formatearlo
+                inputRef.value.value = formatNumber(Number(newValue));
+            }
         }
     }
 );
@@ -426,8 +456,13 @@ onMounted(async () => {
     }
 
     if (props.type === "number" && props.numberFormat && inputRef.value) {
-        // Inicializar con el valor formateado
-        inputRef.value.value = formatNumber(Number(internalValue.value) || 0);
+        // Si el valor es vacío, mantener el input vacío
+        if (internalValue.value === "" || internalValue.value === null || internalValue.value === undefined) {
+            inputRef.value.value = "";
+        } else {
+            // Si hay un valor numérico, formatearlo
+            inputRef.value.value = formatNumber(Number(internalValue.value));
+        }
     }
 
     await v$.value.$validate();
