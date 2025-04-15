@@ -1,10 +1,10 @@
 <template>
     <Main>
         <div class="pb-6 border-b mb-7 border-slate-700 mt-2">
-            <h1 class="text-4xl font-extrabold text-blue-500">
+            <h1 class="text-4xl font-extrabold dark:text-white">
                 ¡Comencemos a crear tu ejercicio!
             </h1>
-            <p class="text-gray-300 mt-2">
+            <p class="text-gray-600 dark:text-gray-300 mt-2">
                 En este espacio podrás diseñar ejercicios personalizados
                 relacionados con el SAT, ideales para reforzar tus conocimientos
                 o evaluar a tu grupo. Puedes compartirlos con la comunidad o
@@ -21,43 +21,42 @@
                     <!-- Muestra la cartilla con el trámite seleccionado -->
 
                     <div v-if="selectedTramite"
-                        className="h-72 w-[220px] group relative overflow-hidden bg-slate-900 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        class="h-72 w-[220px] group relative overflow-hidden bg-indigo-500 dark:bg-indigo-900 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+
+                        <!-- Elementos decorativos de fondo -->
                         <div
-                            className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16">
+                            class="absolute top-0 right-0 w-32 h-32 bg-white dark:bg-indigo-300 opacity-10 dark:opacity-5 rounded-full -mr-16 -mt-16">
                         </div>
                         <div
-                            className="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -ml-12 -mb-12">
+                            class="absolute bottom-0 left-0 w-24 h-24 bg-white dark:bg-indigo-300 opacity-10 dark:opacity-5 rounded-full -ml-12 -mb-12">
                         </div>
 
+                        <!-- Botón de cerrar -->
                         <button @click.stop="quitarSeleccionTramite"
-                            class="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600">
+                            class="absolute top-2 right-2 bg-red-500 dark:bg-red-600 text-white rounded-full p-1 hover:bg-red-600 dark:hover:bg-red-700 transition-colors duration-200 z-10">
                             <Icon icon="material-symbols:close" />
                         </button>
 
                         <!-- Contenido del trámite -->
-                        <div class="flex justify-center items-center h-full w-full">
+                        <div class="flex justify-center items-center h-full w-full relative z-0">
                             <div>
-                                <h3 class="font-semibold text-white text-lg mb-2">
+                                <h3 class="font-semibold text-white text-lg mb-3 text-center">
                                     {{ selectedTramite.titulo }}
                                 </h3>
-                                <p class="text-gray-300 text-sm text-center px-4">
+                                <p class="text-gray-100 dark:text-gray-200 text-sm text-center px-2">
                                     {{ selectedTramite.descripcion }}
                                 </p>
                             </div>
                         </div>
-                        <!-- </div> -->
                     </div>
 
                     <!-- Muestra el botón de añadir cuando no hay selección -->
                     <div v-else
-                        class="relative h-72 w-[220px] border-4 bg-slate-700 border-dashed rounded-md border-gray-300 flex flex-col items-center justify-center transition-all duration-300 hover:border-white hover:bg-indigo-500 transform hover:-translate-y-1">
-                        <Icon icon="hugeicons:add-01" class="text-white text-7xl" />
-                        <p class="text-center text-white">
+                        class="relative h-72 w-[220px] border-4 border-dashed rounded-md bg-white/10 dark:bg-indigo-900/20 border-indigo-300 dark:border-indigo-600 flex flex-col items-center justify-center gap-3 p-4 transition-all duration-300 hover:border-indigo-400 dark:hover:border-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-800/30 transform hover:-translate-y-1">
+                        <Icon icon="hugeicons:add-01" class="text-7xl text-indigo-500 dark:text-indigo-300" />
+                        <p class="text-center text-gray-700 dark:text-gray-200">
                             Selecciona un trámite o servicio fiscal.
                         </p>
-                        <div class="float justify-center items-center absolute -bottom-24">
-                            <Icon icon="hugeicons:tap-05" class="text-7xl animate-bounce text-blue-500" />
-                        </div>
                     </div>
                 </template>
             </ModalFiscal>
@@ -69,25 +68,29 @@
                     <template #button-open="{ selectedDato: selectedDeclaracion }">
                         <!-- Muestra la cartilla con el trámite seleccionado -->
                         <div v-if="selectedDeclaracion"
-                            className="h-72 w-[220px] group relative overflow-hidden bg-slate-900 p-6 hover:border-blue-500 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                            class="h-72 w-[220px] group relative overflow-hidden bg-indigo-500 dark:bg-indigo-900 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+
+                            <!-- Elementos decorativos de fondo -->
                             <div
-                                className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16">
+                                class="absolute top-0 right-0 w-32 h-32 bg-white dark:bg-indigo-300 opacity-10 dark:opacity-5 rounded-full -mr-16 -mt-16">
                             </div>
                             <div
-                                className="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -ml-12 -mb-12">
+                                class="absolute bottom-0 left-0 w-24 h-24 bg-white dark:bg-indigo-300 opacity-10 dark:opacity-5 rounded-full -ml-12 -mb-12">
                             </div>
-                            <!-- Botón para quitar la selección -->
+
+                            <!-- Botón de cerrar -->
                             <button @click.stop="quitarSeleccionDeclaracion"
-                                class="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600">
+                                class="absolute top-2 right-2 bg-red-500 dark:bg-red-600 text-white rounded-full p-1 hover:bg-red-600 dark:hover:bg-red-700 transition-colors duration-200 z-10">
                                 <Icon icon="material-symbols:close" />
                             </button>
 
-                            <div class="flex justify-center items-center h-full w-full">
+                            <!-- Contenido del trámite -->
+                            <div class="flex justify-center items-center h-full w-full relative z-0">
                                 <div>
-                                    <h3 class="font-semibold text-white text-lg mb-2">
+                                    <h3 class="font-semibold text-white text-lg mb-3 text-center">
                                         {{ selectedDeclaracion.titulo }}
                                     </h3>
-                                    <p class="text-gray-300 text-sm text-center px-4">
+                                    <p class="text-gray-100 dark:text-gray-200 text-sm text-center px-2">
                                         {{ selectedDeclaracion.descripcion }}
                                     </p>
                                 </div>
@@ -96,14 +99,11 @@
 
                         <!-- Muestra el botón de añadir cuando no hay selección -->
                         <div v-else
-                            class="relative h-72 w-[220px] border-4 bg-slate-700 border-dashed rounded-md border-gray-300 flex flex-col items-center justify-center transition-all duration-300 hover:border-white hover:bg-indigo-500 transform hover:-translate-y-1">
-                            <Icon icon="hugeicons:add-01" class="text-white text-7xl" />
-                            <p class="text-center text-white">
+                            class="relative h-72 w-[220px] border-4 border-dashed rounded-md bg-white/10 dark:bg-indigo-900/20 border-indigo-300 dark:border-indigo-600 flex flex-col items-center justify-center gap-3 p-4 transition-all duration-300 hover:border-indigo-400 dark:hover:border-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-800/30 transform hover:-translate-y-1">
+                            <Icon icon="hugeicons:add-01" class="text-7xl text-indigo-500 dark:text-indigo-300" />
+                            <p class="text-center text-gray-700 dark:text-gray-200">
                                 Selecciona un tipo de declaración.
                             </p>
-                            <div class="float justify-center items-center absolute -bottom-24">
-                                <Icon icon="hugeicons:tap-05" class="text-7xl animate-bounce text-blue-500" />
-                            </div>
                         </div>
                     </template>
                 </ModalFiscal>
@@ -118,25 +118,29 @@
                     <template #button-open="{ selectedDato: selectedRegimen }">
                         <!-- Muestra la cartilla con el trámite seleccionado -->
                         <div v-if="selectedRegimen"
-                            className="h-72 w-[220px] group relative overflow-hidden bg-slate-900 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                            class="h-72 w-[220px] group relative overflow-hidden bg-indigo-500 dark:bg-indigo-900 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+
+                            <!-- Elementos decorativos de fondo -->
                             <div
-                                className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16">
+                                class="absolute top-0 right-0 w-32 h-32 bg-white dark:bg-indigo-300 opacity-10 dark:opacity-5 rounded-full -mr-16 -mt-16">
                             </div>
                             <div
-                                className="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -ml-12 -mb-12">
+                                class="absolute bottom-0 left-0 w-24 h-24 bg-white dark:bg-indigo-300 opacity-10 dark:opacity-5 rounded-full -ml-12 -mb-12">
                             </div>
-                            <!-- Botón para quitar la selección -->
+
+                            <!-- Botón de cerrar -->
                             <button @click.stop="quitarSeleccionRegimen"
-                                class="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600">
+                                class="absolute top-2 right-2 bg-red-500 dark:bg-red-600 text-white rounded-full p-1 hover:bg-red-600 dark:hover:bg-red-700 transition-colors duration-200 z-10">
                                 <Icon icon="material-symbols:close" />
                             </button>
 
-                            <div class="flex justify-center items-center h-full w-full">
+                            <!-- Contenido del trámite -->
+                            <div class="flex justify-center items-center h-full w-full relative z-0">
                                 <div>
-                                    <h3 class="font-semibold text-white text-lg mb-2">
+                                    <h3 class="font-semibold text-white text-lg mb-3 text-center">
                                         {{ selectedRegimen.titulo }}
                                     </h3>
-                                    <p class="text-gray-300 text-sm text-center px-4">
+                                    <p class="text-gray-100 dark:text-gray-200 text-sm text-center px-2">
                                         {{ selectedRegimen.descripcion }}
                                     </p>
                                 </div>
@@ -145,14 +149,11 @@
 
                         <!-- Muestra el botón de añadir cuando no hay selección -->
                         <div v-else
-                            class="relative h-72 w-[220px] border-4 bg-slate-700 border-dashed rounded-md border-gray-300 flex flex-col items-center justify-center transition-all duration-300 hover:border-white hover:bg-indigo-500 transform hover:-translate-y-1">
-                            <Icon icon="hugeicons:add-01" class="text-white text-7xl" />
-                            <p class="text-center text-white">
+                            class="relative h-72 w-[220px] border-4 border-dashed rounded-md bg-white/10 dark:bg-indigo-900/20 border-indigo-300 dark:border-indigo-600 flex flex-col items-center justify-center gap-3 p-4 transition-all duration-300 hover:border-indigo-400 dark:hover:border-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-800/30 transform hover:-translate-y-1">
+                            <Icon icon="hugeicons:add-01" class="text-7xl text-indigo-500 dark:text-indigo-300" />
+                            <p class="text-center text-gray-700 dark:text-gray-200">
                                 Selecciona un tipo de regimen de impuesto.
                             </p>
-                            <div class="float justify-center items-center absolute -bottom-24">
-                                <Icon icon="hugeicons:tap-05" class="text-7xl animate-bounce text-blue-500" />
-                            </div>
                         </div>
                     </template>
                 </ModalFiscal>
@@ -165,25 +166,29 @@
                     <template #button-open="{ selectedDato: selectedIVA }">
                         <!-- Muestra la cartilla con el trámite seleccionado -->
                         <div v-if="selectedIVA"
-                            className="h-72 w-[220px] group relative overflow-hidden bg-slate-900 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                            class="h-72 w-[220px] group relative overflow-hidden bg-indigo-500 dark:bg-indigo-900 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+
+                            <!-- Elementos decorativos de fondo -->
                             <div
-                                className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16">
+                                class="absolute top-0 right-0 w-32 h-32 bg-white dark:bg-indigo-300 opacity-10 dark:opacity-5 rounded-full -mr-16 -mt-16">
                             </div>
                             <div
-                                className="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -ml-12 -mb-12">
+                                class="absolute bottom-0 left-0 w-24 h-24 bg-white dark:bg-indigo-300 opacity-10 dark:opacity-5 rounded-full -ml-12 -mb-12">
                             </div>
-                            <!-- Botón para quitar la selección -->
+
+                            <!-- Botón de cerrar -->
                             <button @click.stop="quitarSeleccionIVA"
-                                class="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600">
+                                class="absolute top-2 right-2 bg-red-500 dark:bg-red-600 text-white rounded-full p-1 hover:bg-red-600 dark:hover:bg-red-700 transition-colors duration-200 z-10">
                                 <Icon icon="material-symbols:close" />
                             </button>
 
-                            <div class="flex justify-center items-center h-full w-full">
+                            <!-- Contenido del trámite -->
+                            <div class="flex justify-center items-center h-full w-full relative z-0">
                                 <div>
-                                    <h3 class="font-semibold text-white text-lg mb-2">
+                                    <h3 class="font-semibold text-white text-lg mb-3 text-center">
                                         {{ selectedIVA.titulo }}
                                     </h3>
-                                    <p class="text-gray-300 text-sm text-center px-4">
+                                    <p class="text-gray-100 dark:text-gray-200 text-sm text-center px-2">
                                         {{ selectedIVA.descripcion }}
                                     </p>
                                 </div>
@@ -192,14 +197,11 @@
 
                         <!-- Muestra el botón de añadir cuando no hay selección -->
                         <div v-else
-                            class="relative h-72 w-[220px] border-4 bg-slate-700 border-dashed rounded-md border-gray-300 flex flex-col items-center justify-center transition-all duration-300 hover:border-white hover:bg-indigo-500 transform hover:-translate-y-1">
-                            <Icon icon="hugeicons:add-01" class="text-white text-7xl" />
-                            <p class="text-center text-white">
+                            class="relative h-72 w-[220px] border-4 border-dashed rounded-md bg-white/10 dark:bg-indigo-900/20 border-indigo-300 dark:border-indigo-600 flex flex-col items-center justify-center gap-3 p-4 transition-all duration-300 hover:border-indigo-400 dark:hover:border-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-800/30 transform hover:-translate-y-1">
+                            <Icon icon="hugeicons:add-01" class="text-7xl text-indigo-500 dark:text-indigo-300" />
+                            <p class="text-center text-gray-700 dark:text-gray-200">
                                 Selecciona un tipo.
                             </p>
-                            <div class="float justify-center items-center absolute -bottom-24">
-                                <Icon icon="hugeicons:tap-05" class="text-7xl animate-bounce text-blue-500" />
-                            </div>
                         </div>
                     </template>
                 </ModalFiscal>
@@ -211,9 +213,6 @@
                     class="relative h-72 w-[220px] border-4 bg-yellow-500 rounded-md flex flex-col items-center justify-center transition-all duration-300 hover:border-white hover:bg-emerald-500 transform hover:-translate-y-1 cursor-pointer">
                 <Icon icon="hugeicons:play" class="text-white text-7xl" />
                 <p class="text-center text-white">Comenzar</p>
-                <div class="float justify-center items-center absolute -bottom-24">
-                    <Icon icon="hugeicons:tap-05" class="text-7xl animate-bounce text-white" />
-                </div>
                 </Link>
             </template>
         </div>

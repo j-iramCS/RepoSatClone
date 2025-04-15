@@ -1,11 +1,11 @@
 <template>
     <Main>
         <div class="container">
-            <div class="pb-6 border-b mb-7 border-slate-700 mt-2">
-                <h1 class="text-4xl font-extrabold text-white">
+            <div class="pb-6 border-b mb-7  border-gray-300 dark:border-slate-600 mt-2">
+                <h1 class="text-4xl font-extrabold dark:text-white">
                     Bienvenido de Nuevo, Iram
                 </h1>
-                <p class="text-gray-300">
+                <p class="dark:text-gray-300 text-gray-600 mt-2">
                     Aquí tienes una descripción general rápida de las
                     actividades de tu cuenta
                 </p>

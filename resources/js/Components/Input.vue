@@ -14,7 +14,7 @@
             <!-- Input para número con formato -->
             <input v-if="type === 'number'" :id="id" ref="inputRef" :value="displayValue" :placeholder="placeholder"
                 :disabled="disabled" :readonly="readonly" :class="[
-                    'w-full px-3 py-2 border rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors',
+                    'w-full px-3 py-2 border rounded-md dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors',
                     leftIcon ? 'pl-10' : '',
                     rightIcon || clearable ? 'pr-10' : '',
                     disabled
@@ -31,7 +31,7 @@
             <input v-else :id="id" ref="inputRef" :value="modelValue" :type="type" :placeholder="placeholder"
                 :disabled="disabled" :readonly="readonly" @input="handleInput" @blur="handleBlur" @focus="handleFocus"
                 :class="[
-                    'w-full px-3 py-2 border rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors',
+                    'w-full px-3 py-2 border rounded-md dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors',
                     leftIcon ? 'pl-10' : '',
                     rightIcon || clearable ? 'pr-10' : '',
                     disabled
@@ -46,7 +46,7 @@
             <!-- Botón para limpiar el input -->
             <div v-if="clearable && (modelValue !== null && modelValue !== undefined && modelValue !== '')"
                 class="absolute inset-y-0 top-2 right-0 flex items-center pr-3 cursor-pointer" @click="clearInput">
-                <span class="p-1 bg-slate-800 rounded-full hover:bg-red-400 transition-colors">
+                <span class="p-1 bg-gray-200 dark:bg-slate-800 rounded-full hover:bg-red-400 transition-colors">
                     <Icon icon="material-symbols:close" class="text-white text-xl" />
                 </span>
             </div>

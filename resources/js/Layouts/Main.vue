@@ -2,61 +2,55 @@
     <div class="min-h-screen flex flex-col overflow-hidden">
         <!-- Contenedor principal con gradiente de fondo -->
         <div
-            class="bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950 flex-grow flex items-center justify-center py-16 px-4 relative"
-        >
-            <!-- Elementos decorativos animados -->
-            <div class="absolute inset-0 overflow-hidden">
+            class="dark:bg-gradient-to-br dark:from-slate-800 dark:via-slate-900 dark:to-slate-950 bg-white flex-grow flex items-center justify-center py-16 px-4 relative transition-colors">
+            <!-- Elementos decorativos animados con pointer-events-none -->
+            <div class="absolute inset-0 overflow-hidden pointer-events-none">
                 <!-- Círculos decorativos animados -->
                 <div
-                    class="absolute top-10 left-10 w-64 h-64 bg-green-500 rounded-full opacity-5 blur-3xl animate-pulse-slow"
-                ></div>
+                    class="absolute top-10 left-10 w-64 h-64 bg-green-500 rounded-full animate-pulse-slow">
+                </div>
                 <div
-                    class="absolute top-40 right-20 w-96 h-96 bg-indigo-500 rounded-full opacity-5 blur-3xl animate-pulse-medium"
-                ></div>
+                    class="absolute top-40 right-20 w-96 h-96 bg-indigo-500 rounded-full animate-pulse-medium">
+                </div>
                 <div
-                    class="absolute bottom-20 left-1/3 w-72 h-72 bg-purple-500 rounded-full opacity-5 blur-3xl animate-pulse-fast"
-                ></div>
+                    class="absolute bottom-20 left-1/3 w-72 h-72 bg-purple-500 rounded-full animate-pulse-fast">
+                </div>
 
                 <!-- Partículas flotantes -->
                 <div class="particles">
-                    <span class="particle"></span>
-                    <span class="particle"></span>
-                    <span class="particle"></span>
-                    <span class="particle"></span>
-                    <span class="particle"></span>
-                    <span class="particle"></span>
-                    <span class="particle"></span>
-                    <span class="particle"></span>
-                    <span class="particle"></span>
-                    <span class="particle"></span>
-                    <span class="particle"></span>
-                    <span class="particle"></span>
+                    <span class="particle bg-black dark:bg-white"></span>
+                    <span class="particle bg-black dark:bg-white"></span>
+                    <span class="particle bg-black dark:bg-white"></span>
+                    <span class="particle bg-black dark:bg-white"></span>
+                    <span class="particle bg-black dark:bg-white"></span>
+                    <span class="particle bg-black dark:bg-white"></span>
+                    <span class="particle bg-black dark:bg-white"></span>
+                    <span class="particle bg-black dark:bg-white"></span>
+                    <span class="particle bg-black dark:bg-white"></span>
+                    <span class="particle bg-black dark:bg-white"></span>
+                    <span class="particle bg-black dark:bg-white"></span>
+                    <span class="particle bg-black dark:bg-white"></span>
                 </div>
             </div>
 
             <!-- Contenido principal -->
-            <div class="flex">
-                <Aside :isOpen="isSidebarOpen" @close="closeSidebar" />
-                <div class="flex-1 flex flex-col relative">
-                    <Header :onToggleSidebar="toggleSidebar" />
+            <div class="flex relative z-10">
+                <Aside :isOpen="isSidebarOpen" @close="closeSidebar" @toggleSidebar="toggleSidebar" />
 
-                    <!-- Main content area -->
-                    <main class="flex-1 p-4 pt-16 md:ml-64">
-                        <div class="max-w-6xl mx-auto mt-6">
-                            <slot></slot>
-                        </div>
-                    </main>
-                </div>
+                <!-- Main content area -->
+                <main class="flex-1 p-4 md:ml-64">
+                    <div class="max-w-6xl mx-auto mt-6">
+                        <slot></slot>
+                    </div>
+                </main>
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import Header from "@/Components/Header.vue";
 import Aside from "@/Components/Aside.vue";
-
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref } from "vue";
 
 const isSidebarOpen = ref(false);
 const toggleSidebar = () => {
@@ -70,11 +64,13 @@ const closeSidebar = () => {
 <style scoped>
 /* Animaciones de pulso para los círculos grandes de fondo */
 @keyframes pulse-slow {
+
     0%,
     100% {
         transform: scale(1);
         opacity: 0.05;
     }
+
     50% {
         transform: scale(1.05);
         opacity: 0.1;
@@ -82,11 +78,13 @@ const closeSidebar = () => {
 }
 
 @keyframes pulse-medium {
+
     0%,
     100% {
         transform: scale(1);
         opacity: 0.05;
     }
+
     50% {
         transform: scale(1.1);
         opacity: 0.1;
@@ -94,11 +92,13 @@ const closeSidebar = () => {
 }
 
 @keyframes pulse-fast {
+
     0%,
     100% {
         transform: scale(1);
         opacity: 0.05;
     }
+
     50% {
         transform: scale(1.15);
         opacity: 0.1;
@@ -133,7 +133,7 @@ const closeSidebar = () => {
     position: absolute;
     width: 6px;
     height: 6px;
-    background-color: white;
+    /* background-color: ; */
     border-radius: 50%;
     opacity: 0.2;
 }
@@ -214,15 +214,19 @@ const closeSidebar = () => {
     0% {
         transform: translateY(0) translateX(0);
     }
+
     25% {
         transform: translateY(-20px) translateX(10px);
     }
+
     50% {
         transform: translateY(0) translateX(20px);
     }
+
     75% {
         transform: translateY(20px) translateX(10px);
     }
+
     100% {
         transform: translateY(0) translateX(0);
     }

@@ -1,70 +1,108 @@
 <template>
     <Main>
-        <div class="max-w-6xl mx-auto rounded-lg shadow-md bg-gradient-to-br from-indigo-900 to-blue-950">
+        <div class="max-w-6xl mx-auto">
+
+            <!--  -->
+            <div class="px-6">
+                <div class="bg-indigo-50 dark:bg-indigo-900/20 rounded-lg p-6 mb-6 dark:text-slate-50 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Insturcciones -->
+
+                    <div class="col-span-2">
+                        <h1 class="text-2xl font-bold">Instrucciones</h1>
+                        <p class="mt-2 leading-relaxed">
+                            A continuación, deberás llenar los datos correspondientes a tu declaración provisional o
+                            definitiva de impuestos federales.
+                            El proceso consta de cuatro apartados que deberás completar en orden. Cada uno se habilitará
+                            cuando hayas finalizado el anterior:
+                        </p>
+
+                        <p class="mt-4 leading-relaxed">
+                            Conforme completes cada sección da click en el boton <span class="text-indigo-500 font-bold">Continuar</span>, se marcará como validada con un icono verde si es que toda la información de ese apartado es correcta. Asegúrate de
+                            proporcionar información precisa y revisar antes de avanzar.
+                        </p>
+                    </div>
+
+                    <div class="min-w-[300px] justify-center items-center hidden md:flex">
+                        <Icon icon="hugeicons:information-circle" class="text-9xl text-indigo-500" />
+                    </div>
+
+                </div>
+            </div>
+
+
             <!-- Header -->
-            <div class="text-white p-6 rounded-t-lg">
+            <div class="dark:text-white px-6 pb-6 rounded-t-lg">
                 <h1 class="text-2xl font-bold">
                     Declaración Provisional o Definitiva de Impuestos Federales
                 </h1>
             </div>
 
             <!-- Navigation Tabs -->
-            <div class="flex border-b bg-slate-900">
+            <div class="px-6 flex gap-1">
                 <!-- Tab Identificación -->
-                <button class="relative py-3 px-6 font-medium flex gap-2 items-center justify-center" :class="[
-                    activeTab === 'identificacion' ? 'text-white border-b-4 border-blue-500' : 'text-white',
-                    tabsValidados.identificacion ? 'bg-green-600' : ''
-                ]" @click="cambiarTab('identificacion')">
-                    Identificación
+                <button
+                    class="relative py-3 px-6 font-medium flex gap-2 items-center justify-center rounded-lg dark:text-white"
+                    :class="[
+                        activeTab === 'identificacion' ? 'border-2 bg-indigo-100 border-indigo-400 dark:bg-indigo-900/20 dark:border-indigo-400' : '',
+                        tabsValidados.identificacion ? 'bg-green-100 border-green-400 dark:bg-green-400/20 dark:border-green-500' : ''
+                    ]" @click="cambiarTab('identificacion')">
+                    IDENTIFICACIÓN
                     <Icon v-if="tabsValidados.identificacion" icon="hugeicons:checkmark-badge-03"
-                        class="text-green-300 text-xl" />
+                        class="text-green-600 dark:text-green-300 text-xl" />
                     <Icon v-else icon="mdi:hand-pointing-down"
-                        class="text-white text-2xl animate-bounce absolute -top-3" />
+                        class="text-slate-950 dark:text-slate-50 text-2xl animate-bounce absolute -top-3" />
                 </button>
 
                 <!-- Tab ISR -->
-                <button class="relative py-3 px-6 font-medium flex gap-2 items-center justify-center" :class="[
-                    activeTab === 'isr' ? 'text-white border-b-4 border-blue-500' : 'text-white',
-                    tabsValidados.isr ? 'bg-green-600' : '',
-                    !tabsValidados.identificacion ? 'opacity-50 cursor-not-allowed' : ''
-                ]" @click="tabsValidados.identificacion ? cambiarTab('isr') : null"
+                <button
+                    class="relative py-3 px-6 font-medium flex gap-2 items-center justify-center rounded-lg dark:text-white"
+                    :class="[
+                        activeTab === 'isr' ? 'border-2 bg-indigo-100 border-indigo-400 dark:bg-indigo-900/20 dark:border-indigo-400' : '',
+                        tabsValidados.isr ? 'bg-green-100 border-green-400 dark:bg-green-400/20 dark:border-green-500' : '',
+                        !tabsValidados.identificacion ? 'opacity-50 cursor-not-allowed' : ''
+                    ]" @click="tabsValidados.identificacion ? cambiarTab('isr') : null"
                     :disabled="!tabsValidados.identificacion">
                     ISR
                     <Icon v-if="!tabsValidados.identificacion" icon="hugeicons:square-lock-02"
-                        class="text-gray-300 text-xl" />
+                        class="text-gray-500 dark:text-gray-300 text-xl" />
                     <Icon v-else-if="tabsValidados.isr" icon="hugeicons:checkmark-badge-03"
-                        class="text-green-300 text-xl" />
+                        class="text-green-600 dark:text-green-300 text-xl" />
                     <Icon v-else icon="mdi:hand-pointing-down"
-                        class="text-white text-2xl animate-bounce absolute -top-3" />
+                        class="text-slate-950 dark:text-slate-50 text-2xl animate-bounce absolute -top-3" />
                 </button>
 
                 <!-- Tab IVA -->
-                <button class="relative py-3 px-6 font-medium flex gap-2 items-center justify-center" :class="[
-                    activeTab === 'iva' ? 'text-white border-b-4 border-blue-500' : 'text-white',
-                    tabsValidados.iva ? 'bg-green-600' : '',
-                    !tabsValidados.isr ? 'opacity-50 cursor-not-allowed' : ''
-                ]" @click="tabsValidados.isr ? cambiarTab('iva') : null" :disabled="!tabsValidados.isr">
+                <button
+                    class="relative py-3 px-6 font-medium flex gap-2 items-center justify-center rounded-lg dark:text-white"
+                    :class="[
+                        activeTab === 'iva' ? 'border-2 bg-indigo-100 border-indigo-400 dark:bg-indigo-900/20 dark:border-indigo-400' : '',
+                        tabsValidados.iva ? 'bg-green-100 border-green-400 dark:bg-green-400/20 dark:border-green-500' : '',
+                        !tabsValidados.isr ? 'opacity-50 cursor-not-allowed' : ''
+                    ]" @click="tabsValidados.isr ? cambiarTab('iva') : null" :disabled="!tabsValidados.isr">
                     IVA
-                    <Icon v-if="!tabsValidados.isr" icon="hugeicons:square-lock-02" class="text-gray-300 text-xl" />
+                    <Icon v-if="!tabsValidados.isr" icon="hugeicons:square-lock-02"
+                        class="text-gray-500 dark:text-gray-300 text-xl" />
                     <Icon v-else-if="tabsValidados.iva" icon="hugeicons:checkmark-badge-03"
-                        class="text-green-300 text-xl" />
+                        class="text-green-600 dark:text-green-300 text-xl" />
                     <Icon v-else icon="mdi:hand-pointing-down"
-                        class="text-white text-2xl animate-bounce absolute -top-3" />
+                        class="text-slate-950 dark:text-slate-50 text-2xl animate-bounce absolute -top-3" />
                 </button>
 
                 <!-- Tab Pagos -->
-                <button class="relative py-3 px-6 font-medium flex gap-2 items-center justify-center" :class="[
-                    activeTab === 'pagos' ? 'text-white border-b-4 border-blue-500' : 'text-white',
-                    tabsValidados.pagos ? 'bg-green-600' : '',
-                    !tabsValidados.iva ? 'opacity-50 cursor-not-allowed' : ''
-                ]" @click="tabsValidados.iva ? cambiarTab('pagos') : null" :disabled="!tabsValidados.iva">
-                    Detalle de Pagos
-                    <Icon v-if="!tabsValidados.iva" icon="hugeicons:square-lock-02" class="text-gray-300 text-xl" />
+                <button
+                    class="relative py-3 px-6 font-medium flex gap-2 items-center justify-center rounded-lg dark:text-white"
+                    :class="[
+                        activeTab === 'pagos' ? 'border-2 bg-indigo-100 border-indigo-400 dark:bg-indigo-900/20 dark:border-indigo-400' : '',
+                        tabsValidados.pagos ? 'bg-green-100 border-green-400 dark:bg-green-400/20 dark:border-green-500' : '',
+                        !tabsValidados.iva ? 'opacity-50 cursor-not-allowed' : ''
+                    ]" @click="tabsValidados.iva ? cambiarTab('pagos') : null" :disabled="!tabsValidados.iva">
+                    DETALLES DE PAGO
+                    <Icon v-if="!tabsValidados.iva" icon="hugeicons:square-lock-02"
+                        class="text-gray-500 dark:text-gray-300 text-xl" />
                     <Icon v-else-if="tabsValidados.pagos" icon="hugeicons:checkmark-badge-03"
-                        class="text-green-300 text-xl" />
+                        class="text-green-600 dark:text-green-300 text-xl" />
                     <Icon v-else icon="mdi:hand-pointing-down"
-                        class="text-white text-2xl animate-bounce absolute -top-3" />
-
+                        class="text-slate-950 dark:text-slate-50 text-2xl animate-bounce absolute -top-3" />
                 </button>
             </div>
 
@@ -72,15 +110,15 @@
             <div class="p-6">
                 <!-- Identificación Tab -->
                 <div v-if="activeTab === 'identificacion'">
-                    <h2 class="text-xl font-bold mb-4 text-white">
+                    <h2 class="text-xl font-bold mb-4 dark:text-white">
                         Datos de Identificación
                     </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                        <div class="bg-slate-900 p-4 rounded-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div class="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg border dark:border-none">
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
                                     <div class="flex items-center gap-2">
-                                        <p class="text-sm font-semibold m-0 p-0 text-white">
+                                        <p class="text-sm m-0 p-0 dark:text-white">
                                             RFC
                                         </p>
                                         <Tooltip width="none" position="top"
@@ -98,7 +136,7 @@
                                 </div>
                                 <div>
                                     <div class="flex items-center gap-2">
-                                        <p class="text-sm font-semibold m-0 p-0 text-white">
+                                        <p class="text-sm m-0 p-0 dark:text-white">
                                             CURP
                                         </p>
                                         <Tooltip width="none" position="top"
@@ -116,11 +154,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-slate-900 p-4 rounded-lg">
+                        <div class="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg border dark:border-none">
                             <div class="grid grid-cols-3 gap-4">
                                 <div>
                                     <div class="flex items-center gap-2">
-                                        <p class="text-sm font-semibold m-0 p-0 text-white">
+                                        <p class="text-sm m-0 p-0 dark:text-white">
                                             Apellido Paterno
                                         </p>
                                         <Tooltip width="none" position="top"
@@ -138,7 +176,7 @@
                                 </div>
                                 <div>
                                     <div class="flex items-center gap-2">
-                                        <p class="text-sm font-semibold m-0 p-0 text-white">
+                                        <p class="text-sm m-0 p-0 dark:text-white">
                                             Apellido Materno
                                         </p>
                                         <Tooltip width="none" position="top"
@@ -156,7 +194,7 @@
                                 </div>
                                 <div>
                                     <div class="flex items-center gap-2">
-                                        <p class="text-sm font-semibold m-0 p-0 text-white">
+                                        <p class="text-sm m-0 p-0 dark:text-white">
                                             Nombre(s)
                                         </p>
                                         <Tooltip width="none" position="top"
@@ -176,14 +214,11 @@
                         </div>
                     </div>
 
-                    <h2 class="text-xl font-bold mb-4 text-white">
-                        Datos Generales
-                    </h2>
-                    <div class="bg-slate-900 p-4 rounded-lg">
+                    <div class="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg border dark:border-none">
                         <div class="grid grid-cols-3 gap-4">
                             <div>
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         Tipo de declaración
                                     </p>
                                     <Tooltip width="none" position="top" text="Sin referencias">
@@ -198,7 +233,7 @@
                             </div>
                             <div>
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         Ejercicio
                                     </p>
                                     <Tooltip width="none" position="top" text="Sin referencias">
@@ -212,7 +247,7 @@
                             </div>
                             <div>
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         Periodo
                                     </p>
                                     <Tooltip width="none" position="top" text="Sin referencias">
@@ -230,21 +265,21 @@
 
                 <!-- ISR Tab -->
                 <div v-if="activeTab === 'isr'">
-                    <h2 class="text-xl font-bold text-white">
+                    <h2 class="text-xl font-bold dark:text-white">
                         Determinación del Impuesto Sobre la Renta (ISR)
                     </h2>
-                    <p class="text-gray-300 text-sm mb-4">
+                    <p class="dark:text-gray-300 text-gray-600 text-sm mb-4">
                         ISR personas fisicas, actividad empresarial y
                         profesional
                     </p>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div class="bg-slate-900 p-4 rounded-lg">
+                        <div class="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg border dark:border-none">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <!-- TUS INGRESOS FUERON OBTENIDO EN COPROPIEDAD O SOCIEDAD CONYUGAL -->
                                 <div class="col-span-2">
                                     <div class="flex items-center gap-2">
-                                        <p class="text-sm font-semibold m-0 p-0 text-white">
+                                        <p class="text-sm m-0 p-0 dark:text-white">
                                             ¿Tus ingresos fueron obtenido en
                                             copropiedad o sociedad conyugal?
                                         </p>
@@ -261,7 +296,7 @@
                                 <!-- INGRESO DE PERIODOS ANTERIORES -->
                                 <div class="">
                                     <div class="flex items-center gap-2">
-                                        <p class="text-sm font-semibold m-0 p-0 text-white">
+                                        <p class="text-sm m-0 p-0 dark:text-white">
                                             Ingreso de periodos anteriores
                                         </p>
                                         <Tooltip width="none" position="bottom"
@@ -277,7 +312,7 @@
                                 <!-- INGRESO DEL PERIODO -->
                                 <div class="">
                                     <div class="flex items-center gap-2">
-                                        <p class="text-sm font-semibold m-0 p-0 text-white">
+                                        <p class="text-sm m-0 p-0 dark:text-white">
                                             Ingreso del periodo
                                         </p>
                                         <Tooltip width="none" position="bottom"
@@ -293,7 +328,7 @@
                                 <!-- TOTAL DE INGRESOS -->
                                 <div class="">
                                     <div class="flex items-center gap-2">
-                                        <p class="text-sm font-semibold m-0 p-0 text-white">
+                                        <p class="text-sm m-0 p-0 dark:text-white">
                                             Total de ingresos
                                         </p>
                                         <Tooltip width="none" position="bottom"
@@ -309,7 +344,7 @@
                                 <!-- TOTAL DE INGRESOS ACUMULABLES -->
                                 <div class="">
                                     <div class="flex items-center gap-2">
-                                        <p class="text-sm font-semibold m-0 p-0 text-white">
+                                        <p class="text-sm m-0 p-0 dark:text-white">
                                             Total de ingresos acumulables
                                         </p>
                                         <Tooltip width="none" position="bottom"
@@ -325,7 +360,7 @@
                                 <!-- COMPRAS Y GASTOS DE PERIODOS ANTERIORES -->
                                 <div class="col-span-2">
                                     <div class="flex items-center gap-2">
-                                        <p class="text-sm font-semibold m-0 p-0 text-white">
+                                        <p class="text-sm m-0 p-0 dark:text-white">
                                             Compras y gastos de periodos
                                             anteriores
                                         </p>
@@ -342,7 +377,7 @@
                                 <!-- COMPRAS Y GASTOS DEL PERIODO -->
                                 <div class="">
                                     <div class="flex items-center gap-2">
-                                        <p class="text-sm font-semibold m-0 p-0 text-white">
+                                        <p class="text-sm m-0 p-0 dark:text-white">
                                             Compras y gastos del periodo
                                         </p>
                                         <Tooltip width="none" position="bottom"
@@ -358,7 +393,7 @@
                                 <!-- TOTAL DE COMPRAS Y GASTOS -->
                                 <div class="">
                                     <div class="flex items-center gap-2">
-                                        <p class="text-sm font-semibold m-0 p-0 text-white">
+                                        <p class="text-sm m-0 p-0 dark:text-white">
                                             Total de compras y gastos
                                         </p>
                                         <Tooltip width="none" position="bottom"
@@ -374,12 +409,12 @@
                             </div>
                         </div>
 
-                        <div class="bg-slate-900 p-4 rounded-lg">
+                        <div class="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg border dark:border-none">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <!-- DEDUCCIÓN DE INVERSIONES DE EJERCICIOS ANTERIORES  -->
                                 <div class="col-span-2">
                                     <div class="flex items-center gap-2">
-                                        <p class="text-sm font-semibold m-0 p-0 text-white">
+                                        <p class="text-sm m-0 p-0 dark:text-white">
                                             Deducción de inversiones de
                                             ejercicios anteriores
                                         </p>
@@ -396,7 +431,7 @@
                                 <!-- DEDUCCIÓN INMEDIATA DE INVERSIONES -->
                                 <div class="col-span-2">
                                     <div class="flex items-center gap-2">
-                                        <p class="text-sm font-semibold m-0 p-0 text-white">
+                                        <p class="text-sm m-0 p-0 dark:text-white">
                                             Deducción inmediata de inversiones
                                         </p>
                                         <Tooltip width="none" position="bottom"
@@ -412,7 +447,7 @@
                                 <!-- ¿TIENES FACILIDADES ADMINISTRATIVAS Y ESTÍMULOS DEDUCIBLES? -->
                                 <div class="col-span-2">
                                     <div class="flex items-center gap-2">
-                                        <p class="text-sm font-semibold m-0 p-0 text-white">
+                                        <p class="text-sm m-0 p-0 dark:text-white">
                                             ¿Tienes facilidades administrativas
                                             y estímulos deducibles?
                                         </p>
@@ -430,7 +465,7 @@
                                 <!-- PARTICIPACIÓN DE LOS TRABAJADORES EN LAS UTILIDADES -->
                                 <div class="col-span-2">
                                     <div class="flex items-center gap-2">
-                                        <p class="text-sm font-semibold m-0 p-0 text-white">
+                                        <p class="text-sm m-0 p-0 dark:text-white">
                                             Participación de los trabajadores en
                                             las utilidades
                                         </p>
@@ -447,7 +482,7 @@
                                 <!-- BASE GRAVABLE DEL PAGO -->
                                 <div class="col-span-2">
                                     <div class="flex items-center gap-2">
-                                        <p class="text-sm font-semibold m-0 p-0 text-white">
+                                        <p class="text-sm m-0 p-0 dark:text-white">
                                             Base gravable del pago provisional
                                         </p>
                                         <Tooltip width="none" position="bottom"
@@ -464,12 +499,12 @@
                         </div>
                     </div>
 
-                    <div class="bg-slate-900 p-4 rounded-lg">
+                    <div class="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg border dark:border-none">
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <!-- ISR CAUSADO  -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         ISR causado
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -484,7 +519,7 @@
                             <!-- ISR RETENIDO DE PERIODOS ANTERIORES -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         ISR retenido de periodos anteriores
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -499,7 +534,7 @@
                             <!-- ISR RETENIDO DEL PERIODO  -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         ISR retenido del periodo
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -514,7 +549,7 @@
                             <!-- IMPUESTO RETENIDO -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         Impuesto retenido
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -529,7 +564,7 @@
                             <!-- ISR A CARGO -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         ISR a cargo
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -547,21 +582,21 @@
 
                 <!-- IVA Tab -->
                 <div v-if="activeTab === 'iva'">
-                    <h2 class="text-xl font-bold text-white">
+                    <h2 class="text-xl font-bold dark:text-white">
                         R122 ISR Personas Físicas, Actividad Empresarial y
                         Profesional
                     </h2>
-                    <p class="text-gray-300 text-sm mb-4">
+                    <p class="dark:text-gray-300 text-gray-600 text-sm mb-4">
                         ISR personas fisicas, actividad empresarial y
                         profesional
                     </p>
 
-                    <div class="bg-slate-900 p-4 rounded-lg">
+                    <div class="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg border dark:border-none">
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             <!-- A CARGO -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         A Cargo
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -577,7 +612,7 @@
                             <!-- PARTE ACTUALIZADA  -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         Parte Actualizada
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -594,7 +629,7 @@
                             <!-- RECARGOS -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         Recargos
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -610,7 +645,7 @@
                             <!-- TOTAL DE CONTRIBUCIONES -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         Total de contribuciones
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -627,7 +662,7 @@
                             <!-- TOTAL DE APLICACIONES -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         Total de Aplicaciones
                                     </p>
                                     <Tooltip width="none" position="bottom" text="Sin referencias">
@@ -642,7 +677,7 @@
                             <!-- CANTIDAD A CARGO -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         Cantidad a Cargo
                                     </p>
                                     <Tooltip width="none" position="bottom" text="Sin referencias">
@@ -657,7 +692,7 @@
                             <!-- ¿OPTA POR PAGAR EN PARCIALIDADES? -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         ¿Opta por pagar en parcialidades?
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -675,7 +710,7 @@
                             <!-- CANTIDAD A PAGAR -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         Cantidad a Pagar
                                     </p>
                                     <Tooltip width="none" position="bottom" text="Sin referencias">
@@ -689,19 +724,19 @@
                         </div>
                     </div>
 
-                    <h2 class="text-xl font-bold text-white mt-5">
+                    <h2 class="text-xl font-bold dark:text-white mt-5">
                         Determinación del Impuesto al Valor Agregado
                     </h2>
-                    <p class="text-gray-300 text-sm mb-4">
+                    <p class="dark:text-gray-300 text-gray-600 text-sm mb-4">
                         Determinación del IVA
                     </p>
 
-                    <div class="bg-slate-900 p-4 rounded-lg">
+                    <div class="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg border dark:border-none">
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             <!-- ACTIVIDADES GRAVADAS A LA TASA DEL 16% -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         Actividades gravadas a la tasa del 16%
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -718,7 +753,7 @@
                             <!-- ACTIVIDADES GRAVADAS A LA TASA DEL 0% -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         Actividades gravadas a la tasa del 0%
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -734,7 +769,7 @@
                             <!-- ACTIVIDADES EXENTAS -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         Actividades exentas
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -750,7 +785,7 @@
                             <!-- IVA COBRADO DEL PERIODO A LA TASA DEL16% -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         IVA cobrado del periodo a la tasa del
                                         16%
                                     </p>
@@ -768,7 +803,7 @@
                             <!-- IVA ACREDITABLE DEL PERIODO -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         IVA acreditable del periodo
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -785,7 +820,7 @@
                             <!-- IVA RETENIDO -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         IVA retenido
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -801,7 +836,7 @@
                             <!-- CANTIDAD A CARGO  -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         Cantidad a Cargo
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -817,7 +852,7 @@
                             <!-- IMPUESTO A CARGO  -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         Impuesto a Cargo
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -835,19 +870,19 @@
 
                 <!-- Pagos Tab -->
                 <div v-if="activeTab === 'pagos'">
-                    <h2 class="text-xl font-bold text-white">
+                    <h2 class="text-xl font-bold dark:text-white">
                         Detalle de Pagos
                     </h2>
-                    <p class="text-gray-300 text-sm mb-4">
+                    <p class="dark:text-gray-300 text-gray-600 text-sm mb-4">
                         R21 Impuesto al valor agregado
                     </p>
 
-                    <div class="bg-slate-900 p-4 rounded-lg">
+                    <div class="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg border dark:border-none">
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             <!-- A CARGO -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         A Cargo
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -863,7 +898,7 @@
                             <!-- PARTE ACTUALIZADA -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         Parte Actualizada
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -880,7 +915,7 @@
                             <!-- RECARGOS -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         Recargos
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -896,7 +931,7 @@
                             <!-- TOTAL DE CONTRIBUCIONES  -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         Total de Contribuciones
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -913,7 +948,7 @@
                             <!-- TOTAL DE APLICACIONES  -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         Total de Aplicaciones
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -929,7 +964,7 @@
                             <!-- CANTIDAD A CARGO  -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         Cantidad a Cargo
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -945,7 +980,7 @@
                             <!-- CANTIDAD A PAGAR  -->
                             <div class="">
                                 <div class="flex items-center gap-2">
-                                    <p class="text-sm font-semibold m-0 p-0 text-white">
+                                    <p class="text-sm m-0 p-0 dark:text-white">
                                         Cantidad a Pagar
                                     </p>
                                     <Tooltip width="none" position="bottom"
@@ -963,17 +998,18 @@
             </div>
         </div>
 
-        <div class="flex justify-end mt-4">
-            <button class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg shadow transition-colors"
+
+        <div class="flex justify-end mt-4 px-6">
+            <button class="bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-2 rounded-lg shadow transition-colors"
                 @click="guardar">
-                {{ activeTab === 'pagos' && tabsValidados.pagos ? 'Guardar Todo' : 'Guardar y Continuar' }}
+                Continuar
             </button>
         </div>
 
-        <button @click="showModal = true">Abrir Modal</button>
+        <!-- <button @click="showModal = true">Abrir Modal</button>
 
         <Modal :show="showModal" @close="showModal = false" title="Vista de tu Ejercicio" max-width="5xl">
-        </Modal>
+        </Modal> -->
     </Main>
 </template>
 
@@ -1234,7 +1270,7 @@ const guardar = async () => {
         tabsValidados.value[currentTab] = validoActual;
 
         if (!validoActual) {
-            toast(`Hay errores en ${currentTab.toUpperCase()}`, {
+            toast(`Hay errores en "${currentTab}" revisa los campos que faltan`, {
                 theme: "dark",
                 type: "error"
             });
@@ -1251,6 +1287,11 @@ const guardar = async () => {
             theme: "dark",
             type: "success"
         });
+
+
+
+
+
     } else {
         // 3. Encontrar el primer tab incompleto
         const siguienteTabIncompleto = tabOrder.find(tab => !tabsValidados.value[tab]);

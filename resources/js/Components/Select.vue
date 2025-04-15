@@ -13,7 +13,7 @@
             <!-- Campo de selección principal -->
             <div
                 @click="toggleDropdown"
-                class="flex mt-2 items-center justify-between text-white w-full px-3 py-2 bg-transparent border rounded-md cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                class="flex mt-2 items-center justify-between dark:text-white w-full px-3 py-2 bg-transparent border rounded-md cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 :class="[
                     isOpen ? 'border-blue-500' : 'border-gray-500',
                     v$.$error
@@ -81,7 +81,7 @@
             <!-- Dropdown con las opciones -->
             <div
                 v-show="isOpen && !disabled"
-                class="absolute z-10 w-full mt-1 bg-slate-700 border border-gray-500 text-white rounded-md shadow-lg max-h-60 overflow-auto"
+                class="absolute z-10 w-full mt-1 dark:bg-slate-700 border border-gray-500 bg-white dark:text-white rounded-md shadow-lg max-h-60 overflow-auto"
             >
                 <!-- Barra de búsqueda -->
                 <div
@@ -104,8 +104,8 @@
                         v-for="option in filteredOptions"
                         :key="option.value"
                         @click.stop="selectOption(option)"
-                        class="px-3 py-2 cursor-pointer hover:bg-slate-600"
-                        :class="{ 'bg-indigo-500': isSelected(option) }"
+                        class="px-3 py-2 cursor-pointer hover:bg-indigo-100 dark:text-white dark:hover:bg-slate-500"
+                        :class="{ 'bg-indigo-400 dark:bg-slate-600 text-white': isSelected(option) }"
                     >
                         <div class="flex items-center">
                             <input
