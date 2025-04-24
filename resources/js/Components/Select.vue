@@ -15,7 +15,7 @@
                 @click="toggleDropdown"
                 class="flex mt-2 items-center justify-between dark:text-white w-full px-3 py-2 bg-transparent border rounded-md cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 :class="[
-                    isOpen ? 'border-blue-500' : 'border-gray-500',
+                    isOpen ? 'border-blue-500' : 'border-gray-300 dark:border-gray-600',
                     v$.$error
                         ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
                         : '',
@@ -81,17 +81,17 @@
             <!-- Dropdown con las opciones -->
             <div
                 v-show="isOpen && !disabled"
-                class="absolute z-10 w-full mt-1 dark:bg-slate-700 border border-gray-500 bg-white dark:text-white rounded-md shadow-lg max-h-60 overflow-auto"
+                class="absolute z-10 w-full mt-1 dark:bg-slate-800 border border-gray-300 dark:border-gray-600 bg-white dark:text-white rounded-md shadow-lg max-h-60 overflow-auto"
             >
                 <!-- Barra de búsqueda -->
                 <div
                     v-if="searchable"
-                    class="sticky top-0 p-2 bg-slate-700 border-gray-200"
+                    class="sticky top-0 p-2  border-gray-300 dark:border-gray-600"
                 >
                     <input
                         v-model="searchQuery"
                         type="text"
-                        class="w-full px-3 py-2 text-sm border bg-transparent border-gray-500 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        class="w-full px-3 py-2 text-sm border bg-transparent border-gray-300 dark:border-gray-600 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         :placeholder="searchPlaceholder"
                         @click.stop
                         ref="searchInput"
@@ -104,7 +104,7 @@
                         v-for="option in filteredOptions"
                         :key="option.value"
                         @click.stop="selectOption(option)"
-                        class="px-3 py-2 cursor-pointer hover:bg-indigo-100 dark:text-white dark:hover:bg-slate-500"
+                        class="px-3 py-2 cursor-pointer hover:bg-indigo-100 hover:text-slate-900 dark:text-white dark:hover:bg-slate-500"
                         :class="{ 'bg-indigo-400 dark:bg-slate-600 text-white': isSelected(option) }"
                     >
                         <div class="flex items-center">
@@ -121,7 +121,7 @@
                 </div>
 
                 <!-- Mensaje cuando no hay resultados -->
-                <div v-else class="px-3 py-4 text-sm text-gray-300 text-center">
+                <div v-else class="px-3 py-4 text-sm text-gray-600 dark:text-gray-300 text-center">
                     No se encontraron resultados para "{{ searchQuery }}"
                 </div>
             </div>

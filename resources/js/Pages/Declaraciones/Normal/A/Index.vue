@@ -2,70 +2,73 @@
     <Main>
         <div class="max-w-6xl mx-auto">
 
-            <!--  -->
-            <div class="px-6">
-                <div class="bg-indigo-50 dark:bg-indigo-900/20 rounded-lg p-6 mb-6 dark:text-slate-50 grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Insturcciones -->
-
-                    <div class="col-span-2">
+            <div class="relative mb-6">
+                <!-- Encabezado que funciona como trigger -->
+                <div class="border-l-4 border-blue-500 bg-white dark:bg-[#171b2e] rounded-t-lg p-4 dark:text-slate-50 flex justify-between items-center shadow-md cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-300"
+                    :class="{ 'rounded-b-lg': !isOpen }" @click="toggleContent">
+                    <div class="flex items-center gap-3">
+                        <div class="transition-transform duration-300" :class="{ 'rotate-180': isOpen }">
+                            <Icon icon="mdi:chevron-down" class="text-2xl text-indigo-500" />
+                        </div>
                         <h1 class="text-2xl font-bold">Instrucciones</h1>
-                        <p class="mt-2 leading-relaxed">
-                            A continuación, deberás llenar los datos correspondientes a tu declaración provisional o
-                            definitiva de impuestos federales.
-                            El proceso consta de cuatro apartados que deberás completar en orden. Cada uno se habilitará
-                            cuando hayas finalizado el anterior:
-                        </p>
-
-                        <p class="mt-4 leading-relaxed">
-                            Conforme completes cada sección da click en el boton <span class="text-indigo-500 font-bold">Continuar</span>, se marcará como validada con un icono verde si es que toda la información de ese apartado es correcta. Asegúrate de
-                            proporcionar información precisa y revisar antes de avanzar.
-                        </p>
                     </div>
-
-                    <div class="min-w-[300px] justify-center items-center hidden md:flex">
-                        <Icon icon="hugeicons:information-circle" class="text-9xl text-indigo-500" />
+                    <div class="hidden md:block text-indigo-500 text-sm font-medium">
+                        {{ isOpen ? 'Ocultar detalles' : 'Ver instrucciones completas' }}
                     </div>
+                </div>
 
+                <!-- Contenido con animación usando Transition -->
+                <div class="overflow-hidden transition-all duration-500 ease-in-out border-l-4 border-blue-500 bg-white dark:bg-[#171b2e] rounded-b-lg shadow-md"
+                    :class="[isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0']">
+                    <div class="px-6 pb-6 pt-2 dark:text-slate-50">
+                        <div class="flex flex-col md:flex-row gap-6">
+                            <div class="flex-grow">
+                                <p class="mt-2 leading-relaxed">
+                                    Lo que harás a continuación es un ejercicio con las respuestas correctas. Estas
+                                    respuestas forman parte del ejercicio. Más adelante, podrás crear la actividad
+                                    completa y seleccionar este ejercicio para integrarlo a tu actividad principal.
+                                </p>
+                                <p class="mt-2 leading-relaxed">
+                                    A continuación, deberás llenar los datos correspondientes a tu declaración
+                                    provisional o definitiva de impuestos federales. El proceso consta de tres apartados
+                                    que deberás completar en orden. Cada uno se habilitará cuando hayas finalizado el
+                                    anterior:
+                                </p>
+                                <p class="mt-4 leading-relaxed">
+                                    Conforme completes cada sección da click en el boton <span
+                                        class="text-indigo-500 font-bold">Continuar</span>, se marcará como validada con
+                                    un icono verde si es que toda la información de ese apartado es correcta. Asegúrate
+                                    de proporcionar información precisa y revisar antes de avanzar.
+                                </p>
+                            </div>
+                            <div
+                                class="min-w-[150px] md:min-w-[200px] lg:min-w-[250px] justify-center items-center hidden md:flex">
+                                <Icon icon="typcn:info" class="text-9xl text-indigo-500" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
 
             <!-- Header -->
-            <div class="dark:text-white px-6 pb-6 rounded-t-lg">
+            <div class="dark:text-white pb-6 rounded-t-lg">
                 <h1 class="text-2xl font-bold">
                     Declaración Provisional o Definitiva de Impuestos Federales
                 </h1>
             </div>
 
             <!-- Navigation Tabs -->
-            <div class="px-6 flex gap-1">
-                <!-- Tab Identificación -->
-                <button
-                    class="relative py-3 px-6 font-medium flex gap-2 items-center justify-center rounded-lg dark:text-white"
-                    :class="[
-                        activeTab === 'identificacion' ? 'border-2 bg-indigo-100 border-indigo-400 dark:bg-indigo-900/20 dark:border-indigo-400' : '',
-                        tabsValidados.identificacion ? 'bg-green-100 border-green-400 dark:bg-green-400/20 dark:border-green-500' : ''
-                    ]" @click="cambiarTab('identificacion')">
-                    IDENTIFICACIÓN
-                    <Icon v-if="tabsValidados.identificacion" icon="hugeicons:checkmark-badge-03"
-                        class="text-green-600 dark:text-green-300 text-xl" />
-                    <Icon v-else icon="mdi:hand-pointing-down"
-                        class="text-slate-950 dark:text-slate-50 text-2xl animate-bounce absolute -top-3" />
-                </button>
-
+            <div class="flex gap-1 pb-6 flex-wrap">
                 <!-- Tab ISR -->
                 <button
-                    class="relative py-3 px-6 font-medium flex gap-2 items-center justify-center rounded-lg dark:text-white"
+                    class="relative py-3 px-6 font-medium flex gap-2 items-center justify-center rounded-lg dark:text-white shadow-md"
                     :class="[
                         activeTab === 'isr' ? 'border-2 bg-indigo-100 border-indigo-400 dark:bg-indigo-900/20 dark:border-indigo-400' : '',
-                        tabsValidados.isr ? 'bg-green-100 border-green-400 dark:bg-green-400/20 dark:border-green-500' : '',
-                        !tabsValidados.identificacion ? 'opacity-50 cursor-not-allowed' : ''
-                    ]" @click="tabsValidados.identificacion ? cambiarTab('isr') : null"
-                    :disabled="!tabsValidados.identificacion">
+                        tabsValidados.isr ? 'bg-green-300 border-green-400 dark:bg-green-400/50 dark:border-green-500' : '',
+                    ]" @click="cambiarTab('isr')">
                     ISR
-                    <Icon v-if="!tabsValidados.identificacion" icon="hugeicons:square-lock-02"
-                        class="text-gray-500 dark:text-gray-300 text-xl" />
-                    <Icon v-else-if="tabsValidados.isr" icon="hugeicons:checkmark-badge-03"
+                    <Icon v-if="tabsValidados.isr" icon="hugeicons:checkmark-badge-03"
                         class="text-green-600 dark:text-green-300 text-xl" />
                     <Icon v-else icon="mdi:hand-pointing-down"
                         class="text-slate-950 dark:text-slate-50 text-2xl animate-bounce absolute -top-3" />
@@ -73,10 +76,10 @@
 
                 <!-- Tab IVA -->
                 <button
-                    class="relative py-3 px-6 font-medium flex gap-2 items-center justify-center rounded-lg dark:text-white"
+                    class="relative py-3 px-6 font-medium flex gap-2 items-center justify-center rounded-lg dark:text-white shadow-md"
                     :class="[
                         activeTab === 'iva' ? 'border-2 bg-indigo-100 border-indigo-400 dark:bg-indigo-900/20 dark:border-indigo-400' : '',
-                        tabsValidados.iva ? 'bg-green-100 border-green-400 dark:bg-green-400/20 dark:border-green-500' : '',
+                        tabsValidados.iva ? 'bg-green-300 border-green-400 dark:bg-green-400/50 dark:border-green-500' : '',
                         !tabsValidados.isr ? 'opacity-50 cursor-not-allowed' : ''
                     ]" @click="tabsValidados.isr ? cambiarTab('iva') : null" :disabled="!tabsValidados.isr">
                     IVA
@@ -90,10 +93,10 @@
 
                 <!-- Tab Pagos -->
                 <button
-                    class="relative py-3 px-6 font-medium flex gap-2 items-center justify-center rounded-lg dark:text-white"
+                    class="relative py-3 px-6 font-medium flex gap-2 items-center justify-center rounded-lg dark:text-white shadow-md"
                     :class="[
                         activeTab === 'pagos' ? 'border-2 bg-indigo-100 border-indigo-400 dark:bg-indigo-900/20 dark:border-indigo-400' : '',
-                        tabsValidados.pagos ? 'bg-green-100 border-green-400 dark:bg-green-400/20 dark:border-green-500' : '',
+                        tabsValidados.pagos ? 'bg-green-300 border-green-400 dark:bg-green-400/50 dark:border-green-500' : '',
                         !tabsValidados.iva ? 'opacity-50 cursor-not-allowed' : ''
                     ]" @click="tabsValidados.iva ? cambiarTab('pagos') : null" :disabled="!tabsValidados.iva">
                     DETALLES DE PAGO
@@ -107,161 +110,7 @@
             </div>
 
             <!-- Content -->
-            <div class="p-6">
-                <!-- Identificación Tab -->
-                <div v-if="activeTab === 'identificacion'">
-                    <h2 class="text-xl font-bold mb-4 dark:text-white">
-                        Datos de Identificación
-                    </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                        <div class="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg border dark:border-none">
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <div class="flex items-center gap-2">
-                                        <p class="text-sm m-0 p-0 dark:text-white">
-                                            RFC
-                                        </p>
-                                        <Tooltip width="none" position="top"
-                                            text="El RFC es un número único que identifica a cada contribuyente en México. Puedes inventar un RFC o puedes dejar el RFC por defecto.">
-                                            <Icon icon="material-symbols:help"
-                                                class="text-xl text-blue-500 cursor-pointer" />
-                                        </Tooltip>
-                                    </div>
-                                    <Input type="text" v-model="formEjercicio.inputRFC" custom-class="mt-2"
-                                        placeholder="Ingrese su RFC" clearable default-value="XAXX010101000"
-                                        :required="true" :rules="{
-                                            maxLength: maxLength(13),
-                                            minLength: minLength(13),
-                                        }" />
-                                </div>
-                                <div>
-                                    <div class="flex items-center gap-2">
-                                        <p class="text-sm m-0 p-0 dark:text-white">
-                                            CURP
-                                        </p>
-                                        <Tooltip width="none" position="top"
-                                            text="La CURP es un código único que identifica a cada persona en México. Puedes inventar una CURP o puedes dejar la CURP por defecto.">
-                                            <Icon icon="material-symbols:help"
-                                                class="text-xl text-blue-500 cursor-pointer" />
-                                        </Tooltip>
-                                    </div>
-                                    <Input type="text" v-model="formEjercicio.inputCURP" custom-class="mt-2"
-                                        placeholder="Ingrese su RFC" clearable default-value="XXXXXXXXXXXXXXXXXX"
-                                        :required="true" :rules="{
-                                            maxLength: maxLength(18),
-                                            minLength: minLength(18),
-                                        }" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg border dark:border-none">
-                            <div class="grid grid-cols-3 gap-4">
-                                <div>
-                                    <div class="flex items-center gap-2">
-                                        <p class="text-sm m-0 p-0 dark:text-white">
-                                            Apellido Paterno
-                                        </p>
-                                        <Tooltip width="none" position="top"
-                                            text="El apellido paterno es el primer apellido de la persona. Puedes inventar un apellido o puedes dejar el apellido por defecto.">
-                                            <Icon icon="material-symbols:help"
-                                                class="text-xl text-blue-500 cursor-pointer" />
-                                        </Tooltip>
-                                    </div>
-                                    <Input type="text" v-model="formEjercicio.inputApellidoPaterno
-                                        " custom-class="mt-2" placeholder="Ingresa un apellido" clearable
-                                        default-value="PPP" :required="true" :rules="{
-                                            maxLength: maxLength(30),
-                                            minLength: minLength(2),
-                                        }" />
-                                </div>
-                                <div>
-                                    <div class="flex items-center gap-2">
-                                        <p class="text-sm m-0 p-0 dark:text-white">
-                                            Apellido Materno
-                                        </p>
-                                        <Tooltip width="none" position="top"
-                                            text="El apellido materno es el segundo apellido de la persona. Puedes inventar un apellido o puedes dejar el apellido por defecto.">
-                                            <Icon icon="material-symbols:help"
-                                                class="text-xl text-blue-500 cursor-pointer" />
-                                        </Tooltip>
-                                    </div>
-                                    <Input type="text" v-model="formEjercicio.inputApellidoMaterno
-                                        " custom-class="mt-2" placeholder="Ingresa un apellido" clearable
-                                        default-value="MMM" :required="true" :rules="{
-                                            maxLength: maxLength(30),
-                                            minLength: minLength(2),
-                                        }" />
-                                </div>
-                                <div>
-                                    <div class="flex items-center gap-2">
-                                        <p class="text-sm m-0 p-0 dark:text-white">
-                                            Nombre(s)
-                                        </p>
-                                        <Tooltip width="none" position="top"
-                                            text="El nombre(s) es el nombre de la persona. Puedes inventar un nombre o puedes dejar el nombre por defecto.">
-                                            <Icon icon="material-symbols:help"
-                                                class="text-xl text-blue-500 cursor-pointer" />
-                                        </Tooltip>
-                                    </div>
-                                    <Input type="text" v-model="formEjercicio.inputNombres" custom-class="mt-2"
-                                        placeholder="Ingresa un apellido" clearable default-value="NNN" :required="true"
-                                        :rules="{
-                                            maxLength: maxLength(30),
-                                            minLength: minLength(2),
-                                        }" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg border dark:border-none">
-                        <div class="grid grid-cols-3 gap-4">
-                            <div>
-                                <div class="flex items-center gap-2">
-                                    <p class="text-sm m-0 p-0 dark:text-white">
-                                        Tipo de declaración
-                                    </p>
-                                    <Tooltip width="none" position="top" text="Sin referencias">
-                                        <Icon icon="material-symbols:help"
-                                            class="text-xl text-blue-500 cursor-pointer" />
-                                    </Tooltip>
-                                </div>
-                                <!-- selec -->
-                                <Select v-model="formEjercicio.selectedTipoDeclaracion
-                                    " :options="optionsTipoDeclaracion" :searchable="false"
-                                    placeholder="Selecciona una declaración" :required="true" />
-                            </div>
-                            <div>
-                                <div class="flex items-center gap-2">
-                                    <p class="text-sm m-0 p-0 dark:text-white">
-                                        Ejercicio
-                                    </p>
-                                    <Tooltip width="none" position="top" text="Sin referencias">
-                                        <Icon icon="material-symbols:help"
-                                            class="text-xl text-blue-500 cursor-pointer" />
-                                    </Tooltip>
-                                </div>
-                                <!-- selec -->
-                                <Select v-model="formEjercicio.selectedEjercicio" :options="optionsEjercicio"
-                                    :searchable="false" placeholder="Selecciona un ejercicio" :required="true" />
-                            </div>
-                            <div>
-                                <div class="flex items-center gap-2">
-                                    <p class="text-sm m-0 p-0 dark:text-white">
-                                        Periodo
-                                    </p>
-                                    <Tooltip width="none" position="top" text="Sin referencias">
-                                        <Icon icon="material-symbols:help"
-                                            class="text-xl text-blue-500 cursor-pointer" />
-                                    </Tooltip>
-                                </div>
-                                <!-- selec -->
-                                <Select v-model="formEjercicio.selectedPeriodo" :options="optionsPeriodo"
-                                    :searchable="false" placeholder="Selecciona un periodo" :required="true" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="">
 
                 <!-- ISR Tab -->
                 <div v-if="activeTab === 'isr'">
@@ -273,9 +122,9 @@
                         profesional
                     </p>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div class="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg border dark:border-none">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-white shadow-md dark:bg-[#171b2e] p-4 rounded-lg">
+                            <div class="grid grid-cols-2 gap-4">
                                 <!-- TUS INGRESOS FUERON OBTENIDO EN COPROPIEDAD O SOCIEDAD CONYUGAL -->
                                 <div class="col-span-2">
                                     <div class="flex items-center gap-2">
@@ -294,7 +143,7 @@
                                         :searchable="false" placeholder="Selecciona una opción" :required="true" />
                                 </div>
                                 <!-- INGRESO DE PERIODOS ANTERIORES -->
-                                <div class="">
+                                <div class="col-span-2 md:col-span-1">
                                     <div class="flex items-center gap-2">
                                         <p class="text-sm m-0 p-0 dark:text-white">
                                             Ingreso de periodos anteriores
@@ -310,7 +159,7 @@
                                         :required="true" />
                                 </div>
                                 <!-- INGRESO DEL PERIODO -->
-                                <div class="">
+                                <div class="col-span-2 md:col-span-1">
                                     <div class="flex items-center gap-2">
                                         <p class="text-sm m-0 p-0 dark:text-white">
                                             Ingreso del periodo
@@ -326,7 +175,7 @@
                                         :required="true" />
                                 </div>
                                 <!-- TOTAL DE INGRESOS -->
-                                <div class="">
+                                <div class="col-span-2 md:col-span-1">
                                     <div class="flex items-center gap-2">
                                         <p class="text-sm m-0 p-0 dark:text-white">
                                             Total de ingresos
@@ -342,7 +191,7 @@
                                         :required="true" />
                                 </div>
                                 <!-- TOTAL DE INGRESOS ACUMULABLES -->
-                                <div class="">
+                                <div class="col-span-2 md:col-span-1">
                                     <div class="flex items-center gap-2">
                                         <p class="text-sm m-0 p-0 dark:text-white">
                                             Total de ingresos acumulables
@@ -375,7 +224,7 @@
                                         :required="true" />
                                 </div>
                                 <!-- COMPRAS Y GASTOS DEL PERIODO -->
-                                <div class="">
+                                <div class="col-span-2 md:col-span-1">
                                     <div class="flex items-center gap-2">
                                         <p class="text-sm m-0 p-0 dark:text-white">
                                             Compras y gastos del periodo
@@ -391,7 +240,7 @@
                                         :required="true" />
                                 </div>
                                 <!-- TOTAL DE COMPRAS Y GASTOS -->
-                                <div class="">
+                                <div class="col-span-2 md:col-span-1">
                                     <div class="flex items-center gap-2">
                                         <p class="text-sm m-0 p-0 dark:text-white">
                                             Total de compras y gastos
@@ -409,7 +258,7 @@
                             </div>
                         </div>
 
-                        <div class="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg border dark:border-none">
+                        <div class="bg-white shadow-md dark:bg-[#171b2e] p-4 rounded-lg">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <!-- DEDUCCIÓN DE INVERSIONES DE EJERCICIOS ANTERIORES  -->
                                 <div class="col-span-2">
@@ -499,8 +348,8 @@
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg border dark:border-none">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white shadow-md dark:bg-[#171b2e] p-4 rounded-lg">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             <!-- ISR CAUSADO  -->
                             <div class="">
                                 <div class="flex items-center gap-2">
@@ -591,7 +440,7 @@
                         profesional
                     </p>
 
-                    <div class="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg border dark:border-none">
+                    <div class="bg-white shadow-md dark:bg-[#171b2e] p-4 rounded-lg">
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             <!-- A CARGO -->
                             <div class="">
@@ -731,7 +580,7 @@
                         Determinación del IVA
                     </p>
 
-                    <div class="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg border dark:border-none">
+                    <div class="bg-white shadow-md dark:bg-[#171b2e] p-4 rounded-lg">
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             <!-- ACTIVIDADES GRAVADAS A LA TASA DEL 16% -->
                             <div class="">
@@ -877,7 +726,7 @@
                         R21 Impuesto al valor agregado
                     </p>
 
-                    <div class="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg border dark:border-none">
+                    <div class="bg-white shadow-md dark:bg-[#171b2e] p-4 rounded-lg">
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             <!-- A CARGO -->
                             <div class="">
@@ -999,17 +848,13 @@
         </div>
 
 
-        <div class="flex justify-end mt-4 px-6">
+        <div class="flex justify-end mt-4">
             <button class="bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-2 rounded-lg shadow transition-colors"
                 @click="guardar">
                 Continuar
             </button>
         </div>
 
-        <!-- <button @click="showModal = true">Abrir Modal</button>
-
-        <Modal :show="showModal" @close="showModal = false" title="Vista de tu Ejercicio" max-width="5xl">
-        </Modal> -->
     </Main>
 </template>
 
@@ -1018,6 +863,7 @@
 // Notificaciones Toastify
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+import axios from 'axios';
 
 // Composables
 import { Icon } from "@iconify/vue";
@@ -1032,10 +878,9 @@ import Select from "@/Components/Select.vue";
 import Input from "@/Components/Input.vue";
 import Modal from "@/Components/Modal.vue";
 
-const activeTab = ref<any>("identificacion"); // Estado
+const activeTab = ref<any>("isr"); // Estado
 const showModal = ref(false); // Modal
 const tabsValidados = ref<any>({
-    identificacion: false,
     isr: false,
     iva: false,
     pagos: false
@@ -1051,17 +896,6 @@ import {
 } from "@vuelidate/validators";
 
 const formEjercicio = ref({
-    inputRFC: "", // r
-    inputCURP: "", // r
-
-    inputApellidoPaterno: "", // r
-    inputApellidoMaterno: "", // r
-    inputNombres: "", // r
-
-    selectedTipoDeclaracion: "", // r
-    selectedEjercicio: "", // r
-    selectedPeriodo: "", // r
-
     selectedIngresos: "", // r
     inputIngresoPeriodoAnterior: "", // r
     inputIngresoPeriodo: "", // r
@@ -1111,37 +945,6 @@ const formEjercicio = ref({
 });
 
 // Definir reglas por tabs
-const rulesIdentificacion = computed(() => ({
-    inputRFC: {
-        required,
-        minLength: minLength(13),
-        maxLength: maxLength(13),
-    },
-    inputCURP: {
-        required,
-        minLength: minLength(18),
-        maxLength: maxLength(18),
-    },
-    inputApellidoPaterno: {
-        required,
-        minLength: minLength(2),
-        maxLength: maxLength(50),
-    },
-    inputApellidoMaterno: {
-        required,
-        minLength: minLength(2),
-        maxLength: maxLength(50),
-    },
-    inputNombres: {
-        required,
-        minLength: minLength(2),
-        maxLength: maxLength(50),
-    },
-    selectedTipoDeclaracion: required,
-    selectedEjercicio: required,
-    selectedPeriodo: required,
-}));
-
 const rulesIngresos = computed(() => ({
     selectedIngresos: required,
     inputIngresoPeriodoAnterior: required,
@@ -1193,7 +996,6 @@ const rulesIVA = computed(() => ({
 }));
 
 // Crear validadores para cada tab
-const v$Identificacion = useVuelidate(rulesIdentificacion, formEjercicio.value);
 const v$isr = useVuelidate(rulesIngresos, formEjercicio.value);
 const v$iva = useVuelidate(rulesDeterminacion, formEjercicio.value);
 const v$pagos = useVuelidate(rulesIVA, formEjercicio.value);
@@ -1201,7 +1003,6 @@ const v$pagos = useVuelidate(rulesIVA, formEjercicio.value);
 // Función para validar un tab específico
 const validarTab = async (tab: string) => {
     const validador = {
-        identificacion: v$Identificacion,
         isr: v$isr,
         iva: v$iva,
         pagos: v$pagos
@@ -1214,7 +1015,7 @@ const validarTab = async (tab: string) => {
 
     // Invalidar solo los tabs siguientes si este no es válido
     if (!isValid) {
-        const tabOrder = ["identificacion", "isr", "iva", "pagos"];
+        const tabOrder = ["isr", "iva", "pagos"];
         const currentIndex = tabOrder.indexOf(tab);
         for (let i = currentIndex + 1; i < tabOrder.length; i++) {
             tabsValidados.value[tabOrder[i]] = false;
@@ -1229,7 +1030,7 @@ const cambiarTab = async (tabDestino: string) => {
     const tabActual = activeTab.value;
     if (tabActual === tabDestino) return;
 
-    const tabOrder = ["identificacion", "isr", "iva", "pagos"];
+    const tabOrder = ["isr", "iva", "pagos"];
     const currentIndex = tabOrder.indexOf(tabActual);
     const destIndex = tabOrder.indexOf(tabDestino);
 
@@ -1253,12 +1054,11 @@ const cambiarTab = async (tabDestino: string) => {
 
 // GUARDAR
 const guardar = async () => {
-    const tabOrder = ["identificacion", "isr", "iva", "pagos"];
+    const tabOrder = ["isr", "iva", "pagos"];
     const currentTab = activeTab.value;
 
     // 1. Validar solo el tab actual
     const validadorActual = {
-        identificacion: v$Identificacion,
         isr: v$isr,
         iva: v$iva,
         pagos: v$pagos
@@ -1282,11 +1082,31 @@ const guardar = async () => {
     const todosCompletos = tabOrder.every(tab => tabsValidados.value[tab]);
 
     if (todosCompletos) {
-        console.log("✅ Todos los datos:", formEjercicio.value);
-        toast("¡Formulario completo!", {
-            theme: "dark",
-            type: "success"
-        });
+        // console.log("✅ Todos los datos:", formEjercicio.value);
+        // toast("¡Formulario completo!", {
+        //     theme: "dark",
+        //     type: "success"
+        // });
+        try {
+            const response = await axios.post(route('store.declaracion.a'), {
+                formEjercicio: formEjercicio.value,
+            });
+
+            toast("Formulario guardado con éxito", {
+                theme: "dark",
+                type: "success"
+            });
+
+            console.log(response.data);
+
+        } catch (error) {
+            toast("Error al guardar el formulario", {
+                theme: "dark",
+                type: "error"
+            });
+            console.error(error);
+
+        }
 
 
 
@@ -1306,33 +1126,6 @@ const guardar = async () => {
     }
 };
 
-const optionsTipoDeclaracion = ref([{ value: "1", label: "Normal" }]);
-const optionsEjercicio = ref([
-    { value: "2016", label: "2016" },
-    { value: "2017", label: "2017" },
-    { value: "2018", label: "2018" },
-    { value: "2019", label: "2019" },
-    { value: "2020", label: "2020" },
-    { value: "2021", label: "2021" },
-    { value: "2022", label: "2022" },
-    { value: "2023", label: "2023" },
-    { value: "2024", label: "2024" },
-    { value: "2025", label: "2025" },
-]);
-const optionsPeriodo = ref([
-    { value: "enero", label: "Enero" },
-    { value: "febrero", label: "Febrero" },
-    { value: "marzo", label: "Marzo" },
-    { value: "abril", label: "Abril" },
-    { value: "mayo", label: "Mayo" },
-    { value: "junio", label: "Junio" },
-    { value: "julio", label: "Julio" },
-    { value: "agosto", label: "Agosto" },
-    { value: "septiembre", label: "Septiembre" },
-    { value: "octubre", label: "Octubre" },
-    { value: "noviembre", label: "Noviembre" },
-    { value: "diciembre", label: "Diciembre" },
-]);
 const optionsIngresos = ref([
     { value: "si", label: "Sí" },
     { value: "no", label: "No" },
@@ -1419,6 +1212,13 @@ watch(
     },
     { immediate: true }
 );
+
+
+// Estado para controlar si el contenido está visible
+const isOpen = ref(false);
+const toggleContent = () => {
+    isOpen.value = !isOpen.value;
+};
 
 </script>
 

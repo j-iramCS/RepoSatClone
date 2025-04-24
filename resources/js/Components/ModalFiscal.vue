@@ -58,7 +58,7 @@
                         ref="modalContent"
                     >
                         <div
-                            class="max-w-5xl mx-auto p-6 bg-gray-50 rounded-xl"
+                            class="max-w-5xl mx-auto p-6 rounded-xl"
                         >
                             <div class="columns-1 lg:columns-2 gap-4">
                                 <div
@@ -82,7 +82,7 @@
                                 >
                                     <!-- Fondo con gradiente -->
                                     <div
-                                        :class="`absolute inset-0 ${item.color} opacity-10`"
+                                        :class="`absolute inset-0 bg-slate-700 sopasxd opacity-25`"
                                     ></div>
 
                                     <!-- CÃ­rculos decorativos -->
@@ -114,17 +114,17 @@
                                         </svg>
                                         <span
                                             class="text-white font-medium text-sm"
-                                            >BLOQUEADO</span
+                                            >NO DISPONIBLE</span
                                         >
                                     </div>
 
                                     <!-- Contenido -->
-                                    <div class="p-5 relative z-10">
+                                    <div class="p-5 relative z-10 bg-blue-200">
                                         <div
-                                            class="flex items-center space-x-3 mb-3"
+                                            class="flex items-center space-x-3"
                                         >
                                             <div
-                                                :class="`p-2 rounded-lg ${item.color} text-white`"
+                                                :class="`p-2 rounded-lg text-white bg-indigo-500`"
                                             >
                                             </div>
                                             <h3
@@ -205,9 +205,6 @@ import { ref, onMounted, onUnmounted, computed, defineEmits } from "vue";
 interface Types {
     id: number;
     titulo: string;
-    icono: string;
-    color: string;
-    colorText: string;
     descripcion: string;
     disponible: boolean;
 }

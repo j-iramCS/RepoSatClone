@@ -14,7 +14,7 @@
             <!-- Input para número con formato -->
             <input v-if="type === 'number'" :id="id" ref="inputRef" :value="displayValue" :placeholder="placeholder"
                 :disabled="disabled" :readonly="readonly" :class="[
-                    'w-full px-3 py-2 border rounded-md dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors',
+                    'w-full px-3 py-2 border  rounded-md dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors',
                     leftIcon ? 'pl-10' : '',
                     rightIcon || clearable ? 'pr-10' : '',
                     disabled
@@ -22,7 +22,7 @@
                         : 'bg-transparent',
                     v$.$error
                         ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
-                        : 'border-gray-500',
+                        : 'border-gray-300 dark:border-gray-600',
                     customClass,
                 ]" type="text" inputmode="numeric" @input="handleNumberInput" @blur="handleBlur"
                 @focus="handleFocus" />
@@ -39,7 +39,7 @@
                         : 'bg-transparent',
                     v$.$error
                         ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
-                        : 'border-gray-500',
+                        : 'border-gray-300 dark:border-gray-600',
                     customClass,
                 ]" />
 

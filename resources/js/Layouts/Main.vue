@@ -1,8 +1,8 @@
 <template>
-    <div class="min-h-screen flex flex-col overflow-hidden">
+    <div class="min-h-screen overflow-hidden">
         <!-- Contenedor principal con gradiente de fondo -->
         <div
-            class="dark:bg-gradient-to-br dark:from-slate-800 dark:via-slate-900 dark:to-slate-950 bg-white flex-grow flex items-center justify-center py-16 px-4 relative transition-colors">
+            class="dark:bg-[#111527] bg-[#f5f6fa] relative transition-colors">
             <!-- Elementos decorativos animados con pointer-events-none -->
             <div class="absolute inset-0 overflow-hidden pointer-events-none">
                 <!-- Círculos decorativos animados -->
@@ -38,7 +38,7 @@
                 <Aside :isOpen="isSidebarOpen" @close="closeSidebar" @toggleSidebar="toggleSidebar" />
 
                 <!-- Main content area -->
-                <main class="flex-1 p-4 md:ml-64">
+                <main class="py-16 container mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="max-w-6xl mx-auto mt-6">
                         <slot></slot>
                     </div>
