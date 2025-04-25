@@ -10,6 +10,10 @@ use App\Models\CatTramitesServicios;
 use App\Models\TramitesServicios;
 use App\Models\Ejercicios;
 use App\Models\TiposEjercicios;
+use App\Models\CatYears;
+use App\Models\CatPeriodos;
+use App\Models\CatPeriodicidades;
+use App\Models\PeriodosHasPeriodicidades;
 
 class InicialesSeeder extends Seeder
 {
@@ -206,24 +210,116 @@ class InicialesSeeder extends Seeder
         $catalogo_tipos_ejercicios = [
             [
                 'tipo' => 'ISR retenciones por salarios',
-                'descripcion' => 'Declaracion Provisional',
+                'descripcion' => 'Declaracion Provisional'
             ],
             [
                 'tipo' => 'ISR retenciones por asimilados a salarios',
-                'descripcion' => 'Declaracion Provisional',
+                'descripcion' => 'Declaracion Provisional'
             ],
             [
                 'tipo' => 'Impuesto al valor agregado. Personas fisicas',
-                'descripcion' => 'Declaracion Provisional',
+                'descripcion' => 'Declaracion Provisional'
             ],
             [
                 'tipo' => 'IVA retenciones',
-                'descripcion' => 'Declaracion Provisional',
+                'descripcion' => 'Declaracion Provisional'
             ],
         ];
 
         foreach ($catalogo_tipos_ejercicios as $tipo) {
             TiposEjercicios::create($tipo);
+        }
+
+
+        // Años
+        $catalogo_anios = [
+            ['anio' => '2020'],
+            ['anio' => '2021'],
+            ['anio' => '2022'],
+            ['anio' => '2023'],
+            ['anio' => '2024'],
+            ['anio' => '2025'],
+        ];
+        foreach ($catalogo_anios as $tipo) {
+            CatYears::create($tipo);
+        }
+
+        // Catalogo de periodicidades
+        $catalogo_periodicidades = [
+            ['nombre' => 'Mensual'],
+            ['nombre' => 'Trimestral'],
+            ['nombre' => 'Semestral (A)'],
+            ['nombre' => 'Bimestral'],
+            ['nombre' => 'Sin periodo']
+        ];
+
+        foreach ($catalogo_periodicidades as $tipo) {
+            CatPeriodicidades::create($tipo);
+        }
+
+        // Catalogo de periodos
+        $catalogo_periodos_mesual = [
+            ['nombre' => 'Enero'],
+            ['nombre' => 'Febrero'],
+            ['nombre' => 'Marzo'],
+            ['nombre' => 'Abril'],
+            ['nombre' => 'Mayo'],
+            ['nombre' => 'Junio'],
+            ['nombre' => 'Julio'],
+            ['nombre' => 'Agosto'],
+            ['nombre' => 'Septiembre'],
+            ['nombre' => 'Octubre'],
+            ['nombre' => 'Noviembre'],
+            ['nombre' => 'Diciembre'],
+
+
+        ];
+        $catalogo_periodos_trimestral = [
+            ['nombre' => 'Enero-Marzo'],
+            ['nombre' => 'Abril-Junio'],
+            ['nombre' => 'Julio-Septiembre'],
+            ['nombre' => 'Octubre-Diciembre'],
+        ];
+        $catalogo_periodos_semestralA = [
+            ['nombre' => 'Enero-Junio'],
+            ['nombre' => 'Julio-Diciembre'],
+        ];
+        $catalogo_periodos_bimestral = [
+            ['nombre' => 'Enero-Febrero'],
+            ['nombre' => 'Marzo-Abril'],
+            ['nombre' => 'Mayo-Junio'],
+            ['nombre' => 'Julio-Agosto'],
+            ['nombre' => 'Septiembre-Octubre'],
+            ['nombre' => 'Noviembre-Diciembre'],
+        ];
+
+        foreach ($catalogo_periodos_mesual as $tipo) {
+            $x = CatPeriodos::create($tipo);
+            PeriodosHasPeriodicidades::create([
+                'cat_periodo_id' => $x->id,
+                'cat_periodicidad_id' => CatPeriodicidades::where('nombre', 'Mensual')->first()->id,
+            ]);
+        }
+        foreach ($catalogo_periodos_trimestral as $tipo) {
+            $x = CatPeriodos::create($tipo);
+            PeriodosHasPeriodicidades::create([
+                'cat_periodo_id' => $x->id,
+                'cat_periodicidad_id' => CatPeriodicidades::where('nombre', 'Trimestral')->first()->id,
+            ]);
+        }
+        foreach ($catalogo_periodos_semestralA as $tipo) {
+            $x = CatPeriodos::create($tipo);
+            PeriodosHasPeriodicidades::create([
+                'cat_periodo_id' => $x->id,
+                'cat_periodicidad_id' => CatPeriodicidades::where('nombre', 'Semestral (A)')->first()->id,
+            ]);
+        }
+        foreach ($catalogo_periodos_bimestral as $tipo) {
+            $x = CatPeriodos::create($tipo);
+            PeriodosHasPeriodicidades::create([
+                'cat_periodo_id' => $x->id,
+                'cat_periodicidad_id' => CatPeriodicidades::where('nombre', 'Bimestral')->first()->id,
+            ]);
         }
     }
 }

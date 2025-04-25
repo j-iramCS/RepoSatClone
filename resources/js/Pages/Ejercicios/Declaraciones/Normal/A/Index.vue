@@ -855,6 +855,19 @@
             </button>
         </div>
 
+        <!-- Modal cuando se complete todo dar opciones de empezar actividad o crear otro ejercicio -->
+        <Modal v-model="showModal" title="¡Formulario guardado con éxito!" :width="600">
+            <div class="text-center">
+                <p class="text-gray-700 dark:text-gray-300 mb-4">
+                    El formulario se ha guardado correctamente.
+                </p>
+                <button class="bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-2 rounded-lg shadow transition-colors"
+                    @click="showModal = false">
+                    Cerrar
+                </button>
+            </div>
+        </Modal>
+
     </Main>
 </template>
 
@@ -1088,7 +1101,7 @@ const guardar = async () => {
         //     type: "success"
         // });
         try {
-            const response = await axios.post(route('store.declaracion.a'), {
+            const response = await axios.post(route('store.ejercicio.obligacion.a'), {
                 formEjercicio: formEjercicio.value,
             });
 

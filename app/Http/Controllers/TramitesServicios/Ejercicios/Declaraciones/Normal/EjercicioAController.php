@@ -24,7 +24,7 @@ class EjercicioAController extends Controller
     public function index()
     {
         //
-        return Inertia::render('Declaraciones/Normal/A/Index', []);
+        return Inertia::render('Ejercicios/Declaraciones/Normal/A/Index', []);
     }
 
     /**

@@ -1,14 +1,41 @@
 <template>
     <Main>
         <div class="max-w-4xl mx-auto mb-10 text-center relative px-4">
-            <h1 class="text-3xl md:text-4xl font-bold text-indigo-600 mb-4">¡Comencemos a crear tu ejercicio!</h1>
+            <h1 class="text-3xl md:text-4xl font-bold text-indigo-600 mb-4">¡Comencemos a definir que tipo de <span
+                    class="px-2 py-1 mr-2 rounded-lg bg-red-500 text-white">Actividad</span> quieres realizar!</h1>
             <div class="h-1 w-20 bg-gradient-to-r from-indigo-300 to-indigo-600 mx-auto mb-4 rounded-full"></div>
             <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">
-                Aquí puedes diseñar ejercicios personalizados relacionados con el SAT. Son ideales
-                para reforzar tus conocimientos o evaluar a tu grupo de estudio. Puedes compartirlos con la comunidad o
-                usarlos para crear Actividades con este ejercicio.
+                Aquí puedes crear actividades personalizadas relacionadas con el SAT. Son ideales para organizar
+                sesiones de práctica, evaluaciones o retos grupales. Puedes usar ejercicios que ya tengas, compartir tus
+                actividades con otros o guardarlas para tu propio estudio.
             </p>
         </div>
+
+        <!-- Modal en medio que muestra un mensaje si tiene_ejercicios  == false -->
+
+        <div v-if="!tiene_ejercicios" class="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-xl mx-auto text-center relative">
+                <button @click="tiene_ejercicios = true"
+                    class="absolute top-2 right-2 p-1 rounded-full text-gray-500 hover:bg-gray-100 hover:text-gray-700 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-500">
+                    <Icon icon="material-symbols:close" class="text-lg" />
+                </button>
+                <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Aún no tienes ejercicios creados
+                </h2>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">
+                    Para comenzar una actividad necesitas al menos un ejercicio creado. ¿Qué te parece si primero
+                    creamos uno?
+                </p>
+                <Link :href="route('index.crear.ejercicio')" class="text-indigo-500 hover:underline flex gap-2 justify-center items-center">
+                <span>
+                    Crear mi primer ejercicio
+                </span>
+                <!-- icon arrow -->
+                <Icon icon="material-symbols:arrow-right-alt" class="text-indigo-500 ml-2" />
+                </Link>
+            </div>
+        </div>
+
+
 
         <!-- Contenedor principal de tarjetas -->
         <div class="flex flex-wrap gap-6 justify-center text-white mt-6">
@@ -242,7 +269,7 @@
 
             <!-- Botón para empezar con el ejercicio (solo visible cuando todos los pasos están completados) -->
             <template v-if="tipoDeclaracionSeleccionado && tipoDeclaracionSeleccionado !== null">
-                <Link :href="route('index.declaracion.a')"
+                <Link :href="route('index.actividad.declaracion.a')"
                     class="relative h-80 w-64 border-3 overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex flex-col items-center justify-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl cursor-pointer group">
                 <!-- Elementos decorativos de fondo -->
                 <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300">
@@ -257,7 +284,7 @@
                 </div>
                 <h3 class="font-semibold text-white text-xl mb-2 z-10">¡Vamos a comenzar!</h3>
                 <p class="text-center text-white/80 text-sm z-10 px-6">
-                    Tu ejercicio está listo para ser rellenado.
+                    Tu actividad está lista para ser rellenada.
                 </p>
                 </Link>
             </template>
@@ -280,12 +307,20 @@ interface Types {
     disponible: boolean;
 }
 
-const { tramites_servicios, declaraciones, tipo_obligacion, tipo_declaracion } = defineProps<{
+const props = defineProps<{
     tramites_servicios: Types[];
     declaraciones: Types[];
     tipo_obligacion: Types[];
     tipo_declaracion: Types[];
+    tiene_ejercicios: boolean;
 }>();
+
+const tramites_servicios = ref(props.tramites_servicios);
+const declaraciones = ref(props.declaraciones);
+const tipo_obligacion = ref(props.tipo_obligacion);
+const tipo_declaracion = ref(props.tipo_declaracion);
+const tiene_ejercicios = ref(props.tiene_ejercicios);
+
 
 // tramites_servicios
 const tramiteSeleccionado = ref<number | null>(null);

@@ -10,7 +10,7 @@ use Inertia\Inertia;
 use App\Models\Ejercicios;
 
 
-class MisEjerciciosController extends Controller
+class usersEjerciciosController extends Controller
 {
     public function __construct()
     {
@@ -23,7 +23,7 @@ class MisEjerciciosController extends Controller
     public function index()
     {
         //
-        return Inertia::render('MisEjercicios/Index');
+        return Inertia::render('usersEjercicios/Index');
     }
 
     /**

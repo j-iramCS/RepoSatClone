@@ -53,7 +53,7 @@
                         </p>
 
                         <div class="flex justify-between items-center mt-2 flex-wrap gap-">
-                            <Link :href="route('index.create')"
+                            <Link :href="route('index.crear.actividad')"
                                 class="px-4 py-2 bg-white text-blue-600 font-medium rounded-lg hover:bg-opacity-90 transition-colors flex items-center">
                             <span>Comenzar</span>
                             <Icon icon="mdi:arrow-right" class="ml-1" />
@@ -84,7 +84,7 @@
                         </p>
 
                         <div class="flex justify-between items-center mt-2 flex-wrap gap-">
-                            <Link :href="route('index.create')"
+                            <Link :href="route('index.crear.ejercicio')"
                                 class="px-4 py-2 bg-white text-blue-600 font-medium rounded-lg hover:bg-opacity-90 transition-colors flex items-center">
                             <span>Crear</span>
                             <Icon icon="mdi:arrow-right" class="ml-1" />

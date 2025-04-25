@@ -4,24 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 use App\Models\TramitesServicios;
+use App\Models\Ejercicios;
 
-class CrearController extends Controller
+
+class CrearActividadContoller extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
-
     /**
      * Display a listing of the resource.
      */
-
     public function index()
     {
-
+        //
         $tramites_servicios = TramitesServicios::from('tramites_servicios as A')
             ->join('cat_tramites_servicios as B', 'A.cat_tramite_servicio_id', '=', 'B.id')
             ->join('cat_tipo_tramites as C', 'A.cat_tipo_tramite_id', '=', 'C.id')
@@ -63,11 +64,14 @@ class CrearController extends Controller
             ->get();
 
 
-        return Inertia::render('Crear/Index', [
+        $tiene_ejercicios = Ejercicios::where('creador_id', Auth::user()->id)->exists();
+
+        return Inertia::render('Crear/Actividades/Index', [
             'tramites_servicios' => $tramites_servicios,
             'declaraciones' => $declaraciones,
             'tipo_obligacion' => $tipo_obligacion,
             'tipo_declaracion' => $tipo_declaracion,
+            'tiene_ejercicios' => $tiene_ejercicios,
         ]);
     }
 
