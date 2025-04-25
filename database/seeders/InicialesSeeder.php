@@ -2,17 +2,14 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
 use App\Models\CatTipoTramites;
 use App\Models\CatTramitesServicios;
 use App\Models\TramitesServicios;
-use App\Models\Ejercicios;
 use App\Models\TiposEjercicios;
 use App\Models\CatYears;
-use App\Models\CatPeriodos;
 use App\Models\CatPeriodicidades;
+use App\Models\CatPeriodos;
 use App\Models\PeriodosHasPeriodicidades;
 
 class InicialesSeeder extends Seeder
@@ -22,7 +19,6 @@ class InicialesSeeder extends Seeder
      */
     public function run(): void
     {
-
         // TIPOS
         $catalogo_tipos_tramites = [
             ['tipo' => 'Tramites y Servicios'],
@@ -37,125 +33,37 @@ class InicialesSeeder extends Seeder
 
         // TRAMITES Y SERVICIOS
         $para_tramites_servicios = [
-            [
-                'titulo' => 'Declaraciones y pagos personas físicas',
-                'descripcion' => '',
-                'disponible' => 1,
-            ],
-            [
-                'titulo' => 'Declaraciones y pagos para empresas',
-                'descripcion' => '',
-                'disponible' => 0,
-            ],
-            [
-                'titulo' => 'RFC, personas',
-                'descripcion' => '',
-                'disponible' => 0,
-            ],
-            [
-                'titulo' => 'RFC, empresas',
-                'descripcion' => '',
-                'disponible' => 0,
-            ],
-            [
-                'titulo' => 'Adeudos fiscales',
-                'descripcion' => '',
-                'disponible' => 0,
-            ],
-            [
-                'titulo' => 'Facturación electrónica',
-                'descripcion' => '',
-                'disponible' => 0,
-            ]
+            ['titulo' => 'Declaraciones y pagos personas físicas', 'disponible' => 1],
+            ['titulo' => 'Declaraciones y pagos para empresas', 'disponible' => 0],
+            ['titulo' => 'RFC, personas', 'disponible' => 0],
+            ['titulo' => 'RFC, empresas', 'disponible' => 0],
+            ['titulo' => 'Adeudos fiscales', 'disponible' => 0],
+            ['titulo' => 'Facturación electrónica', 'disponible' => 0]
         ];
 
         $para_tramites = [
-            [
-                'titulo' => 'Provisionales y definitivas',
-                'descripcion' => '',
-                'disponible' => 1,
-            ],
-            [
-                'titulo' => 'Declaraciones de plataformas tecnológicas',
-                'descripcion' => '',
-                'disponible' => 0,
-            ],
-            [
-                'titulo' => 'Anual',
-                'descripcion' => '',
-                'disponible' => 0,
-            ],
-            [
-                'titulo' => 'Informativas',
-                'descripcion' => '',
-                'disponible' => 0,
-            ],
-            [
-                'titulo' => 'Visores',
-                'descripcion' => '',
-                'disponible' => 0,
-            ],
-            [
-                'titulo' => 'Derechos, productos y aprovechamientos (DPA)',
-                'descripcion' => '',
-                'disponible' => 0,
-            ],
-            [
-                'titulo' => 'Devoluciones y compensaciones',
-                'descripcion' => '',
-                'disponible' => 0,
-            ]
+            ['titulo' => 'Provisionales y definitivas', 'disponible' => 1],
+            ['titulo' => 'Declaraciones de plataformas tecnológicas', 'disponible' => 0],
+            ['titulo' => 'Anual', 'disponible' => 0],
+            ['titulo' => 'Informativas', 'disponible' => 0],
+            ['titulo' => 'Visores', 'disponible' => 0],
+            ['titulo' => 'Derechos, productos y aprovechamientos (DPA)', 'disponible' => 0],
+            ['titulo' => 'Devoluciones y compensaciones', 'disponible' => 0]
         ];
 
         $para_tipos_obligaciones_declarar = [
-            [
-                'titulo' => 'ISR retenciones por salarios',
-                'descripcion' => '',
-                'disponible' => 0
-            ],
-            [
-                'titulo' => 'ISR renteniones por asimilados a salarios',
-                'descripcion' => '',
-                'disponible' => 0
-            ],
-            [
-                'titulo' => 'Impuesto al valor agregado. Personas fisicas',
-                'descripcion' => '',
-                'disponible' => 1
-            ],
-            [
-                'titulo' => 'IVA retenciones',
-                'descripcion' => '',
-                'disponible' => 0
-            ],
+            ['titulo' => 'ISR retenciones por salarios', 'disponible' => 0],
+            ['titulo' => 'ISR renteniones por asimilados a salarios', 'disponible' => 0],
+            ['titulo' => 'Impuesto al valor agregado. Personas fisicas', 'disponible' => 1],
+            ['titulo' => 'IVA retenciones', 'disponible' => 0],
         ];
 
         $para_tipos_declaraciones = [
-            [
-                'titulo' => 'Normal',
-                'descripcion' => '',
-                'disponible' => 1,
-            ],
-            [
-                'titulo' => 'Complementaria',
-                'descripcion' => '',
-                'disponible' => 0,
-            ],
-            [
-                'titulo' => 'Normal por Corrección Fiscal',
-                'descripcion' => '',
-                'disponible' => 0,
-            ],
-            [
-                'titulo' => 'Complementaria por Corrección Fiscal',
-                'descripcion' => '',
-                'disponible' => 0,
-            ],
-            [
-                'titulo' => 'Complementaria por Dictamen',
-                'descripcion' => '',
-                'disponible' => 0,
-            ],
+            ['titulo' => 'Normal', 'disponible' => 1],
+            ['titulo' => 'Complementaria', 'disponible' => 0],
+            ['titulo' => 'Normal por Corrección Fiscal', 'disponible' => 0],
+            ['titulo' => 'Complementaria por Corrección Fiscal', 'disponible' => 0],
+            ['titulo' => 'Complementaria por Dictamen', 'disponible' => 0],
         ];
 
         foreach ($para_tramites_servicios as $item) {
@@ -173,63 +81,60 @@ class InicialesSeeder extends Seeder
 
         // Agregar Su categoria a cada uno de los tramites y servicios
         foreach ($para_tramites_servicios as $item) {
+            $catTipoTramiteId = CatTipoTramites::where('tipo', 'Tramites y Servicios')->first()->id;
+            $catTramiteServicioId = CatTramitesServicios::where('titulo', $item['titulo'])->first()->id;
+
             TramitesServicios::create([
-                'cat_tramite_servicio_id' => CatTramitesServicios::where('titulo', $item['titulo'])->first()->id,
-                'cat_tipo_tramite_id' => CatTipoTramites::where('tipo', 'Tramites y Servicios')->first()->id,
+                'cat_tramite_servicio_id' => $catTramiteServicioId,
+                'cat_tipo_tramite_id' => $catTipoTramiteId,
                 'creador_id' => 1,
             ]);
         }
 
         foreach ($para_tramites as $item) {
+            $catTipoTramiteId = CatTipoTramites::where('tipo', 'Tramites')->first()->id;
+            $catTramiteServicioId = CatTramitesServicios::where('titulo', $item['titulo'])->first()->id;
+
             TramitesServicios::create([
-                'cat_tramite_servicio_id' => CatTramitesServicios::where('titulo', $item['titulo'])->first()->id,
-                'cat_tipo_tramite_id' => CatTipoTramites::where('tipo', 'Tramites')->first()->id,
+                'cat_tramite_servicio_id' => $catTramiteServicioId,
+                'cat_tipo_tramite_id' => $catTipoTramiteId,
                 'creador_id' => 1,
             ]);
         }
 
         foreach ($para_tipos_obligaciones_declarar as $item) {
+            $catTipoTramiteId = CatTipoTramites::where('tipo', 'Tipos de obligaciones a declarar')->first()->id;
+            $catTramiteServicioId = CatTramitesServicios::where('titulo', $item['titulo'])->first()->id;
+
             TramitesServicios::create([
-                'cat_tramite_servicio_id' => CatTramitesServicios::where('titulo', $item['titulo'])->first()->id,
-                'cat_tipo_tramite_id' => CatTipoTramites::where('tipo', 'Tipos de obligaciones a declarar')->first()->id,
+                'cat_tramite_servicio_id' => $catTramiteServicioId,
+                'cat_tipo_tramite_id' => $catTipoTramiteId,
                 'creador_id' => 1,
             ]);
         }
 
         foreach ($para_tipos_declaraciones as $item) {
+            $catTipoTramiteId = CatTipoTramites::where('tipo', 'Tipos de declaraciones')->first()->id;
+            $catTramiteServicioId = CatTramitesServicios::where('titulo', $item['titulo'])->first()->id;
+
             TramitesServicios::create([
-                'cat_tramite_servicio_id' => CatTramitesServicios::where('titulo', $item['titulo'])->first()->id,
-                'cat_tipo_tramite_id' => CatTipoTramites::where('tipo', 'Tipos de declaraciones')->first()->id,
+                'cat_tramite_servicio_id' => $catTramiteServicioId,
+                'cat_tipo_tramite_id' => $catTipoTramiteId,
                 'creador_id' => 1,
             ]);
         }
 
-
-
         // Tipos Ejercicios
         $catalogo_tipos_ejercicios = [
-            [
-                'tipo' => 'ISR retenciones por salarios',
-                'descripcion' => 'Declaracion Provisional'
-            ],
-            [
-                'tipo' => 'ISR retenciones por asimilados a salarios',
-                'descripcion' => 'Declaracion Provisional'
-            ],
-            [
-                'tipo' => 'Impuesto al valor agregado. Personas fisicas',
-                'descripcion' => 'Declaracion Provisional'
-            ],
-            [
-                'tipo' => 'IVA retenciones',
-                'descripcion' => 'Declaracion Provisional'
-            ],
+            ['tipo' => 'ISR retenciones por salarios', 'descripcion' => 'Declaracion Provisional'],
+            ['tipo' => 'ISR retenciones por asimilados a salarios', 'descripcion' => 'Declaracion Provisional'],
+            ['tipo' => 'Impuesto al valor agregado. Personas fisicas', 'descripcion' => 'Declaracion Provisional'],
+            ['tipo' => 'IVA retenciones', 'descripcion' => 'Declaracion Provisional'],
         ];
 
         foreach ($catalogo_tipos_ejercicios as $tipo) {
             TiposEjercicios::create($tipo);
         }
-
 
         // Años
         $catalogo_anios = [
@@ -240,6 +145,7 @@ class InicialesSeeder extends Seeder
             ['anio' => '2024'],
             ['anio' => '2025'],
         ];
+
         foreach ($catalogo_anios as $tipo) {
             CatYears::create($tipo);
         }
@@ -250,7 +156,7 @@ class InicialesSeeder extends Seeder
             ['nombre' => 'Trimestral'],
             ['nombre' => 'Semestral (A)'],
             ['nombre' => 'Bimestral'],
-            ['nombre' => 'Sin periodo']
+            ['nombre' => 'Sin periodo'],
         ];
 
         foreach ($catalogo_periodicidades as $tipo) {
@@ -271,54 +177,14 @@ class InicialesSeeder extends Seeder
             ['nombre' => 'Octubre'],
             ['nombre' => 'Noviembre'],
             ['nombre' => 'Diciembre'],
-
-
-        ];
-        $catalogo_periodos_trimestral = [
-            ['nombre' => 'Enero-Marzo'],
-            ['nombre' => 'Abril-Junio'],
-            ['nombre' => 'Julio-Septiembre'],
-            ['nombre' => 'Octubre-Diciembre'],
-        ];
-        $catalogo_periodos_semestralA = [
-            ['nombre' => 'Enero-Junio'],
-            ['nombre' => 'Julio-Diciembre'],
-        ];
-        $catalogo_periodos_bimestral = [
-            ['nombre' => 'Enero-Febrero'],
-            ['nombre' => 'Marzo-Abril'],
-            ['nombre' => 'Mayo-Junio'],
-            ['nombre' => 'Julio-Agosto'],
-            ['nombre' => 'Septiembre-Octubre'],
-            ['nombre' => 'Noviembre-Diciembre'],
         ];
 
+        // Crear y asociar los periodos
         foreach ($catalogo_periodos_mesual as $tipo) {
             $x = CatPeriodos::create($tipo);
             PeriodosHasPeriodicidades::create([
                 'cat_periodo_id' => $x->id,
                 'cat_periodicidad_id' => CatPeriodicidades::where('nombre', 'Mensual')->first()->id,
-            ]);
-        }
-        foreach ($catalogo_periodos_trimestral as $tipo) {
-            $x = CatPeriodos::create($tipo);
-            PeriodosHasPeriodicidades::create([
-                'cat_periodo_id' => $x->id,
-                'cat_periodicidad_id' => CatPeriodicidades::where('nombre', 'Trimestral')->first()->id,
-            ]);
-        }
-        foreach ($catalogo_periodos_semestralA as $tipo) {
-            $x = CatPeriodos::create($tipo);
-            PeriodosHasPeriodicidades::create([
-                'cat_periodo_id' => $x->id,
-                'cat_periodicidad_id' => CatPeriodicidades::where('nombre', 'Semestral (A)')->first()->id,
-            ]);
-        }
-        foreach ($catalogo_periodos_bimestral as $tipo) {
-            $x = CatPeriodos::create($tipo);
-            PeriodosHasPeriodicidades::create([
-                'cat_periodo_id' => $x->id,
-                'cat_periodicidad_id' => CatPeriodicidades::where('nombre', 'Bimestral')->first()->id,
             ]);
         }
     }
