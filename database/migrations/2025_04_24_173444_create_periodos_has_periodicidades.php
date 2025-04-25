@@ -12,21 +12,23 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('periodos_has_periodicidades', function (Blueprint $table) {
-            $table->unsignedBigInteger('cat_periodo_id')->unsigned();
-            $table->unsignedBigInteger('cat_periodicidad_id')->unsigned();
+            $table->unsignedBigInteger('cat_periodo_id');
+            $table->unsignedBigInteger('cat_periodicidad_id');
             $table->timestamps();
 
+            $table->primary(['cat_periodo_id', 'cat_periodicidad_id']);
+
             $table->foreign('cat_periodo_id')
-            ->references('id')
-            ->on('cat_periodos')
-            ->onDelete('no action')
-            ->onUpdate('no action');
+                ->references('id')
+                ->on('cat_periodos')
+                ->onDelete('no action')
+                ->onUpdate('no action');
 
             $table->foreign('cat_periodicidad_id')
-            ->references('id')
-            ->on('cat_periodicidades')
-            ->onDelete('no action')
-            ->onUpdate('no action');
+                ->references('id')
+                ->on('cat_periodicidades')
+                ->onDelete('no action')
+                ->onUpdate('no action');
         });
     }
 
