@@ -1,18 +1,22 @@
 <template>
     <Main>
-        <div class="max-w-4xl mx-auto mb-10 text-center relative px-4">
-            <h1 class="text-3xl md:text-4xl font-bold text-indigo-600 mb-4">¡Comencemos a definir que tipo de <span
-                    class="px-2 py-1 mr-2 rounded-lg bg-blue-500 text-white">Ejercicio</span> quieres realizar!</h1>
-            <div class="h-1 w-20 bg-gradient-to-r from-indigo-300 to-indigo-600 mx-auto mb-4 rounded-full"></div>
-            <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">
-                Aquí puedes diseñar ejercicios personalizados relacionados con el SAT. Son ideales para reforzar tus
+        <div class="mb-6 relative">
+            <h1 class="text-3xl md:text-3xl font-bold mb-4 dark:text-white">¡Comencemos a <span class="underline decoration-blue-500">definir</span> que tipo de <span
+                    class=" rounded-lg text-blue-500">Ejercicio</span> quieres realizar!</h1>
+            <p class="text-gray-600 dark:text-gray-400 md:max-w-4xl">
+                Aquí puedes definir que tipo de ejercicios relacionados con el SAT quieres elaborar. Son ideales para reforzar tus
                 conocimientos o evaluar a tu grupo de estudio. Puedes compartirlos con la comunidad o usarlos para crear
                 Actividades basadas en ellos.
             </p>
+            <p class="text-indigo-500 mt-4 text-sm">
+                Para comenzar sigue los pasos a continuación.
+            </p>
         </div>
+        <!-- division border-->
+        <div class="border-t border-gray-300 dark:border-gray-600"></div>
 
         <!-- Contenedor principal de tarjetas -->
-        <div class="flex flex-wrap gap-6 justify-center text-white mt-6">
+        <div class="flex flex-wrap gap-6 justify-center text-white p-6">
             <!-- 1. Trámite -->
             <ModalFiscal title="Selecciona un trámite o servicio fiscal" :data="tramites_servicios"
                 v-model="tramiteSeleccionado" @select-tramite="onTramiteSelected">

@@ -1,15 +1,20 @@
 <template>
     <Main>
-        <div class="max-w-4xl mx-auto mb-10 text-center relative px-4">
-            <h1 class="text-3xl md:text-4xl font-bold text-indigo-600 mb-4">¡Comencemos a definir que tipo de <span
-                    class="px-2 py-1 mr-2 rounded-lg bg-red-500 text-white">Actividad</span> quieres realizar!</h1>
-            <div class="h-1 w-20 bg-gradient-to-r from-indigo-300 to-indigo-600 mx-auto mb-4 rounded-full"></div>
-            <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">
-                Aquí puedes crear actividades personalizadas relacionadas con el SAT. Son ideales para organizar
+
+        <div class="mb-6 relative">
+            <h1 class="text-3xl md:text-3xl font-bold mb-4 dark:text-white">¡Comencemos a <span class="underline decoration-red-500">definir</span> que tipo de <span
+                    class=" rounded-lg text-red-500">Actividad</span> quieres realizar!</h1>
+            <p class="text-gray-600 dark:text-gray-400 md:max-w-4xl">
+                Aquí puedes definir actividades personalizadas relacionadas con el SAT. Son ideales para organizar
                 sesiones de práctica, evaluaciones o retos grupales. Puedes usar ejercicios que ya tengas, compartir tus
                 actividades con otros o guardarlas para tu propio estudio.
             </p>
+            <p class="text-indigo-500 mt-4 text-sm">
+                Para comenzar sigue los pasos a continuación.
+            </p>
         </div>
+        <!-- division border-->
+        <div class="border-t border-gray-300 dark:border-gray-600"></div>
 
         <!-- Modal en medio que muestra un mensaje si tiene_ejercicios  == false -->
 

@@ -90,23 +90,53 @@ onMounted(() => {
     <div class="app-container h-screen flex flex-col">
         <!-- Sidebar SOLO para escritorio -->
         <div :class="[
-            'fixed inset-y-0 left-0 z-30 w-64 transform transition-transform duration-300 ease-in-out dark:bg-[#171b2e] bg-white shadow-lg',
+            'fixed inset-y-0 bottom-0 left-0 z-30 w-64 transform transition-transform duration-300 ease-in-out dark:bg-[#171b2e] bg-white shadow-lg',
             'hidden md:block md:translate-x-0', // Solo visible en desktop
         ]">
             <div class="flex-1 flex flex-col h-full relative z-10">
                 <!-- Logo -->
-                <div class="flex items-center justify-between p-4">
+                <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
                     <div class="flex items-center">
-                        <h1 class="text-indigo-500 font-bold text-2xl flex gap-2 items-center">
-                            <Icon icon="hugeicons:alpha" class="text-red-500 text-2xl" />
-                            onLab
+                        <h1 class="font-bold text-2xl flex gap-2 items-center dark:text-white">
+                            <!-- <Icon icon="hugeicons:alpha" class="text-red-500 text-2xl" /> -->
+                            Proyecto
                         </h1>
                         <!-- <Icon icon="game-icons:axolotl" class="text-blue-500 text-3xl" /> -->
                     </div>
                 </div>
 
-                <!-- Separador -->
-                <div class="border-b border-gray-200 dark:border-gray-700"></div>
+                <!-- Acciones (desktop only) -->
+                <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+
+                    <div class="flex gap-2">
+                        <div class="h-8 w-8 overflow-hidden rounded-full min-w-8">
+                            <img src="https://www.svgrepo.com/show/384670/account-avatar-profile-user.svg" alt="Avatar"
+                                class="h-full w-full object-cover" />
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium dark:text-gray-300 m-0 p-0">Usuario</p>
+                            <div class="flex items-center">
+                                <p class="text-xs text-gray-600 dark:text-gray-300 p-0 m-0 truncate"
+                                    title="usuarioa@gmail.com" style="max-width: 0px;">
+                                    usuarioaadasadsdasdadadadadadaadsdadasadsda
+                                </p>
+                                <p class="text-xs text-gray-600 dark:text-gray-300 p-0 m-0">@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-end items-end w-full">
+                            <button
+                                class="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors">
+                                <Icon icon="heroicons:bell" class="text-lg" />
+                            </button>
+
+                            <button @click="toggleDarkMode"
+                                class="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors">
+                                <Icon :icon="darkMode ? 'ph:sun' : 'ph:moon'" class="text-lg" />
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
 
                 <div class="h-full overflow-y-auto mt-2">
                     <!-- Navegación principal -->
@@ -161,9 +191,9 @@ onMounted(() => {
                         </button> -->
 
                         <ResponsiveNavLink :href="route('logout')" method="post" as="button"
-                            class="flex items-center gap-1 rounded-md px-3 py-2 text-sm text-red-600 hover:bg-red-100 dark:hover:bg-red-900 dark:text-red-400 transition-colors w-full">
+                            class="flex font-bold items-center gap-1 rounded-md px-3 py-2 text-sm text-red-600 hover:bg-red-100 dark:hover:bg-red-900 dark:text-red-400 transition-colors w-full dark:hover:text-white">
                             <Icon icon="hugeicons:logout-02" class="text-xl" />
-                            <span>Salir de la Cuenta</span>
+                            <span>Cerrar Sesión</span>
                         </ResponsiveNavLink>
                     </div>
                 </div>
@@ -172,14 +202,14 @@ onMounted(() => {
 
         <!-- Header para escritorio -->
         <header
-            class="fixed top-0 right-0 z-20 flex items-center justify-between px-4 py-4 md:px-6 left-0 md:left-64 backdrop-blur-sm">
+            class="fixed top-0 right-0 z-20 items-center justify-between px-4 py-4 md:px-6 left-0 bg-white dark:bg-[#171b2e] hidden">
             <!-- Mobile logo y menú -->
             <div class="flex items-center gap-2">
-                <div class="flex md:hidden items-center gap-2">
+                <div class="flex items-center gap-2">
                     <div class="flex items-center">
-                        <h1 class="text-indigo-500 font-bold text-2xl flex gap-2 items-center">
-                            <Icon icon="hugeicons:alpha" class="text-red-500 text-2xl" />
-                            onLab
+                        <h1 class="text-indigo-500 font-bold text-2xl flex gap-2 items-center dark:text-white">
+                            <!-- <Icon icon="hugeicons:alpha" class="text-red-500 text-2xl" /> -->
+                            Proyecto
                         </h1>
                         <!-- <Icon icon="game-icons:axolotl" class="text-blue-500 text-3xl" /> -->
                     </div>

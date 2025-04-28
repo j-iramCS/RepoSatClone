@@ -1,6 +1,6 @@
 <template>
     <Main>
-        <div class="container px-4 py-6 mx-auto">
+        <div class="container mx-auto">
             <!-- Encabezado y Estadísticas Rápidas -->
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
                 <div>
@@ -8,29 +8,6 @@
                     <p class="text-gray-600">Resumen de actividad y recursos disponibles</p>
                 </div>
 
-                <!-- Estadísticas rápidas -->
-                <div class="flex mt-4 md:mt-0 space-x-4">
-                    <div
-                        class="flex items-center p-3 bg-blue-50 rounded-lg dark:bg-purple-900/20 dark:border dark:border-purple-500">
-                        <div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100">
-                            <Icon icon="mdi:trending-up" class="text-blue-600 text-xl" />
-                        </div>
-                        <div class="ml-3">
-                            <p class="text-xs text-gray-600 dark:text-gray-300">Ejercicios completados</p>
-                            <p class="text-lg font-semibold text-gray-800 dark:text-white">24</p>
-                        </div>
-                    </div>
-                    <div
-                        class="flex items-center p-3 bg-green-50 rounded-lg dark:bg-cyan-900/20 dark:border dark:border-cyan-500">
-                        <div class="w-10 h-10 flex items-center justify-center rounded-full bg-green-100">
-                            <Icon icon="mdi:star" class="text-green-600 text-xl" />
-                        </div>
-                        <div class="ml-3">
-                            <p class="text-xs text-gray-600 dark:text-gray-300">Contribuciones</p>
-                            <p class="text-lg font-semibold text-gray-800 dark:text-white">8</p>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <!-- Tarjetas principales -->

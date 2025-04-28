@@ -1,10 +1,12 @@
 <template>
   <Main>
     <!-- Cabecera con efectos de degradado y mejora visual -->
-    <div class="mb-6 bg-gradient-to-r from-blue-500 to-purple-600 p-6 rounded-lg text-white">
-      <h1 class="text-2xl font-bold">Panel de Control - Simulador SAT</h1>
-      <p class="opacity-80">Administración central del sistema</p>
-      <div class="flex mt-3">
+    <div class="flex flex-col md:flex-row flex-wrap justify-between items-start md:items-center mb-8">
+      <div>
+        <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Panel de Control</h1>
+        <p class="text-gray-600">Administración central del sistema</p>
+      </div>
+      <div class="flex mt-3 flex-wrap">
         <div class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm mr-2 flex items-center justify-center">
           <Icon icon="mdi:clock-outline" class="mr-1" />
           {{ currentDate }}
@@ -18,56 +20,40 @@
 
     <!-- Panel de métricas principales con mejores indicadores visuales -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-      <!-- Usuarios Activos -->
+      <!-- Usuarios -->
       <div class="bg-white dark:bg-[#171b2e] p-5 rounded-lg shadow-md border-l-4 border-blue-500">
         <div class="flex items-center justify-between">
-          <h2 class="text-lg font-semibold dark:text-white">Usuarios Activos</h2>
+          <h2 class="text-lg font-semibold dark:text-white">Usuarios Registrados</h2>
           <Icon icon="mdi:account-check" class="text-blue-500 text-2xl" />
         </div>
-        <p class="text-3xl font-bold mt-2 dark:text-white">3,724</p>
-        <div class="text-green-500 text-sm flex items-center mt-2">
-          <Icon icon="mdi:arrow-up" />
-          <span>5% esta semana</span>
-        </div>
+        <p class="text-3xl font-bold mt-2 dark:text-white">9</p>
       </div>
 
       <!-- Tasa de Conversión -->
-      <div class="bg-white dark:bg-[#171b2e] p-5 rounded-lg shadow-md border-l-4 border-purple-500">
+      <div class="bg-white dark:bg-[#171b2e] p-5 rounded-lg shadow-md border-l-4 border-purple-500 hidden">
         <div class="flex items-center justify-between">
           <h2 class="text-lg font-semibold dark:text-white">Tasa de Conversión</h2>
           <Icon icon="mdi:chart-line" class="text-purple-500 text-2xl" />
         </div>
         <p class="text-3xl font-bold mt-2 dark:text-white">23.8%</p>
-        <div class="text-red-500 text-sm flex items-center mt-2">
-          <Icon icon="mdi:arrow-down" />
-          <span>2.1% vs mes anterior</span>
-        </div>
       </div>
 
       <!-- Certificaciones -->
-      <div class="bg-white dark:bg-[#171b2e] p-5 rounded-lg shadow-md border-l-4 border-amber-500">
+      <div class="bg-white dark:bg-[#171b2e] p-5 rounded-lg shadow-md border-l-4 border-amber-500 hidden">
         <div class="flex items-center justify-between">
           <h2 class="text-lg font-semibold dark:text-white">Certificaciones</h2>
           <Icon icon="mdi:certificate" class="text-amber-500 text-2xl" />
         </div>
         <p class="text-3xl font-bold mt-2 dark:text-white">142</p>
-        <div class="text-green-500 text-sm flex items-center mt-2">
-          <Icon icon="mdi:arrow-up" />
-          <span>12% este mes</span>
-        </div>
       </div>
 
       <!-- Nuevo: Eficiencia del Sistema -->
-      <div class="bg-white dark:bg-[#171b2e] p-5 rounded-lg shadow-md border-l-4 border-green-500">
+      <div class="bg-white dark:bg-[#171b2e] p-5 rounded-lg shadow-md border-l-4 border-green-500 hidden">
         <div class="flex items-center justify-between">
           <h2 class="text-lg font-semibold dark:text-white">Eficiencia</h2>
           <Icon icon="mdi:gauge" class="text-green-500 text-2xl" />
         </div>
         <p class="text-3xl font-bold mt-2 dark:text-white">98.2%</p>
-        <div class="text-green-500 text-sm flex items-center mt-2">
-          <Icon icon="mdi:arrow-up" />
-          <span>0.5% vs mes anterior</span>
-        </div>
       </div>
     </div>
 

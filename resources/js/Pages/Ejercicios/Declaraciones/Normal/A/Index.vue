@@ -856,7 +856,7 @@
         </div>
 
         <!-- Modal cuando se complete todo dar opciones de empezar actividad o crear otro ejercicio -->
-        <Modal v-model="showModal" title="¡Formulario guardado con éxito!" :width="600">
+        <Modal :show="true" v-model="showModal" title="¡Formulario guardado con éxito!" :width="600">
             <div class="text-center">
                 <p class="text-gray-700 dark:text-gray-300 mb-4">
                     El formulario se ha guardado correctamente.
@@ -892,7 +892,7 @@ import Input from "@/Components/Input.vue";
 import Modal from "@/Components/Modal.vue";
 
 const activeTab = ref<any>("isr"); // Estado
-const showModal = ref(false); // Modal
+const showModal = ref(true); // Modal
 const tabsValidados = ref<any>({
     isr: false,
     iva: false,
@@ -1111,6 +1111,8 @@ const guardar = async () => {
             });
 
             console.log(response.data);
+
+            // Mostrar modal de éxito
 
         } catch (error) {
             toast("Error al guardar el formulario", {

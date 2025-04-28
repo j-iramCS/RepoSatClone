@@ -6,7 +6,7 @@
             <!-- Elementos decorativos animados con pointer-events-none -->
             <div class="absolute inset-0 overflow-hidden pointer-events-none">
                 <!-- Círculos decorativos animados -->
-                <div
+                <!-- <div
                     class="absolute top-10 left-10 w-64 h-64 bg-green-500 rounded-full animate-pulse-slow">
                 </div>
                 <div
@@ -14,10 +14,10 @@
                 </div>
                 <div
                     class="absolute bottom-20 left-1/3 w-72 h-72 bg-purple-500 rounded-full animate-pulse-fast">
-                </div>
+                </div> -->
 
                 <!-- Partículas flotantes -->
-                <div class="particles">
+                <!-- <div class="particles">
                     <span class="particle bg-black dark:bg-white"></span>
                     <span class="particle bg-black dark:bg-white"></span>
                     <span class="particle bg-black dark:bg-white"></span>
@@ -30,7 +30,7 @@
                     <span class="particle bg-black dark:bg-white"></span>
                     <span class="particle bg-black dark:bg-white"></span>
                     <span class="particle bg-black dark:bg-white"></span>
-                </div>
+                </div> -->
             </div>
 
             <!-- Contenido principal -->
@@ -38,7 +38,7 @@
                 <Aside :isOpen="isSidebarOpen" @close="closeSidebar" @toggleSidebar="toggleSidebar" />
 
                 <!-- Main content area -->
-                <main class="py-16 container mx-auto px-4 sm:px-6 lg:px-8">
+                <main class="pb-16 md:pt-4 container mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="max-w-6xl mx-auto mt-6">
                         <slot></slot>
                     </div>
