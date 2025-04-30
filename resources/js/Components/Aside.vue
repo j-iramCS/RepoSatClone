@@ -117,13 +117,13 @@ onMounted(() => {
                             <p class="text-sm text-gray-500 font-medium dark:text-gray-300 m-0 p-0">Usuario</p>
                             <div class="flex items-center">
                                 <p class="text-xs text-gray-600 dark:text-gray-300 p-0 m-0 truncate"
-                                    title="usuarioa@gmail.com" style="max-width: 0px;">
-                                    usuarioaadasadsdasdadadadadadaadsdadasadsda
+                                    title="usuarioa@gmail.com" style="max-width: 50px;">
+                                    castiyo0429
                                 </p>
                                 <p class="text-xs text-gray-600 dark:text-gray-300 p-0 m-0">@gmail.com</p>
                             </div>
                         </div>
-                        <div class="flex justify-end items-end w-full">
+                        <div class="flex justify-end items-center w-full">
                             <button
                                 class="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors">
                                 <Icon icon="heroicons:bell" class="text-lg" />

@@ -179,6 +179,29 @@ class InicialesSeeder extends Seeder
             ['nombre' => 'Diciembre'],
         ];
 
+        $catalogo_periodos_trimestral = [
+            ['nombre' => 'Enero - Marzo'],
+            ['nombre' => 'Abril - Junio'],
+            ['nombre' => 'Julio - Septiembre'],
+            ['nombre' => 'Octubre - Diciembre'],
+        ];
+
+        $cat_periodos_semestralA = [
+            ['nombre' => 'Enero - Junio'],
+            ['nombre' => 'Julio - Diciembre'],
+        ];
+
+        $catalogo_periodos_bimestral = [
+            ['nombre' => 'Enero - Febrero'],
+            ['nombre' => 'Marzo - Abril'],
+            ['nombre' => 'Mayo - Junio'],
+            ['nombre' => 'Julio - Agosto'],
+            ['nombre' => 'Septiembre - Octubre'],
+            ['nombre' => 'Noviembre - Diciembre'],
+        ];
+
+
+
         // Crear y asociar los periodos
         foreach ($catalogo_periodos_mesual as $tipo) {
             $x = CatPeriodos::create($tipo);
@@ -187,5 +210,30 @@ class InicialesSeeder extends Seeder
                 'cat_periodicidad_id' => CatPeriodicidades::where('nombre', 'Mensual')->first()->id,
             ]);
         }
+
+        foreach ($catalogo_periodos_trimestral as $tipo) {
+            $x = CatPeriodos::create($tipo);
+            PeriodosHasPeriodicidades::create([
+                'cat_periodo_id' => $x->id,
+                'cat_periodicidad_id' => CatPeriodicidades::where('nombre', 'Trimestral')->first()->id,
+            ]);
+        }
+
+        foreach ($cat_periodos_semestralA as $tipo) {
+            $x = CatPeriodos::create($tipo);
+            PeriodosHasPeriodicidades::create([
+                'cat_periodo_id' => $x->id,
+                'cat_periodicidad_id' => CatPeriodicidades::where('nombre', 'Semestral (A)')->first()->id,
+            ]);
+        }
+
+        foreach ($catalogo_periodos_bimestral as $tipo) {
+            $x = CatPeriodos::create($tipo);
+            PeriodosHasPeriodicidades::create([
+                'cat_periodo_id' => $x->id,
+                'cat_periodicidad_id' => CatPeriodicidades::where('nombre', 'Bimestral')->first()->id,
+            ]);
+        }
+
     }
 }

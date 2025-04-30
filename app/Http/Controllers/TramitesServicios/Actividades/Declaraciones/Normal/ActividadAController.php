@@ -9,6 +9,7 @@ use Inertia\Inertia;
 use App\Models\CatYears;
 use App\Models\CatPeriodicidades;
 use App\Models\CatPeriodos;
+use App\Models\Ejercicios;
 use App\Models\PeriodosHasPeriodicidades;
 use App\Models\TramitesServicios;
 
@@ -58,11 +59,24 @@ class ActividadAController extends Controller
             ->where('B.disponible', 1)
             ->get();
 
+        $ejercicios_impuesto_valor_agregado = Ejercicios::from('ejercicios as A')
+        ->join('tipos_ejercicios as B', 'A.tipo_ejercicio_id', '=', 'B.id')
+        ->select(
+            'A.id',
+            'A.creador_id',
+            'B.tipo',
+            'B.descripcion',
+            'A.datos as ejercicio_datos',
+        )
+        ->where('A.tipo_ejercicio_id', 3)
+        ->get();
+
         return Inertia::render('Actividades/Declaraciones/Normal/A/Index', [
             'catalogo_anios' => $catalogo_anios,
             'catalogo_periodicidades' => $catalogo_periodicidades,
             'total_periodos' => $total_periodos,
-            'tipos_declaracion' => $tipos_declaracion
+            'tipos_declaracion' => $tipos_declaracion,
+            'ejercicios_impuesto_valor_agregado' => $ejercicios_impuesto_valor_agregado
         ]);
     }
 
