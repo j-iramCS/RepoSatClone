@@ -2,7 +2,7 @@
     <div class="min-h-screen overflow-hidden">
         <!-- Contenedor principal con gradiente de fondo -->
         <div
-            class="dark:bg-[#111527] bg-[#f5f6fa] relative transition-colors">
+            class="dark:bg-[#050714] bg-[#f5f6fa] relative transition-colors">
             <!-- Elementos decorativos animados con pointer-events-none -->
             <div class="absolute inset-0 overflow-hidden pointer-events-none">
                 <!-- Círculos decorativos animados -->

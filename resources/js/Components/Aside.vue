@@ -90,7 +90,7 @@ onMounted(() => {
     <div class="app-container h-screen flex flex-col">
         <!-- Sidebar SOLO para escritorio -->
         <div :class="[
-            'fixed inset-y-0 bottom-0 left-0 z-30 w-64 transform transition-transform duration-300 ease-in-out dark:bg-[#171b2e] bg-white shadow-lg',
+            'fixed inset-y-0 bottom-0 left-0 z-30 w-64 transform transition-transform duration-300 ease-in-out dark:bg-[#141624] bg-white shadow-lg',
             'hidden md:block md:translate-x-0', // Solo visible en desktop
         ]">
             <div class="flex-1 flex flex-col h-full relative z-10">
@@ -125,12 +125,12 @@ onMounted(() => {
                         </div>
                         <div class="flex justify-end items-center w-full">
                             <button
-                                class="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors">
+                                class="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-[#1d2333] rounded-full transition-colors">
                                 <Icon icon="heroicons:bell" class="text-lg" />
                             </button>
 
                             <button @click="toggleDarkMode"
-                                class="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors">
+                                class="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-[#1d2333] rounded-full transition-colors">
                                 <Icon :icon="darkMode ? 'ph:sun' : 'ph:moon'" class="text-lg" />
                             </button>
                         </div>
@@ -145,7 +145,7 @@ onMounted(() => {
 
                         <Can permission="panel-control">
                             <Link :href="route('panel.admin')"
-                                class="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">
+                                class="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#1d2333] transition-colors">
                             <Icon icon="hugeicons:user-settings-01" class="text-xl" />
                             <span>Panel de Control</span>
                             </Link>
@@ -153,7 +153,7 @@ onMounted(() => {
 
                         <div v-for="item in navigationItems" :key="item.name">
                             <Link :href="route(item.route)" :class="[
-                                'flex items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors',
+                                'flex items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#1d2333] transition-colors',
                                 item.active
                                     ? ''
                                     : ''
@@ -171,7 +171,7 @@ onMounted(() => {
                                 <!-- Añadir colecciones aquí -->
                                 <div v-for="link in additionalLinks" :key="link.name">
                                     <Link :href="route(link.route)"
-                                        class="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">
+                                        class="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#1d2333] transition-colors">
                                     <Icon :icon="link.icon" class="text-xl" />
                                     <span>{{ link.name }}</span>
                                     </Link>
@@ -185,7 +185,7 @@ onMounted(() => {
                 <div class="mt-auto p-4 border-t border-gray-200 dark:border-gray-700">
                     <div class="flex items-center justify-between">
                         <!-- <button @click="toggleDarkMode"
-                            class="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">
+                            class="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#1d2333] transition-colors">
                             <Icon :icon="darkMode ? 'ph:sun' : 'ph:moon'" class="text-lg" />
                             <span>{{ darkMode ? 'Modo claro' : 'Modo oscuro' }}</span>
                         </button> -->
@@ -202,7 +202,7 @@ onMounted(() => {
 
         <!-- Header para escritorio -->
         <header
-            class="fixed top-0 right-0 z-20 items-center justify-between px-4 py-4 md:px-6 left-0 bg-white dark:bg-[#171b2e] hidden">
+            class="fixed top-0 right-0 z-20 items-center justify-between px-4 py-4 md:px-6 left-0 bg-white dark:bg-[#141624] hidden">
             <!-- Mobile logo y menú -->
             <div class="flex items-center gap-2">
                 <div class="flex items-center gap-2">
@@ -219,12 +219,12 @@ onMounted(() => {
             <!-- Acciones (desktop only) -->
             <div class="hidden md:flex items-center gap-4">
                 <button
-                    class="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors">
+                    class="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-[#1d2333] rounded-full transition-colors">
                     <Icon icon="heroicons:bell" class="text-xl" />
                 </button>
 
                 <button @click="toggleDarkMode"
-                    class="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors">
+                    class="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-[#1d2333] rounded-full transition-colors">
                     <Icon :icon="darkMode ? 'ph:sun' : 'ph:moon'" class="text-xl" />
                 </button>
 
@@ -244,7 +244,7 @@ onMounted(() => {
         </main>
 
         <!-- Navegación de tipo app para móviles -->
-        <nav class="md:hidden fixed bottom-0 inset-x-0 z-30 dark:bg-[#171b2e] shadow-lg bg-white dark:text-white">
+        <nav class="md:hidden fixed bottom-0 inset-x-0 z-30 dark:bg-[#141624] shadow-lg bg-white dark:text-white">
             <div class="flex justify-around items-center h-16">
                 <Link v-for="(item, index) in navigationItems.slice(0, 3)" :key="item.name" :href="route(item.route)"
                     :class="[
@@ -285,7 +285,7 @@ onMounted(() => {
             @click="toggleBottomSheet">
         </div>
         <div :class="[
-            'md:hidden fixed bottom-0 inset-x-0 z-50 bg-white dark:bg-[#171b2e] rounded-t-3xl shadow-lg',
+            'md:hidden fixed bottom-0 inset-x-0 z-50 bg-white dark:bg-[#141624] rounded-t-3xl shadow-lg',
             'transform transition-transform duration-300 ease-out',
             isBottomSheetOpen ? 'translate-y-0' : 'translate-y-full'
         ]" style="max-height: 75vh; overflow-y: auto;">
@@ -330,7 +330,7 @@ onMounted(() => {
                     <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2 px-1">ACCESOS RÁPIDOS</h3>
                     <div class="space-y-1">
                         <Link :href="route('dashboard')"
-                            class="flex items-center justify-between w-full p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-300">
+                            class="flex items-center justify-between w-full p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-[#1d2333] text-gray-700 dark:text-gray-300">
                         <div class="flex items-center gap-2">
                             <Icon icon="heroicons:star" class="text-yellow-500 text-xl" />
                             <span>Mis favoritos</span>
@@ -339,7 +339,7 @@ onMounted(() => {
                         </Link>
 
                         <Link :href="route('dashboard')"
-                            class="flex items-center justify-between w-full p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-300">
+                            class="flex items-center justify-between w-full p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-[#1d2333] text-gray-700 dark:text-gray-300">
                         <div class="flex items-center gap-2">
                             <Icon icon="heroicons:document-text" class="text-blue-500 text-xl" />
                             <span>Mis documentos</span>

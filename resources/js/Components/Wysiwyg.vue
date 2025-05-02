@@ -1,11 +1,11 @@
 <template>
-    <div class="wysiwyg-editor w-full bg-white dark:bg-[#171b2e] rounded-lg shadow-md dark:text-white" :class="{ 'readonly': props.readonly }">
+    <div class="wysiwyg-editor w-full bg-white dark:bg-[#141624] rounded-lg shadow-md dark:text-white" :class="{ 'readonly': props.readonly }">
         <!-- Barra de herramientas (puede estar arriba o abajo según la configuración) -->
         <div v-if="props.toolbarPosition === 'top'"
-            class="flex flex-wrap items-center gap-1 p-2 border-b border-gray-200 bg-gray-50 dark:bg-slate-800 dark:text-white rounded-t-lg"
+            class="flex flex-wrap items-center gap-1 p-2 border-b border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-[#141624] dark:text-white rounded-t-lg"
             :class="{ 'opacity-50 pointer-events-none': props.readonly }">
             <!-- Estilo de texto -->
-            <div class="flex items-center border-r border-gray-300 pr-2 mr-2">
+            <div class="flex items-center border-r border-gray-300 dark:border-gray-600 pr-2 mr-2">
                 <button v-for="format in textFormats" :key="format.command" @click.prevent="execCommand(format.command)"
                     :class="[
                         'p-1.5 rounded hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors',
@@ -16,9 +16,9 @@
             </div>
 
             <!-- Formatos de párrafo -->
-            <div class="flex items-center border-r border-gray-300 pr-2 mr-2 gap-1">
+            <div class="flex items-center border-r border-gray-300 dark:border-gray-600 pr-2 mr-2 gap-1">
                 <select @change="formatBlock(($event.target as HTMLSelectElement)?.value)"
-                    class="p-1 border border-gray-300 rounded text-sm bg-white dark:bg-slate-700 dark:border-slate-600 w-28" :value="currentBlockFormat">
+                    class="p-1 border border-gray-300  rounded text-sm bg-transparent dark:border-gray-600 w-28" :value="currentBlockFormat">
                     <option value="" selected disabled>Formatos</option>
                     <!-- <option value="h1">Título 1</option> -->
                     <!-- <option value="h2">Título 2</option> -->
@@ -28,14 +28,14 @@
                     <option value="pre">Código</option>
                 </select>
                 <select @change="changeFontSize(($event.target as HTMLSelectElement)?.value)"
-                    class="p-1 border border-gray-300 rounded text-sm bg-white dark:bg-slate-700 dark:border-slate-600 w-32">
+                    class="p-1 border border-gray-300  rounded text-sm bg-transparent dark:border-gray-600 w-32">
                     <option value="" selected disabled>Tamaño</option>
                     <option v-for="size in fontSizes" :key="size.value" :value="size.value">{{ size.label }}</option>
                 </select>
             </div>
 
             <!-- Alineación -->
-            <div class="flex items-center border-r border-gray-300 pr-2 mr-2">
+            <div class="flex items-center border-r border-gray-300 dark:border-gray-600 pr-2 mr-2">
                 <button v-for="align in alignments" :key="align.command" @click.prevent="execCommand(align.command)"
                     :class="[
                         'p-1.5 rounded hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors',
@@ -46,7 +46,7 @@
             </div>
 
             <!-- Listas -->
-            <div class="flex items-center border-r border-gray-300 pr-2 mr-2">
+            <div class="flex items-center border-r border-gray-300 dark:border-gray-600 pr-2 mr-2">
                 <button v-for="list in lists" :key="list.command" @click.prevent="execCommand(list.command)" :class="[
                     'p-1.5 rounded hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors',
                     isActive(list.command) ? 'bg-gray-200 dark:bg-slate-900' : ''
@@ -56,7 +56,7 @@
             </div>
 
             <!-- Enlaces e imágenes -->
-            <div class="flex items-center border-r border-gray-300 pr-2 mr-2">
+            <div class="flex items-center border-r border-gray-300 dark:border-gray-600 pr-2 mr-2">
                 <button @click.prevent="insertLink" class="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors"
                     title="Insertar enlace" type="button">
                     <Icon icon="hugeicons:attachment" class="w-4 h-4" />
@@ -64,7 +64,7 @@
             </div>
 
             <!-- Colores -->
-            <div class="flex items-center border-r border-gray-300 pr-2 mr-2">
+            <div class="flex items-center border-r border-gray-300 dark:border-gray-600 pr-2 mr-2">
                 <div class="relative">
                     <button @click.prevent="showColorPicker = !showColorPicker"
                         class="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors flex items-center color-picker-trigger"
@@ -133,7 +133,7 @@
         </div>
 
         <!-- Contador de caracteres -->
-        <div class="p-2 border-t border-gray-200 dark:bg-slate-800 dark:text-gray-300 text-xs text-gray-500 flex justify-between items-center bg-gray-50"
+        <div class="p-2 border-t border-gray-200 dark:bg-[#141624] dark:border-gray-600 dark:text-gray-300 text-xs text-gray-500 flex justify-between items-center bg-gray-50"
             :class="{ 'rounded-b-lg': props.toolbarPosition !== 'bottom' }">
             <span>{{ characterCount }} caracteres</span>
             <span v-if="!isEmpty && showWordCount">{{ wordCount }} palabras</span>

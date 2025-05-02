@@ -21,7 +21,7 @@
     <!-- Panel de métricas principales con mejores indicadores visuales -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
       <!-- Usuarios -->
-      <div class="bg-white dark:bg-[#171b2e] p-5 rounded-lg shadow-md border-l-4 border-blue-500">
+      <div class="bg-white dark:bg-[#141624] p-5 rounded-lg shadow-md border-l-4 border-blue-500">
         <div class="flex items-center justify-between">
           <h2 class="text-lg font-semibold dark:text-white">Usuarios Registrados</h2>
           <Icon icon="mdi:account-check" class="text-blue-500 text-2xl" />
@@ -30,7 +30,7 @@
       </div>
 
       <!-- Tasa de Conversión -->
-      <div class="bg-white dark:bg-[#171b2e] p-5 rounded-lg shadow-md border-l-4 border-purple-500 hidden">
+      <div class="bg-white dark:bg-[#141624] p-5 rounded-lg shadow-md border-l-4 border-purple-500 hidden">
         <div class="flex items-center justify-between">
           <h2 class="text-lg font-semibold dark:text-white">Tasa de Conversión</h2>
           <Icon icon="mdi:chart-line" class="text-purple-500 text-2xl" />
@@ -39,7 +39,7 @@
       </div>
 
       <!-- Certificaciones -->
-      <div class="bg-white dark:bg-[#171b2e] p-5 rounded-lg shadow-md border-l-4 border-amber-500 hidden">
+      <div class="bg-white dark:bg-[#141624] p-5 rounded-lg shadow-md border-l-4 border-amber-500 hidden">
         <div class="flex items-center justify-between">
           <h2 class="text-lg font-semibold dark:text-white">Certificaciones</h2>
           <Icon icon="mdi:certificate" class="text-amber-500 text-2xl" />
@@ -48,7 +48,7 @@
       </div>
 
       <!-- Nuevo: Eficiencia del Sistema -->
-      <div class="bg-white dark:bg-[#171b2e] p-5 rounded-lg shadow-md border-l-4 border-green-500 hidden">
+      <div class="bg-white dark:bg-[#141624] p-5 rounded-lg shadow-md border-l-4 border-green-500 hidden">
         <div class="flex items-center justify-between">
           <h2 class="text-lg font-semibold dark:text-white">Eficiencia</h2>
           <Icon icon="mdi:gauge" class="text-green-500 text-2xl" />
@@ -61,7 +61,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
       <!-- Gráfico de resumen (simplificado) -->
       <Link href="/admin/usuarios"
-        class="bg-white dark:bg-[#171b2e] p-5 rounded-lg shadow-md flex flex-col items-center justify-center hover:shadow-lg transition-all duration-300">
+        class="bg-white dark:bg-[#141624] p-5 rounded-lg shadow-md flex flex-col items-center justify-center hover:shadow-lg transition-all duration-300">
       <div class="bg-blue-100 p-3 rounded-full mb-3 dark:bg-blue-900">
         <Icon icon="hugeicons:user-group-02" class="text-2xl text-blue-500 dark:text-blue-300" />
       </div>
@@ -73,7 +73,7 @@
       </Link>
 
       <Link href="/admin/reportes"
-        class="bg-white dark:bg-[#171b2e] p-5 rounded-lg shadow-md flex flex-col items-center justify-center hover:shadow-lg transition-all duration-300">
+        class="bg-white dark:bg-[#141624] p-5 rounded-lg shadow-md flex flex-col items-center justify-center hover:shadow-lg transition-all duration-300">
       <div class="bg-red-100 p-3 rounded-full mb-3 dark:bg-red-900">
         <Icon icon="hugeicons:access" class="text-2xl text-red-500 dark:text-red-300" />
       </div>
@@ -85,7 +85,7 @@
       </Link>
 
       <!-- Actividad reciente mejorada -->
-      <div class="bg-white rounded-lg shadow-md dark:bg-[#171b2e]">
+      <div class="bg-white rounded-lg shadow-md dark:bg-[#141624]">
         <div class="p-4 border-b dark:border-gray-600">
           <h2 class="text-lg font-semibold dark:text-white">Actividad Reciente</h2>
         </div>

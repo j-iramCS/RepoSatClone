@@ -4,7 +4,7 @@
             <div class="max-w-6xl mx-auto">
                 <div class="relative mb-6">
                     <!-- Encabezado que funciona como trigger -->
-                    <div class="border-l-4 border-blue-500 bg-white dark:bg-[#171b2e] rounded-t-lg p-4 dark:text-slate-50 flex justify-between items-center shadow-md cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-300"
+                    <div class="border-l-4 border-blue-500 bg-white dark:bg-[#141624] rounded-t-lg p-4 dark:text-slate-50 flex justify-between items-center shadow-md cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-300"
                         :class="{ 'rounded-b-lg': !isOpen }" @click="toggleContent">
                         <div class="flex items-center gap-3">
                             <div class="transition-transform duration-300" :class="{ 'rotate-180': isOpen }">
@@ -18,7 +18,7 @@
                     </div>
 
                     <!-- Contenido con animación usando Transition -->
-                    <div class="overflow-hidden transition-all duration-500 ease-in-out border-l-4 border-blue-500 bg-white dark:bg-[#171b2e] rounded-b-lg shadow-md"
+                    <div class="overflow-hidden transition-all duration-500 ease-in-out border-l-4 border-blue-500 bg-white dark:bg-[#141624] rounded-b-lg shadow-md"
                         :class="[isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0']">
                         <div class="px-6 pb-6 pt-2 dark:text-slate-50">
                             <div class="flex flex-col md:flex-row gap-6">
@@ -126,7 +126,7 @@
                         </p>
 
                         <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
-                            <div class="bg-white shadow-md dark:bg-[#171b2e] p-4 rounded-lg">
+                            <div class="bg-white shadow-md dark:bg-[#141624] p-4 rounded-lg">
                                 <div class="grid grid-cols-2 gap-4">
                                     <!-- TUS INGRESOS FUERON OBTENIDO EN COPROPIEDAD O SOCIEDAD CONYUGAL -->
                                     <div class="col-span-2">
@@ -261,7 +261,7 @@
                                 </div>
                             </div>
 
-                            <div class="bg-white shadow-md dark:bg-[#171b2e] p-4 rounded-lg">
+                            <div class="bg-white shadow-md dark:bg-[#141624] p-4 rounded-lg">
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <!-- DEDUCCIÓN DE INVERSIONES DE EJERCICIOS ANTERIORES  -->
                                     <div class="col-span-2">
@@ -351,7 +351,7 @@
                             </div>
                         </div>
 
-                        <div class="bg-white shadow-md dark:bg-[#171b2e] p-4 rounded-lg">
+                        <div class="bg-white shadow-md dark:bg-[#141624] p-4 rounded-lg">
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                 <!-- ISR CAUSADO  -->
                                 <div class="">
@@ -446,7 +446,7 @@
                             profesional
                         </p>
 
-                        <div class="bg-white shadow-md dark:bg-[#171b2e] p-4 rounded-lg">
+                        <div class="bg-white shadow-md dark:bg-[#141624] p-4 rounded-lg">
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                 <!-- A CARGO -->
                                 <div class="">
@@ -587,7 +587,7 @@
                             Determinación del IVA
                         </p>
 
-                        <div class="bg-white shadow-md dark:bg-[#171b2e] p-4 rounded-lg">
+                        <div class="bg-white shadow-md dark:bg-[#141624] p-4 rounded-lg">
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                 <!-- ACTIVIDADES GRAVADAS A LA TASA DEL 16% -->
                                 <div class="">
@@ -737,7 +737,7 @@
                             R21 Impuesto al valor agregado
                         </p>
 
-                        <div class="bg-white shadow-md dark:bg-[#171b2e] p-4 rounded-lg">
+                        <div class="bg-white shadow-md dark:bg-[#141624] p-4 rounded-lg">
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 <!-- A CARGO -->
                                 <div class="">
@@ -894,7 +894,7 @@
 
 
                     <div
-                        class="group relative overflow-hidden p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        class="group relative overflow-hidden p-6 dark:bg-[#141624] rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16">
                         </div>
                         <div class="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -ml-12 -mb-12">
@@ -920,7 +920,7 @@
                     </div>
 
                     <div
-                        class="group relative overflow-hidden p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        class="group relative overflow-hidden p-6 dark:bg-[#141624] rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16">
                         </div>
                         <div class="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -ml-12 -mb-12">
@@ -961,7 +961,7 @@
 
                             <div class="flex justify-between items-center mt-2 flex-wrap">
                                 <Link :href="route('index.actividad.declaracion.a')"
-                                    class="px-4 py-2 animate-bounce  bg-gray-50 dark:bg-slate-900 text-blue-600 font-medium rounded-lg hover:bg-opacity-90 flex items-center">
+                                    class="px-4 py-2 animate-bounce  bg-gray-50 text-blue-600 font-medium rounded-lg hover:bg-opacity-90 flex items-center">
                                 <span>Continuar</span>
                                 <Icon icon="mdi:arrow-right" class="ml-1" />
                                 </Link>

@@ -4,7 +4,7 @@
         <div class="py-6 grid grid-cols-2 gap-4 wysiwyg">
             <Wysiwyg :modelValue="content" @change="handleContentChange" />
 
-            <div class="bg-white dark:bg-[#171b2e] dark:text-white rounded-lg shadow-md p-4">
+            <div class="bg-white dark:bg-[#141624] dark:text-white rounded-lg shadow-md p-4">
                 <div v-html="content"></div>
             </div>
         </div>
@@ -15,7 +15,7 @@
                 Datos de Identificación
             </p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div class="bg-white shadow-md dark:bg-[#171b2e] p-4 rounded-lg">
+                <div class="bg-white shadow-md dark:bg-[#141624] p-4 rounded-lg">
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <div class="flex items-center gap-2">
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-white shadow-md dark:bg-[#171b2e] p-4 rounded-lg">
+                <div class="bg-white shadow-md dark:bg-[#141624] p-4 rounded-lg">
                     <div class="grid grid-cols-3 gap-4">
                         <div>
                             <div class="flex items-center gap-2">
@@ -109,7 +109,7 @@
                 </div>
             </div>
 
-            <div class="bg-white shadow-md dark:bg-[#171b2e] p-4 rounded-lg">
+            <div class="bg-white shadow-md dark:bg-[#141624] p-4 rounded-lg">
                 <div class="grid grid-cols-3 gap-4">
                     <div>
                         <div class="flex items-center gap-2">
