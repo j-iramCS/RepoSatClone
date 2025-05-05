@@ -42,4 +42,11 @@ Route::middleware(['auth'])->group(function () {
     // Rutas Admin
     Route::get('/panel-admin', [AdminPanelContoller::class, 'index'])->name('panel.admin');
 
+
+
+    Route::get('/vistaA', function () {
+        return Inertia::render('VistaA');
+    })->name('vistaA');
+
+
 });
