@@ -21,9 +21,8 @@
             </div>
 
 
-
-            <div class="bg-white rounded-md overflow-y-auto h-[calc(100%-2.5rem)]">
-
+            <!-- Pagina 1 -->
+            <div v-if="pagina === 1" class="bg-white rounded-md overflow-y-auto h-[calc(100%-2.5rem)]">
                 <div>
                     <div class="flex justify-between items-center gap-4">
                         <img src="https://placehold.co/300x60" alt="">
@@ -53,6 +52,7 @@
                     </div>
                 </div>
 
+                <!-- Vista Inicio -->
                 <div v-if="vista === 'inicio'">
                     <div class=" pt-20 pb-10 shadow-lg">
                         <h1 class="text-4xl font-bold text-center">Bienvenid@ al Portal del SAT</h1>
@@ -79,7 +79,7 @@
                     </div>
                 </div>
 
-                <!-- Vista interna -->
+                <!-- Vista Tramites y sercicios -->
                 <div v-if="vista === 'contenido'">
                     <img src="https://placehold.co/300x60" alt="" class="w-full h-full object-cover">
                     <div class="p-6 flex items-end px-10 py-10">
@@ -341,6 +341,7 @@
                     </div>
                 </div>
 
+                <!-- Vista Declaraciones -->
                 <div v-if="vista === 'Declaraciones para personas'">
                     <div class="px-10">
                         <div class="flex items-center py-10">
@@ -432,7 +433,7 @@
                                 </div>
                                 <!-- Plus 2 -->
                                 <div class="flex gap-2 items-center mt-2">
-                                    <div @click="plus = 2" class="border-2 border-blue-500 rounded-lg relative">
+                                    <div @click="plus = !plus" class="border-2 border-blue-500 rounded-lg relative">
                                         <Icon icon="mdi:plus" class="text-[#be955b] text-4xl cursor-pointer" />
                                         <Icon icon="mdi:hand-pointing-down"
                                             class="text-blue-600 dark:text-slate-50 text-2xl animate-bounce absolute -top-4 right-1" />
@@ -448,7 +449,7 @@
                                     </div>
                                 </div>
 
-                                <div v-if="plus === 2">
+                                <div v-if="plus === true">
                                     <div class="flex gap-4 py-5 items-start">
                                         <img src="https://placehold.co/120x120" alt="">
 
@@ -458,7 +459,7 @@
                                             <p class="font-bold">Pasos a seguir:</p>
                                             <ol class="ml-10">
                                                 <li class="list-decimal text-gray-500 flex gap-2">Ingresa al
-                                                    <button
+                                                    <button @click="pagina = 2"
                                                         class="flex gap-2 items-center border border-blue-500 relative">servicio
                                                         <Icon icon="quill:link-out" />
                                                         <Icon icon="mdi:hand-pointing-down"
@@ -502,7 +503,6 @@
                             </div>
                         </div>
 
-
                         <div class="flex gap-4 mt-10 mb-5 items-center">
                             <Icon icon="material-symbols:arrow-forward-ios-rounded"
                                 class="text-3xl text-[#be955b] cursor-pointer" />
@@ -519,7 +519,6 @@
                             <hr class="border-t-2 border-gray-600 flex-grow">
                         </div>
                     </div>
-
 
                     <div class="bg-[#e6d3bb] p-6">
                         <div class="grid grid-cols-4 gap-4 justify-center items-center px-32 flex-wrap">
@@ -553,116 +552,319 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 <!-- footer -->
-                <div class="grid grid-cols-3 gap-4 text-xs mx-14 mt-5">
-                    <div class="border-r-2 border-[#be955b]">
-                        <p class="text-[#9b2247] font-bold text-xl">Portal de Trámites y Servicios</p>
-                        <div class="flex flex-col">
-                            <p>Prensa</p>
-                            <p>Derechos del Contribuyente</p>
-                            <p>Datos abiertos</p>
-                            <p>Aviso de privacidad</p>
-                            <p>Denuncia a factureras</p>
-                            <p>Guía de usuario nuevo Portal</p>
-                        </div>
-                        <p class="text-[#9b2247] font-bold text-xl">Denuncias SAT</p>
-                        <div>
-                            <p>denuncias@sat.gob.mx</p>
-                            <p>55 8852 2222</p>
-                            <p>Nueva denuncia</p>
-                        </div>
-                    </div>
-
-                    <div class="col-span-2 grid grid-cols-2 gap-2">
-                        <div>
-                            <p class="text-[#9b2247] font-bold text-xl">Oficinas SAT</p>
+                <footer>
+                    <div class="grid grid-cols-3 gap-4 text-xs mx-14 mt-5">
+                        <div class="border-r-2 border-[#be955b]">
+                            <p class="text-[#9b2247] font-bold text-xl">Portal de Trámites y Servicios</p>
                             <div class="flex flex-col">
-                                <p>Directorio nacional</p>
-                                <p>Atención personal</p>
-                                <p>Lunes a Jueves:</p>
-                                <p>de 9:00 a 16:00 horas.</p>
-                                <p>Viernes:</p>
-                                <p>de 8:30 a 15:00 horas.</p>
+                                <p>Prensa</p>
+                                <p>Derechos del Contribuyente</p>
+                                <p>Datos abiertos</p>
+                                <p>Aviso de privacidad</p>
+                                <p>Denuncia a factureras</p>
+                                <p>Guía de usuario nuevo Portal</p>
                             </div>
-                        </div>
-
-                        <div>
-                            <p class="text-[#9b2247] font-bold text-xl">Contacto </p>
-                            <p>Marca SAT 5562722728 De lunes a viernes de 9:00 a 18:00 horas, excepto días
-                                inhábiles. Desde cualquier parte del país</p>
-                            <div class="mt-10">
-                                <p class="text-[#9b2247] font-bold text-xl">Chat uno a uno</p>
-                                <div class="flex flex-wrap gap-2 items-center">
-                                    <p class="text-[#9b2247] font-bold text-xl">Redes sociales</p>
-                                    <img src="https://placehold.co/40x40" alt="">
-                                    <img src="https://placehold.co/40x40" alt="">
-                                    <img src="https://placehold.co/40x40" alt="">
-                                    <img src="https://placehold.co/40x40" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <p class="text-[#9b2247] font-bold text-xl">Oficina Central</p>
-                            <p>Av. Hidalgo 77, Col. Guerrero, C.P. 06300, Ciudad de México.</p>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="bg-[#611232] mt-3 text-sm">
-                    <div>
-                        <!-- Loading Cards in a Grid -->
-                        <div class="grid grid-cols-4 gap-4 p-6">
+                            <p class="text-[#9b2247] font-bold text-xl">Denuncias SAT</p>
                             <div>
-                                <img src="https://placehold.co/200x60" alt="">
+                                <p>denuncias@sat.gob.mx</p>
+                                <p>55 8852 2222</p>
+                                <p>Nueva denuncia</p>
                             </div>
+                        </div>
 
-                            <!--  -->
+                        <div class="col-span-2 grid grid-cols-2 gap-2">
                             <div>
-                                <p class="text-white font-bold text-xl">Enlace</p>
+                                <p class="text-[#9b2247] font-bold text-xl">Oficinas SAT</p>
                                 <div class="flex flex-col">
-                                    <p class="text-white">Datos</p>
-                                    <p class="text-white">Publicaciones</p>
-                                    <p class="text-white">Portal de Obligaciones de Transparencia</p>
-                                    <p class="text-white">INAI</p>
-                                    <p class="text-white">Alerta</p>
-                                    <p class="text-white">Denuncia</p>
+                                    <p>Directorio nacional</p>
+                                    <p>Atención personal</p>
+                                    <p>Lunes a Jueves:</p>
+                                    <p>de 9:00 a 16:00 horas.</p>
+                                    <p>Viernes:</p>
+                                    <p>de 8:30 a 15:00 horas.</p>
                                 </div>
                             </div>
 
-                            <!--  -->
                             <div>
-                                <p class="text-white font-bold text-xl">¿Qué es gob.mx?</p>
-                                <p class="text-white">Es el portal único de trámites, información y participación
-                                    ciudadana. Leer más</p>
-                                <p class="text-white">Declaración de Accesibilidad</p>
-                                <p class="text-white">Aviso de privacidad</p>
-                                <p class="text-white">Aviso de privacidad simplificado</p>
-                                <p class="text-white">Términos y condiciones</p>
-                                <p class="text-white">Política de seguridad</p>
-                                <p class="text-white">Marco jurídico</p>
-                                <p class="text-white">Mapa de sitio</p>
+                                <p class="text-[#9b2247] font-bold text-xl">Contacto </p>
+                                <p>Marca SAT 5562722728 De lunes a viernes de 9:00 a 18:00 horas, excepto días
+                                    inhábiles. Desde cualquier parte del país</p>
+                                <div class="mt-10">
+                                    <p class="text-[#9b2247] font-bold text-xl">Chat uno a uno</p>
+                                    <div class="flex flex-wrap gap-2 items-center">
+                                        <p class="text-[#9b2247] font-bold text-xl">Redes sociales</p>
+                                        <img src="https://placehold.co/40x40" alt="">
+                                        <img src="https://placehold.co/40x40" alt="">
+                                        <img src="https://placehold.co/40x40" alt="">
+                                        <img src="https://placehold.co/40x40" alt="">
+                                    </div>
+                                </div>
                             </div>
-
-                            <!--  -->
                             <div>
-                                <p class="text-white font-bold text-xl">Síguenos en</p>
-                                <div class="flex gap-2">
-                                    <img src="https://placehold.co/40x40" alt="">
-                                    <img src="https://placehold.co/40x40" alt="">
-                                    <img src="https://placehold.co/40x40" alt="">
-                                    <img src="https://placehold.co/40x40" alt="">
+                                <p class="text-[#9b2247] font-bold text-xl">Oficina Central</p>
+                                <p>Av. Hidalgo 77, Col. Guerrero, C.P. 06300, Ciudad de México.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="bg-[#611232] mt-3 text-sm">
+                        <div>
+                            <!-- Loading Cards in a Grid -->
+                            <div class="grid grid-cols-4 gap-4 p-6">
+                                <div>
+                                    <img src="https://placehold.co/200x60" alt="">
+                                </div>
+
+                                <!--  -->
+                                <div>
+                                    <p class="text-white font-bold text-xl">Enlace</p>
+                                    <div class="flex flex-col">
+                                        <p class="text-white">Datos</p>
+                                        <p class="text-white">Publicaciones</p>
+                                        <p class="text-white">Portal de Obligaciones de Transparencia</p>
+                                        <p class="text-white">INAI</p>
+                                        <p class="text-white">Alerta</p>
+                                        <p class="text-white">Denuncia</p>
+                                    </div>
+                                </div>
+
+                                <!--  -->
+                                <div>
+                                    <p class="text-white font-bold text-xl">¿Qué es gob.mx?</p>
+                                    <p class="text-white">Es el portal único de trámites, información y participación
+                                        ciudadana. Leer más</p>
+                                    <p class="text-white">Declaración de Accesibilidad</p>
+                                    <p class="text-white">Aviso de privacidad</p>
+                                    <p class="text-white">Aviso de privacidad simplificado</p>
+                                    <p class="text-white">Términos y condiciones</p>
+                                    <p class="text-white">Política de seguridad</p>
+                                    <p class="text-white">Marco jurídico</p>
+                                    <p class="text-white">Mapa de sitio</p>
+                                </div>
+
+                                <!--  -->
+                                <div>
+                                    <p class="text-white font-bold text-xl">Síguenos en</p>
+                                    <div class="flex gap-2">
+                                        <img src="https://placehold.co/40x40" alt="">
+                                        <img src="https://placehold.co/40x40" alt="">
+                                        <img src="https://placehold.co/40x40" alt="">
+                                        <img src="https://placehold.co/40x40" alt="">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="bg-[#7a183f] p-6">
+                    </div>
+                </footer>
+            </div>
+
+            <div v-if="pagina === 2" class="bg-white rounded-md overflow-y-auto h-[calc(100%-2.5rem)] relative">
+
+                <div class="absolute top-28 right-10 border p-6 border-blue-500 bg-blue-100">
+                    <p class="max-w-[300px]">Aquí normalmente deberías ingresar tus credenciales ya sea por <span
+                            class="font-bold">contraseña</span> o por <span class="font-bold">e.firma</span>, pero como
+                        se trata de
+                        un simulador, omitiremos ese paso. Por favor, continúa siguiendo las indicaciones.</p>
+
+
                 </div>
-                <div class="bg-[#7a183f] p-6">
+
+                <div class="flex justify-between items-center gap-4 bg-[#611232]">
+                    <img src="https://placehold.co/200x30" alt="" class="p-2">
+                    <div class="flex gap-4 items-center text-white p-2">
+                        <p>Tramites</p>
+                        <p>Gobierno</p>
+                        <Icon icon="iconoir:search" class="text-3xl" />
+                    </div>
                 </div>
+                <div class="">
+                    <div class="flex gap-1 items-center">
+                        <img src="https://placehold.co/20x20" alt="" class="p-2">
+                        <Icon icon="material-symbols:arrow-forward-ios-rounded" />
+                        <p class="font-bold text-lg">Inicio</p>
+                    </div>
+
+                    <h1 class="text-2xl font-bold mt-10">Acceso por contraseña</h1>
+
+                    <div class="w-3/5">
+
+                        <div class="flex items-center justify-end mt-10">
+                            <label for="">RFC:</label>
+                            <input type="text" class="border border-gray-300 rounded-md p-1 ml-2 w-[450px]"
+                                placeholder="RFC">
+                        </div>
+                        <div class="flex items-center justify-end mt-2">
+                            <label for="">Contraseña:</label>
+                            <input type="password" class="border border-gray-300 rounded-md p-1 ml-2 w-[450px]"
+                                placeholder="Contraseña">
+                        </div>
+                        <div class="flex items-center justify-end mt-2">
+                            <label for="">e.firma portable::</label>
+                            <input type="text" disabled
+                                class="border border-gray-300 bg-gray-300 rounded-md p-1 ml-2 w-[450px]"
+                                placeholder="Clave dinamica">
+                        </div>
+
+                        <div class="flex items-center justify-center mt-2">
+                            <label for="">Captcha:</label>
+                            <img src="https://placehold.co/130x60" alt="" class="p-2">
+                        </div>
+                        <div class="flex items-center justify-end mt-2">
+                            <input type="text" class="border border-gray-300 rounded-md p-1 ml-2 w-[450px]"
+                                placeholder="Escriba la palabra del captcha">
+                        </div>
+
+                        <div class="flex items-center justify-end mt-2 gap-2">
+                            <button class="px-6 py-2 border-2 border-gray-500 text-center">
+                                e.firma
+                            </button>
+                            <button class="p-2 border border-blue-500 relative">
+                                <button @click="pagina = 3"
+                                    class="px-6 py-2 border-2 border-[#611232] text-[#611232] text-center">
+                                    Enviar
+                                </button>
+                                <Icon icon="mdi:hand-pointing-down"
+                                    class="text-blue-600 dark:text-slate-50 text-2xl animate-bounce absolute -top-4 right-1" />
+                            </button>
+                        </div>
+
+                        <div class="mt-3">
+                            <p class="text-blue-500 underline text-end">¿Olvidaste tu contraseña?</p>
+                            <p class="text-end">Si aún no cuentas con tu contraseña, obtenla <span
+                                    class="text-blue-500">aquí.</span></p>
+                            <p class="text-end">Si aún no cuentas con tu e.firma portable, obtenla <span
+                                    class="text-blue-500">aquí.</span></p>
+                            <p class="text-blue-500 underline text-end">Requisitos de uso de e.firma portable</p>
+                        </div>
+
+
+
+
+
+                    </div>
+                    <div class="bg-[#d9edf7] p-4 my-10">
+                        <h1 class="font-bold text-blue-900 text-center text-xl">Aviso de privacidad simplificado</h1>
+                        <p class="text-center text-blue-900">El Servicio de Administración Tributaria, es el responsable
+                            del
+                            tratamiento de los datos personales que se recolectan a través de su portal de internet
+                            (https://www.sat.gob.mx), los cuales son protegidos conforme a lo dispuesto en la Ley
+                            General de Protección de Datos Personales en Posesión de Sujetos Obligados y la normatividad
+                            que resulte aplicable.
+                        </p>
+
+                        <p class="text-center mt-2 text-blue-900">Para mayor información acerca de este tema y de los
+                            derechos que puedes
+                            hacer valer, ponemos a tu disposición el Aviso de privacidad en el sitio:
+                            https://repositorio.cloudb.sat.gob.mx/FTP/avisoprivacidad/802_NV_aviso_integral.html
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <footer>
+                    <div class="bg-[#611232] mt-3 text-sm">
+                        <div>
+                            <!-- Loading Cards in a Grid -->
+                            <div class="grid grid-cols-4 gap-4 p-6">
+                                <div>
+                                    <img src="https://placehold.co/200x60" alt="">
+                                </div>
+
+                                <!--  -->
+                                <div>
+                                    <p class="text-white font-bold text-xl">Enlace</p>
+                                    <div class="flex flex-col">
+                                        <p class="text-white">Datos</p>
+                                        <p class="text-white">Publicaciones</p>
+                                        <p class="text-white">Portal de Obligaciones de Transparencia</p>
+                                        <p class="text-white">INAI</p>
+                                        <p class="text-white">Alerta</p>
+                                        <p class="text-white">Denuncia</p>
+                                    </div>
+                                </div>
+
+                                <!--  -->
+                                <div>
+                                    <p class="text-white font-bold text-xl">¿Qué es gob.mx?</p>
+                                    <p class="text-white">Es el portal único de trámites, información y participación
+                                        ciudadana. Leer más</p>
+                                    <p class="text-white">Declaración de Accesibilidad</p>
+                                    <p class="text-white">Aviso de privacidad</p>
+                                    <p class="text-white">Aviso de privacidad simplificado</p>
+                                    <p class="text-white">Términos y condiciones</p>
+                                    <p class="text-white">Política de seguridad</p>
+                                    <p class="text-white">Marco jurídico</p>
+                                    <p class="text-white">Mapa de sitio</p>
+                                </div>
+
+                                <!--  -->
+                                <div>
+                                    <p class="text-white font-bold text-xl">Síguenos en</p>
+                                    <div class="flex gap-2">
+                                        <img src="https://placehold.co/40x40" alt="">
+                                        <img src="https://placehold.co/40x40" alt="">
+                                        <img src="https://placehold.co/40x40" alt="">
+                                        <img src="https://placehold.co/40x40" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-[#7a183f] p-6">
+                    </div>
+                </footer>
+            </div>
+
+            <div v-if="pagina === 3" class="bg-white rounded-md overflow-y-auto h-[calc(100%-2.5rem)] relative">
+
+                <img src="https://placehold.co/400x50" alt="" class="p-2">
+                <div class="bg-[#d9d9d9] flex justify-between pb-3">
+                    <div>
+                        <p class="text-xs">Versión 2.3.0</p>
+                        <p class="text-xs">Martes 6 de Mayo de 2025</p>
+                    </div>
+                    <p class="font-bold text-gray-700">Declaración Provisional</p>
+                    <div class="text-xs">
+                        <p>Bienvenido(a) :NOMBRE FALSO SIMULADO</p>
+                        <p>RFC: XXXXXXXXXXXX <span class="underline">Cerrar Sesión</span> </p>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 p-1 text-xs border-b border-gray-600 items-center">
+                    <button class="flex gap-2">Presentacion de la declaración
+                        <Icon icon="material-symbols:arrow-drop-down-rounded" />
+                    </button>
+                    <button class="flex gap-2">Consultas
+                        <Icon icon="material-symbols:arrow-drop-down-rounded" />
+                    </button>
+                    <button class="flex gap-2">Consultas de mis cuentas de Arrendamiento
+                        <Icon icon="material-symbols:arrow-drop-down-rounded" />
+                    </button>
+                    <button class="p-1 border border-blue-500 relative">
+                        <button class="flex gap-2">Nuevo portal de pagos provisionales
+                            <Icon icon="material-symbols:arrow-drop-down-rounded" />
+                        </button>
+                        <Icon icon="mdi:hand-pointing-down"
+                            class="text-blue-600 dark:text-slate-50 text-2xl animate-bounce absolute -top-4 right-1" />
+                    </button>
+                </div>
+
+                <div class="flex justify-center items-center ">
+                    <img src="https://placehold.co/600x250" alt="" class="p-2">
+
+                </div>
+
 
             </div>
+
+
+
 
 
         </section>
@@ -694,7 +896,8 @@ const tabs = ref<
     'Devoluciones y compensaciones'
 >('Anual');
 
-const plus = ref<number>(0);
+const plus = ref<boolean>(false);
+const pagina = ref<number>(1);
 
 </script>
 

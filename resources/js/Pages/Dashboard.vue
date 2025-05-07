@@ -92,11 +92,11 @@
                         </p>
 
                         <div class="flex justify-between items-center mt-2 flex-wrap gap-">
-                            <button
+                            <Link :href="route('vistaA')"
                                 class="px-4 py-2 bg-white text-emerald-600 font-medium rounded-lg hover:bg-opacity-90 transition-colors flex items-center">
-                                <span>Explorar</span>
-                                <Icon icon="mdi:arrow-right" class="ml-1" />
-                            </button>
+                            <span>Explorar</span>
+                            <Icon icon="mdi:arrow-right" class="ml-1" />
+                            </Link>
                             <span
                                 class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-xs font-medium text-white flex items-center">
                                 <Icon icon="mdi:bell" class="mr-1" />
