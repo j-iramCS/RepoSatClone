@@ -59,13 +59,13 @@ const navigationItems = [
     {
         name: 'Inicio',
         route: 'dashboard',
-        icon: 'hugeicons:home-05',
+        icon: 'mingcute:home-3-fill',
         active: computed(() => currentRoute.value === 'dashboard')
     },
     {
         name: 'Grupos',
         route: 'dashboard', // Cambiar a la ruta real de grupos
-        icon: 'hugeicons:add-team',
+        icon: 'mingcute:group-2-fill',
         active: computed(() => currentRoute.value === 'groups')
     },
 ];
@@ -146,14 +146,14 @@ onMounted(() => {
                         <Can permission="panel-control">
                             <Link :href="route('panel.admin')"
                                 class="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#1d2333] transition-colors">
-                            <Icon icon="hugeicons:user-settings-01" class="text-xl" />
+                            <Icon icon="mingcute:user-setting-fill" class="text-xl" />
                             <span>Panel de Control</span>
                             </Link>
                         </Can>
 
                         <div v-for="item in navigationItems" :key="item.name">
                             <Link :href="route(item.route)" :class="[
-                                'flex items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#1d2333] transition-colors',
+                                'flex items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#1d2333] transition-colors',
                                 item.active
                                     ? ''
                                     : ''
@@ -248,7 +248,7 @@ onMounted(() => {
             <div class="flex justify-around items-center h-16">
                 <Link v-for="(item, index) in navigationItems.slice(0, 3)" :key="item.name" :href="route(item.route)"
                     :class="[
-                        'flex flex-col items-center justify-center flex-1 py-2 px-1',
+                        'flex flex-col items-center justify-center flex-1 py-2 px-1 text-gray-800 dark:text-gray-300',
                         item.active
                             ? ''
                             : ''
@@ -266,7 +266,7 @@ onMounted(() => {
 
                 <!-- Botón para abrir el Bottom Sheet -->
                 <button @click="toggleBottomSheet"
-                    class="flex flex-col items-center justify-center flex-1 py-2 px-1 text-gray-600 dark:text-gray-400">
+                    class="flex flex-col items-center justify-center flex-1 py-2 px-1 text-gray-800 dark:text-gray-300">
                     <div :class="[
                         'p-1 rounded-full transition-colors',
                         isBottomSheetOpen

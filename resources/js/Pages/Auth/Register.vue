@@ -31,20 +31,30 @@ const submit = () => {
     <div class="min-h-screen bg-[#050714] flex items-center justify-center p-4">
         <!-- Contenedor principal -->
         <div class="max-w-5xl w-full relative z-10">
+
+            <div class="flex justify-between gap-5 mb-5 md:hidden items-center">
+                <Link :href="route('welcome')" class="text-gray-300 py-2 px-4">
+                <Icon icon="hugeicons:arrow-left-02" class="text-3xl" />
+                </Link>
+                <h2 class="text-xl font-bold text-gray-300">Proyecto</h2>
+            </div>
+
+
             <!-- Header con logo -->
-            <header class="mb-10 flex items-center justify-center md:justify-between">
+            <header class="mb-10 items-center justify-center md:justify-between gap-5 hidden md:flex">
                 <div class="flex items-center">
-                    <div class="rounded-full h-12 w-12 flex items-center justify-center mr-4">
+                    <div class=" rounded-full h-12 w-12 flex items-center justify-center mr-4">
                         <Icon icon="ix:project" class="text-9xl text-blue-600" />
                     </div>
                     <h1 class="text-3xl md:text-4xl font-bold text-white">Proyecto</h1>
                 </div>
 
                 <Link :href="route('welcome')"
-                    class="bg-gray-800 hover:bg-gray-700 text-gray-300 py-2 px-4 rounded-md transition flex items-center gap-2 justify-center">
-                <Icon icon="hugeicons:undo-03" class="text-xl " />
-                <span>Inicio</span>
+                    class="bg-gray-900 hover:bg-slate-800 text-gray-300 py-2 px-4 rounded-md transition items-center gap-2 justify-center flex">
+                <Icon icon="hugeicons:arrow-left-02" class="text-2xl" />
+                <span>Regresar</span>
                 </Link>
+
             </header>
 
             <!-- Contenedor de la tarjeta de registro -->

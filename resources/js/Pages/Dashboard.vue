@@ -2,138 +2,173 @@
     <Main>
         <div class="container mx-auto">
             <!-- Encabezado y Estadísticas Rápidas -->
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 ">
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-800 dark:text-white">¡Bienvenido de nuevo!</h1>
+                    <div class="flex items-center mb-4 gap-4">
+                        <div
+                            class="bg-blue-500 dark:bg-[#141624] bg-opacity-20 w-12 h-12 rounded-lg flex items-center justify-center">
+                            <Icon icon="mingcute:home-3-fill" class="text-3xl text-blue-600 dark:text-gray-300" />
+                        </div>
+                        <h1 class="text-3xl font-bold dark:text-gray-300">Bienvenido {{ props.username }} </h1>
+                    </div>
                     <p class="text-gray-600">Resumen de actividad y recursos disponibles</p>
                 </div>
-
             </div>
 
             <!-- Tarjetas principales -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <div class="grid grid-cols-2  md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                <!-- Crear Actividad -->
                 <div
-                    class="group relative overflow-hidden bg-gradient-to-br from-red-500 to-red-600 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    class="text-xs md:text-base group relative overflow-hidden bg-gradient-to-br from-red-500 to-red-600 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16"></div>
                     <div class="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -ml-12 -mb-12">
                     </div>
 
                     <div class="flex flex-col h-full">
-                        <div class="bg-white bg-opacity-20 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                            <Icon icon="mdi:pencil-plus" class="text-white text-2xl" />
+                        <div
+                            class="bg-white bg-opacity-20 w-8 h-8 md:w-12 md:h-12 rounded-lg flex items-center justify-center">
+                            <Icon icon="mdi:pencil-plus" class="text-white text-lg  md:text-2xl" />
                         </div>
 
-                        <h3 class="text-xl font-bold mb-2 text-white">Crear Actividad</h3>
+                        <h3 class="text-lg md:text-xl font-bold mb-2 text-white">Crear Actividad</h3>
                         <p class="text-white text-opacity-80 mb-4 flex-grow">
                             Diseña actividades personalizadas y compártelas con toda la comunidad o con tu grupo de
                             estudio.
                         </p>
 
-                        <div class="flex justify-between items-center mt-2 flex-wrap gap-">
+                        <div class="flex justify-between items-center flex-wrap gap-">
                             <Link :href="route('index.crear.actividad')"
                                 class="px-4 py-2 bg-white text-blue-600 font-medium rounded-lg hover:bg-opacity-90 transition-colors flex items-center">
-                            <span>Comenzar</span>
+                            <span class="font-bold">Comenzar</span>
                             <Icon icon="mdi:arrow-right" class="ml-1" />
                             </Link>
-                            <span class="text-white text-opacity-70 flex items-center">
+                            <!-- <span class="text-white text-opacity-70 flex items-center">
                                 <Icon icon="mdi:star" class="mr-1" />
                                 Gratis
-                            </span>
+                            </span> -->
                         </div>
                     </div>
                 </div>
 
                 <!-- Crear Ejercicios -->
                 <div
-                    class="group relative overflow-hidden bg-gradient-to-br from-blue-500 to-indigo-600 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    class="text-xs md:text-base group relative overflow-hidden bg-gradient-to-br from-blue-500 to-indigo-600 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16"></div>
                     <div class="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -ml-12 -mb-12">
                     </div>
 
                     <div class="flex flex-col h-full">
-                        <div class="bg-white bg-opacity-20 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                            <Icon icon="mdi:pencil-plus" class="text-white text-2xl" />
+                        <div
+                            class="bg-white bg-opacity-20 w-8 h-8 md:w-12 md:h-12 rounded-lg flex items-center justify-center">
+                            <Icon icon="mdi:pencil-plus" class="text-white text-lg  md:text-2xl" />
                         </div>
 
-                        <h3 class="text-xl font-bold mb-2 text-white">Crear Ejercicios</h3>
+                        <h3 class="text-lg md:text-xl font-bold mb-2 text-white">Crear Ejercicios</h3>
                         <p class="text-white text-opacity-80 mb-4 flex-grow">
                             Diseña ejercicios personalizados y usalos en todas tus actividades.
                         </p>
 
-                        <div class="flex justify-between items-center mt-2 flex-wrap gap-">
+                        <div class="flex justify-between items-center flex-wrap gap-">
                             <Link :href="route('index.crear.ejercicio')"
                                 class="px-4 py-2 bg-white text-blue-600 font-medium rounded-lg hover:bg-opacity-90 transition-colors flex items-center">
                             <span>Crear</span>
                             <Icon icon="mdi:arrow-right" class="ml-1" />
                             </Link>
-                            <span class="text-white text-opacity-70 flex items-center">
+                            <!-- <span class="text-white text-opacity-70 flex items-center">
                                 <Icon icon="mdi:star" class="mr-1" />
                                 Gratis
-                            </span>
+                            </span> -->
                         </div>
                     </div>
                 </div>
 
                 <!-- Ejercicios de la Comunidad -->
                 <div
-                    class="group relative overflow-hidden bg-gradient-to-br from-emerald-500 to-teal-600 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    class="text-xs md:text-base group relative overflow-hidden bg-gradient-to-br from-emerald-500 to-teal-600 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16"></div>
                     <div class="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -ml-12 -mb-12">
                     </div>
 
                     <div class="flex flex-col h-full">
-                        <div class="bg-white bg-opacity-20 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                            <Icon icon="mdi:account-group" class="text-white text-2xl" />
+                        <div
+                            class="bg-white bg-opacity-20 w-8 h-8 md:w-12 md:h-12 rounded-lg flex items-center justify-center">
+                            <Icon icon="mdi:pencil-plus" class="text-white text-lg  md:text-2xl" />
                         </div>
 
-                        <h3 class="text-xl font-bold mb-2 text-white">Ejercicios de la Comunidad</h3>
+                        <h3 class="text-lg md:text-xl font-bold mb-2 text-white">Ejercicios de la Comunidad</h3>
                         <p class="text-white text-opacity-80 mb-4 flex-grow">
                             Explora ejercicios creados por otros usuarios. Practica con retos reales y variados.
                         </p>
 
-                        <div class="flex justify-between items-center mt-2 flex-wrap gap-">
+                        <div class="flex justify-between items-center flex-wrap gap-">
                             <Link :href="route('vistaA')"
-                                class="px-4 py-2 bg-white text-emerald-600 font-medium rounded-lg hover:bg-opacity-90 transition-colors flex items-center">
-                            <span>Explorar</span>
+                                class="px-4 py-2 bg-white text-blue-600 font-medium rounded-lg hover:bg-opacity-90 transition-colors flex items-center">
+                            <span>Crear</span>
                             <Icon icon="mdi:arrow-right" class="ml-1" />
                             </Link>
-                            <span
-                                class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-xs font-medium text-white flex items-center">
-                                <Icon icon="mdi:bell" class="mr-1" />
-                                5 Nuevos
-                            </span>
+                            <!-- <span class="text-white text-opacity-70 flex items-center">
+                                <Icon icon="mdi:star" class="mr-1" />
+                                Gratis
+                            </span> -->
                         </div>
                     </div>
                 </div>
 
-            </div>
-
-            <!-- Segunda fila de contenido -->
-            <div class="grid md:grid-cols-3 gap-6">
-                <!-- Mis Creaciones -->
+                <!-- Favoritos -->
                 <div
-                    class="md:col-span-2 group relative overflow-hidden bg-gradient-to-br from-amber-500 to-orange-600 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    class="text-xs md:text-base group relative overflow-hidden bg-gradient-to-br from-purple-500 to-pink-600 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16"></div>
+                    <div class="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -ml-12 -mb-12">
+                    </div>
+
+                    <div class="flex flex-col h-full">
+                        <div
+                            class="bg-white bg-opacity-20 w-8 h-8 md:w-12 md:h-12 rounded-lg flex items-center justify-center">
+                            <Icon icon="mdi:heart" class="text-white text-lg  md:text-2xl" />
+                        </div>
+
+                        <h3 class="text-lg md:text-xl font-bold mb-2 text-white">Mis Favoritos</h3>
+                        <p class="text-white text-opacity-80 mb-4 flex-grow">
+                            Acceso rápido a los ejercicios que has marcado como favoritos para practicar después.
+                        </p>
+
+                        <div class="flex justify-between items-center flex-wrap gap-">
+                            <button
+                                class="px-4 py-2 bg-white text-purple-600 font-medium rounded-lg hover:bg-opacity-90 transition-colors flex items-center">
+                                <span>Ver favoritos</span>
+                                <Icon icon="mdi:arrow-right" class="ml-1" />
+                            </button>
+                            <!-- <span
+                                class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-xs font-medium text-white">12
+                                guardados</span> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="col-span-2 text-xs md:text-base group relative overflow-hidden bg-gradient-to-br from-amber-500 to-orange-600 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16"></div>
                     <div class="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -ml-12 -mb-12">
                     </div>
 
                     <div class="flex flex-col">
                         <div class="flex items-center mb-4">
-                            <div class="bg-white bg-opacity-20 w-12 h-12 rounded-lg flex items-center justify-center">
-                                <Icon icon="mdi:folder-multiple" class="text-white text-2xl" />
+                            <div
+                                class="bg-white bg-opacity-20 w-8 h-8 md:w-12 md:h-12 rounded-lg flex items-center justify-center">
+                                <Icon icon="mdi:folder-multiple" class="text-white text-lg  md:text-2xl" />
                             </div>
                             <div class="ml-4">
-                                <h3 class="text-xl font-bold text-white">Mis Actividades Creadas</h3>
+                                <h3 class="text-lg md:text-xl font-bold mb-2 text-white">Mis Actividades Creadas</h3>
                                 <div class="flex space-x-2 mt-1">
                                     <span
                                         class="px-2 py-1 bg-white bg-opacity-20 rounded-lg text-sm text-white flex items-center">
                                         <Icon icon="mdi:package-variant" class="mr-1" />
-                                        <span>3 Ejercicios</span>
+                                        <span class="text-xs md:text-base">3 Ejercicios</span>
                                     </span>
                                     <span
                                         class="px-2 py-1 bg-white bg-opacity-20 rounded-lg text-sm text-white flex items-center">
                                         <Icon icon="mdi:thumb-up" class="mr-1" />
-                                        <span>15 Me gusta</span>
+                                        <span class="text-xs md:text-base">15 Me gusta</span>
                                     </span>
                                 </div>
                             </div>
@@ -153,13 +188,13 @@
                                     </div>
                                     <div class="flex space-x-2">
                                         <button class="p-1 text-white opacity-70 hover:opacity-100 transition-opacity">
-                                            <Icon icon="mdi:pencil" />
+                                            <Icon icon="mdi:pencil" class="text-lg" />
                                         </button>
                                         <button class="p-1 text-white opacity-70 hover:opacity-100 transition-opacity">
-                                            <Icon icon="mdi:eye" />
+                                            <Icon icon="mdi:eye" class="text-lg" />
                                         </button>
                                         <button class="p-1 text-white opacity-70 hover:opacity-100 transition-opacity">
-                                            <Icon icon="mdi:delete" />
+                                            <Icon icon="mdi:delete" class="text-lg" />
                                         </button>
                                     </div>
                                 </li>
@@ -182,35 +217,14 @@
                     </div>
                 </div>
 
-                <!-- Mis Favoritos -->
-                <div
-                    class="group relative overflow-hidden bg-gradient-to-br from-purple-500 to-pink-600 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16"></div>
-                    <div class="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -ml-12 -mb-12">
-                    </div>
 
-                    <div class="flex flex-col h-full">
-                        <div class="bg-white bg-opacity-20 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                            <Icon icon="mdi:heart" class="text-white text-2xl" />
-                        </div>
+            </div>
 
-                        <h3 class="text-xl font-bold mb-2 text-white">Mis Favoritos</h3>
-                        <p class="text-white text-opacity-80 mb-4 flex-grow">
-                            Acceso rápido a los ejercicios que has marcado como favoritos para practicar después.
-                        </p>
+            <!-- Segunda fila de contenido -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Mis Creaciones -->
 
-                        <div class="flex justify-between items-center mt-2 flex-wrap gap-">
-                            <button
-                                class="px-4 py-2 bg-white text-purple-600 font-medium rounded-lg hover:bg-opacity-90 transition-colors flex items-center">
-                                <span>Ver favoritos</span>
-                                <Icon icon="mdi:arrow-right" class="ml-1" />
-                            </button>
-                            <span
-                                class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-xs font-medium text-white">12
-                                guardados</span>
-                        </div>
-                    </div>
-                </div>
+
 
                 <!-- Panel de Progreso y Actividad Reciente -->
                 <div class="bg-white rounded-xl shadow-lg p-5 space-y-6 hidden">
@@ -361,6 +375,12 @@ const userProgress = ref({
     exercisesCompleted: 24,
     exercisesCreated: 3,
     level: "Intermedio"
+});
+
+const props = defineProps({
+    username: {
+        type: String,
+    },
 });
 
 // Functions
