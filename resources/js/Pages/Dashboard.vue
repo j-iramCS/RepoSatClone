@@ -6,7 +6,7 @@
                 <div>
                     <div class="flex items-center mb-4 gap-4">
                         <div
-                            class="bg-blue-500 dark:bg-[#141624] bg-opacity-20 w-12 h-12 rounded-lg flex items-center justify-center">
+                            class="bg-blue-500 dark:bg-gray-900 bg-opacity-20 w-12 h-12 rounded-lg flex items-center justify-center">
                             <Icon icon="mingcute:home-3-fill" class="text-3xl text-blue-600 dark:text-gray-300" />
                         </div>
                         <h1 class="text-3xl font-bold dark:text-gray-300">Bienvenido {{ props.username }} </h1>

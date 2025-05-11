@@ -20,15 +20,15 @@
         <transition name="slide">
             <div
                 v-if="isOpen"
-                class="fixed inset-y-0 right-0 z-50 w-full max-w-full sm:max-w-xl bg-white shadow-xl overflow-hidden"
+                class="fixed inset-y-0 right-0 z-50 w-full max-w-full sm:max-w-xl bg-gray-50 dark:bg-gray-900 shadow-xl overflow-hidden"
             >
                 <div class="h-full flex flex-col">
                     <!-- Encabezado sticky -->
                     <div
-                        class="sticky top-0 z-10 bg-white p-4 border-b flex justify-between items-center"
+                        class="sticky top-0 z-10 p-4 border-b dark:border-gray-600 flex justify-between items-center"
                         :class="{ 'shadow-sm': isScrolled }"
                     >
-                        <h2 class="text-xl text-gray-900">{{ title }}</h2>
+                        <h2 class="text-gray-900 dark:text-gray-300">{{ title }}</h2>
                         <button
                             @click="closeModal"
                             class="p-1 rounded-full text-gray-500 hover:bg-gray-100 hover:text-gray-700 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-500"
@@ -119,16 +119,16 @@
                                     </div>
 
                                     <!-- Contenido -->
-                                    <div class="p-5 relative z-10 bg-blue-200">
+                                    <div class="p-5 relative z-10 bg-gray-800">
                                         <div
                                             class="flex items-center space-x-3"
                                         >
                                             <div
-                                                :class="`p-2 rounded-lg text-white bg-indigo-500`"
+                                                :class="`p-2 rounded-lg text-white bg-blue-500`"
                                             >
                                             </div>
                                             <h3
-                                                class="font-semibold text-gray-800"
+                                                class="font-semibold"
                                             >
                                                 {{ item.titulo }}
                                             </h3>
@@ -144,7 +144,7 @@
                                                 seleccionado === item.id &&
                                                 item.disponible
                                             "
-                                            class="absolute top-3 right-3 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center"
+                                            class="absolute top-3 right-3 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center"
                                         >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -164,14 +164,14 @@
                             </div>
 
                             <!-- BotÃ³n de continuar -->
-                            <div class="mt-8 text-center" v-if="seleccionado">
+                            <!-- <div class="mt-8 text-center" v-if="seleccionado">
                                 <button
-                                    class="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-md"
+                                    class="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-indigo-500 transition-colors shadow-md"
                                     @click="continuar"
                                 >
                                     Continuar con el dato seleccionado
                                 </button>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
 

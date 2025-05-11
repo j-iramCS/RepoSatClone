@@ -1,8 +1,8 @@
 <template>
-    <div class="wysiwyg-editor w-full bg-white dark:bg-[#141624] rounded-lg shadow-md dark:text-white" :class="{ 'readonly': props.readonly }">
+    <div class="wysiwyg-editor w-full bg-white dark:bg-gray-900 rounded-lg shadow-md dark:text-white" :class="{ 'readonly': props.readonly }">
         <!-- Barra de herramientas (puede estar arriba o abajo según la configuración) -->
         <div v-if="props.toolbarPosition === 'top'"
-            class="flex flex-wrap items-center gap-1 p-2 border-b border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-[#141624] dark:text-white rounded-t-lg"
+            class="flex flex-wrap items-center gap-1 p-2 border-b border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 dark:text-white rounded-t-lg"
             :class="{ 'opacity-50 pointer-events-none': props.readonly }">
             <!-- Estilo de texto -->
             <div class="flex items-center border-r border-gray-300 dark:border-gray-600 pr-2 mr-2">
@@ -133,7 +133,7 @@
         </div>
 
         <!-- Contador de caracteres -->
-        <div class="p-2 border-t border-gray-200 dark:bg-[#141624] dark:border-gray-600 dark:text-gray-300 text-xs text-gray-500 flex justify-between items-center bg-gray-50"
+        <div class="p-2 border-t border-gray-200 dark:bg-gray-900 dark:border-gray-600 dark:text-gray-300 text-xs text-gray-500 flex justify-between items-center bg-gray-50"
             :class="{ 'rounded-b-lg': props.toolbarPosition !== 'bottom' }">
             <span>{{ characterCount }} caracteres</span>
             <span v-if="!isEmpty && showWordCount">{{ wordCount }} palabras</span>

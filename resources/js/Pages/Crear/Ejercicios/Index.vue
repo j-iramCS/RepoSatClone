@@ -1,281 +1,77 @@
 <template>
     <Main>
-        <div class="mb-6 relative">
-            <h1 class="text-3xl md:text-3xl font-bold mb-4 dark:text-white">¡Comencemos a <span class="underline decoration-blue-500">definir</span> que tipo de <span
-                    class=" rounded-lg text-blue-500">Ejercicio</span> quieres realizar!</h1>
-            <p class="text-gray-600 dark:text-gray-400 md:max-w-4xl">
-                Aquí puedes definir que tipo de ejercicios relacionados con el SAT quieres elaborar. Son ideales para reforzar tus
-                conocimientos o evaluar a tu grupo de estudio. Puedes compartirlos con la comunidad o usarlos para crear
-                Actividades basadas en ellos.
-            </p>
-            <p class="text-indigo-500 mt-4 text-sm">
-                Para comenzar sigue los pasos a continuación.
-            </p>
+        <div
+            class="fixed left-0 top-0 right-0 flex justify-between md:hidden items-center bg-gray-50 dark:bg-gray-950 p-3 z-10">
+            <Link :href="route('dashboard')" class="dark:text-gray-300 py-2 px-4">
+            <Icon icon="hugeicons:arrow-left-02" class="text-3xl" />
+            </Link>
+            <div class="flex gap-4 items-center">
+                <div class="p-2 bg-blue-500 rounded-lg">
+                    <Icon icon="mingcute:classify-add-2-fill" class="text-2xl text-white" />
+                </div>
+                <h2 class="text-xl font-bold dark:text-gray-300">Crear Ejercicio</h2>
+            </div>
         </div>
-        <!-- division border-->
-        <div class="border-t border-gray-300 dark:border-gray-600"></div>
 
-        <!-- Contenedor principal de tarjetas -->
-        <div class="flex flex-wrap gap-6 justify-center text-white p-6">
-            <!-- 1. Trámite -->
-            <ModalFiscal title="Selecciona un trámite o servicio fiscal" :data="tramites_servicios"
-                v-model="tramiteSeleccionado" @select-tramite="onTramiteSelected">
-                <template #button-open="{ selectedDato: selectedTramite }">
-                    <!-- Solo mostrar una tarjeta: la seleccionada o el botón de añadir -->
-                    <div v-if="selectedTramite"
-                        class="h-80 w-64 group relative overflow-hidden bg-gradient-to-br from-indigo-500 to-indigo-700 dark:from-indigo-700 dark:to-indigo-900 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                        <!-- Contenido de la tarjeta seleccionada -->
-                        <div
-                            class="absolute top-0 right-0 w-40 h-40 bg-white dark:bg-indigo-300 opacity-10 dark:opacity-5 rounded-full -mr-16 -mt-16">
+        <div class="lg:flex gap-6 items-start justify-start mt-24 lg:mt-10">
+            <div class="mb-6 relative mt-6 w-full md:max-w-[450px] lg:sticky lg:top-24">
+                <div class="hidden md:block mb-8">
+                    <div class="flex gap-4 items-center">
+                        <div class="p-2 bg-blue-500 rounded-lg">
+                            <Icon icon="mingcute:classify-add-2-fill" class="text-2xl text-white" />
                         </div>
-                        <div
-                            class="absolute bottom-0 left-0 w-32 h-32 bg-white dark:bg-indigo-300 opacity-10 dark:opacity-5 rounded-full -ml-12 -mb-12">
-                        </div>
-                        <div
-                            class="absolute top-1/2 left-1/2 w-24 h-24 bg-white dark:bg-indigo-300 opacity-5 dark:opacity-5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-lg">
-                        </div>
-
-                        <button @click.stop="quitarSeleccionTramite"
-                            class="absolute top-3 right-3 bg-red-500 dark:bg-red-600 text-white rounded-full p-1.5 hover:bg-red-600 dark:hover:bg-red-700 transition-all duration-200 z-10 hover:rotate-90 transform">
-                            <Icon icon="material-symbols:close" class="text-lg" />
-                        </button>
-
-                        <div class="flex justify-center mb-4">
-                            <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                                <Icon icon="solar:file-text-bold" class="text-white text-3xl" />
-                            </div>
-                        </div>
-
-                        <div class="flex justify-center items-center w-full relative z-0">
-                            <div>
-                                <h3 class="font-semibold text-white text-xl mb-3 text-center">
-                                    {{ selectedTramite.titulo }}
-                                </h3>
-                                <div class="h-0.5 w-12 bg-white/30 mx-auto mb-3"></div>
-                                <p class="text-gray-100 dark:text-gray-200 text-sm text-center px-2">
-                                    {{ selectedTramite.descripcion }}
-                                </p>
-                            </div>
-                        </div>
+                        <h2 class="text-2xl font-bold dark:text-gray-300">Crear Ejercicio</h2>
                     </div>
-                    <div v-else
-                        class="relative h-80 w-64 border-3 border-dashed rounded-2xl bg-white/5 dark:bg-indigo-900/10 border-indigo-300 dark:border-indigo-600 flex flex-col items-center justify-center gap-4 p-6 transition-all duration-300 hover:border-indigo-400 dark:hover:border-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-800/20 transform hover:-translate-y-1 shadow-sm hover:shadow-lg">
-                        <div
-                            class="w-20 h-20 bg-indigo-100 dark:bg-indigo-800/30 rounded-full flex items-center justify-center mb-2">
-                            <Icon icon="hugeicons:add-01" class="text-5xl text-indigo-500 dark:text-indigo-300" />
-                        </div>
-                        <h3 class="font-medium text-indigo-600 dark:text-indigo-300 text-lg">Trámite Fiscal</h3>
-                        <p class="text-center text-gray-600 dark:text-gray-400 text-sm">
-                            Selecciona un trámite o servicio fiscal.
-                        </p>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-bold mb-4 dark:text-white text-center md:text-start">¡Comencemos a
+                    <span class="underline decoration-blue-500">definir</span> que tipo de <span
+                        class=" rounded-lg text-blue-500">EJercicio</span> quieres realizar!</h1>
+                <p class="text-blue-600 text-center md:text-start">Sigue las indicaciones para continuar.</p>
+            </div>
+            <!-- Contenedor principal de tarjetas -->
+            <div class="flex flex-wrap gap-6 justify-center w-full text-white mt-24 lg:mt-6">
+                <!-- Componente genérico para cada paso del flujo de selección -->
+                <SelectorModal v-for="(paso, index) in pasos" :key="paso.id" v-show="debeMostrarPaso(index)"
+                    :paso="paso" :title="paso.modalTitle" :data="paso.data" v-model="paso.selectedId"
+                    @select-item="(item) => onItemSelected(index, item)"
+                    @remove-selection="(e) => quitarSeleccion(e, index)" />
+
+                <!-- Botón para empezar con el ejercicio (solo visible cuando todos los pasos están completados) -->
+                <template v-if="todosLosPasosCompletados">
+                    <Link :href="route('index.ejercicio.obligacion.a')"
+                        class="relative h-64 w-52 border-3 overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex flex-col items-center justify-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl cursor-pointer group">
+                    <!-- Elementos decorativos de fondo -->
+                    <div
+                        class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300">
                     </div>
+                    <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/20 to-transparent">
+                    </div>
+                    <div
+                        class="absolute -inset-1 bg-emerald-500 opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-300">
+                    </div>
+
+                    <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-4 z-10">
+                        <Icon icon="hugeicons:play" class="text-white text-4xl" />
+                    </div>
+                    <h3 class="font-semibold text-white text-xl mb-2 z-10">¡Vamos a comenzar!</h3>
+                    <p class="text-center text-white/80 text-sm z-10 px-6">
+                        Tu actividad está lista para ser rellenada.
+                    </p>
+                    </Link>
                 </template>
-            </ModalFiscal>
+            </div>
 
-            <!-- 2. Declaración (solo se muestra si hay un trámite seleccionado) -->
-            <template v-if="tramiteSeleccionado && tramiteSeleccionado !== null">
-                <ModalFiscal title="Selecciona un tipo de declaración" :data="declaraciones"
-                    v-model="declaracionSeleccionado" @select-tramite="onDeclaracionSelected">
-                    <template #button-open="{ selectedDato: selectedDeclaracion }">
-                        <div v-if="selectedDeclaracion"
-                            class="h-80 w-64 group relative overflow-hidden bg-gradient-to-br from-indigo-500 to-indigo-700 dark:from-indigo-700 dark:to-indigo-900 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                            <!-- Contenido de la declaración seleccionada -->
-                            <div
-                                class="absolute top-0 right-0 w-40 h-40 bg-white dark:bg-indigo-300 opacity-10 dark:opacity-5 rounded-full -mr-16 -mt-16">
-                            </div>
-                            <div
-                                class="absolute bottom-0 left-0 w-32 h-32 bg-white dark:bg-indigo-300 opacity-10 dark:opacity-5 rounded-full -ml-12 -mb-12">
-                            </div>
-                            <div
-                                class="absolute top-1/2 left-1/2 w-24 h-24 bg-white dark:bg-indigo-300 opacity-5 dark:opacity-5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-lg">
-                            </div>
-
-                            <button @click.stop="quitarSeleccionDeclaracion"
-                                class="absolute top-3 right-3 bg-red-500 dark:bg-red-600 text-white rounded-full p-1.5 hover:bg-red-600 dark:hover:bg-red-700 transition-all duration-200 z-10 hover:rotate-90 transform">
-                                <Icon icon="material-symbols:close" class="text-lg" />
-                            </button>
-
-                            <div class="flex justify-center mb-4">
-                                <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                                    <Icon icon="solar:file-text-bold" class="text-white text-3xl" />
-                                </div>
-                            </div>
-
-                            <div class="flex justify-center items-center w-full relative z-0">
-                                <div>
-                                    <h3 class="font-semibold text-white text-xl mb-3 text-center">
-                                        {{ selectedDeclaracion.titulo }}
-                                    </h3>
-                                    <div class="h-0.5 w-12 bg-white/30 mx-auto mb-3"></div>
-                                    <p class="text-gray-100 dark:text-gray-200 text-sm text-center px-2">
-                                        {{ selectedDeclaracion.descripcion }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div v-else
-                            class="relative h-80 w-64 border-3 border-dashed rounded-2xl bg-white/5 dark:bg-indigo-900/10 border-indigo-300 dark:border-indigo-600 flex flex-col items-center justify-center gap-4 p-6 transition-all duration-300 hover:border-indigo-400 dark:hover:border-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-800/20 transform hover:-translate-y-1 shadow-sm hover:shadow-lg">
-                            <div
-                                class="w-20 h-20 bg-indigo-100 dark:bg-indigo-800/30 rounded-full flex items-center justify-center mb-2">
-                                <Icon icon="hugeicons:add-01" class="text-5xl text-indigo-500 dark:text-indigo-300" />
-                            </div>
-                            <h3 class="font-medium text-indigo-600 dark:text-indigo-300 text-lg">Tipo de Declaración
-                            </h3>
-                            <p class="text-center text-gray-600 dark:text-gray-400 text-sm">
-                                Selecciona un tipo de declaración.
-                            </p>
-                        </div>
-                    </template>
-                </ModalFiscal>
-            </template>
-
-            <!-- tipo_obligacion -->
-            <template v-if="declaracionSeleccionado && declaracionSeleccionado !== null">
-                <ModalFiscal title="Selecciona un tipo de obligación" :data="tipo_obligacion"
-                    v-model="obligacionSeleccionado" @select-tramite="onObligacionSelected">
-                    <template #button-open="{ selectedDato: selectedObligacion }">
-                        <div v-if="selectedObligacion"
-                            class="h-80 w-64 group relative overflow-hidden bg-gradient-to-br from-indigo-500 to-indigo-700 dark:from-indigo-700 dark:to-indigo-900 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                            <!-- Contenido de la obligación seleccionada -->
-                            <div
-                                class="absolute top-0 right-0 w-40 h-40 bg-white dark:bg-indigo-300 opacity-10 dark:opacity-5 rounded-full -mr-16 -mt-16">
-                            </div>
-                            <div
-                                class="absolute bottom-0 left-0 w-32 h-32 bg-white dark:bg-indigo-300 opacity-10 dark:opacity-5 rounded-full -ml-12 -mb-12">
-                            </div>
-                            <div
-                                class="absolute top-1/2 left-1/2 w-24 h-24 bg-white dark:bg-indigo-300 opacity-5 dark:opacity-5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-lg">
-                            </div>
-
-                            <button @click.stop="quitarSeleccionObligacion"
-                                class="absolute top-3 right-3 bg-red-500 dark:bg-red-600 text-white rounded-full p-1.5 hover:bg-red-600 dark:hover:bg-red-700 transition-all duration-200 z-10 hover:rotate-90 transform">
-                                <Icon icon="material-symbols:close" class="text-lg" />
-                            </button>
-
-                            <div class="flex justify-center mb-4">
-                                <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                                    <Icon icon="solar:file-text-bold" class="text-white text-3xl" />
-                                </div>
-                            </div>
-
-                            <div class="flex justify-center items-center w-full relative z-0">
-                                <div>
-                                    <h3 class="font-semibold
-                                        text-white text-xl mb-3 text-center">
-                                        {{ selectedObligacion.titulo }}
-                                    </h3>
-                                    <div class="h-0.5 w-12 bg-white/30 mx-auto mb-3"></div>
-                                    <p class="text-gray-100 dark:text-gray-200 text-sm text-center px-2">
-                                        {{ selectedObligacion.descripcion }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div v-else
-                            class="relative h-80 w-64 border-3 border-dashed rounded-2xl bg-white/5 dark:bg-indigo-900/10 border-indigo-300 dark:border-indigo-600 flex flex-col items-center justify-center gap-4 p-6 transition-all duration-300 hover:border-indigo-400 dark:hover:border-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-800/20 transform hover:-translate-y-1 shadow-sm hover:shadow-lg">
-                            <div
-                                class="w-20 h-20 bg-indigo-100 dark:bg-indigo-800/30 rounded-full flex items-center justify-center mb-2">
-                                <Icon icon="hugeicons:add-01" class="text-5xl text-indigo-500 dark:text-indigo-300" />
-                            </div>
-                            <h3 class="font-medium text-indigo-600 dark:text-indigo-300 text-lg">Tipo de Obligación
-                            </h3>
-                            <p class="text-center text-gray-600 dark:text-gray-400 text-sm">
-                                Selecciona un tipo de obligación.
-                            </p>
-                        </div>
-                    </template>
-                </ModalFiscal>
-            </template>
-
-
-            <template v-if="obligacionSeleccionado && obligacionSeleccionado !== null">
-                <ModalFiscal title="Selecciona un tipo de declaración" :data="tipo_declaracion"
-                    v-model="tipoDeclaracionSeleccionado" @select-tramite="onTipoDeclaracionSelected">
-                    <template #button-open="{ selectedDato: selectedTipoDeclaracion }">
-                        <div v-if="selectedTipoDeclaracion"
-                            class="h-80 w-64 group relative overflow-hidden bg-gradient-to-br from-indigo-500 to-indigo-700 dark:from-indigo-700 dark:to-indigo-900 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                            <!-- Contenido de la obligación seleccionada -->
-                            <div
-                                class="absolute top-0 right-0 w-40 h-40 bg-white dark:bg-indigo-300 opacity-10 dark:opacity-5 rounded-full -mr-16 -mt-16">
-                            </div>
-                            <div
-                                class="absolute bottom-0 left-0 w-32 h-32 bg-white dark:bg-indigo-300 opacity-10 dark:opacity-5 rounded-full -ml-12 -mb-12">
-                            </div>
-                            <div
-                                class="absolute top-1/2 left-1/2 w-24 h-24 bg-white dark:bg-indigo-300 opacity-5 dark:opacity-5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-lg">
-                            </div>
-
-                            <button @click.stop="quitarSeleccionTipoDeclaracion"
-                                class="absolute top-3 right-3 bg-red-500 dark:bg-red-600 text-white rounded-full p-1.5 hover:bg-red-600 dark:hover:bg-red-700 transition-all duration-200 z-10 hover:rotate-90 transform">
-                                <Icon icon="material-symbols:close" class="text-lg" />
-                            </button>
-
-                            <div class="flex justify-center mb-4">
-                                <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                                    <Icon icon="solar:file-text-bold" class="text-white text-3xl" />
-                                </div>
-                            </div>
-
-                            <div class="flex justify-center items-center w-full relative z-0">
-                                <div>
-                                    <h3 class="font-semibold
-                                        text-white text-xl mb-3 text-center">
-                                        {{ selectedTipoDeclaracion.titulo }}
-                                    </h3>
-                                    <div class="h-0.5 w-12 bg-white/30 mx-auto mb-3"></div>
-                                    <p class="text-gray-100 dark:text-gray-200 text-sm text-center px-2">
-                                        {{ selectedTipoDeclaracion.descripcion }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div v-else
-                            class="relative h-80 w-64 border-3 border-dashed rounded-2xl bg-white/5 dark:bg-indigo-900/10 border-indigo-300 dark:border-indigo-600 flex flex-col items-center justify-center gap-4 p-6 transition-all duration-300 hover:border-indigo-400 dark:hover:border-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-800/20 transform hover:-translate-y-1 shadow-sm hover:shadow-lg">
-                            <div
-                                class="w-20 h-20 bg-indigo-100 dark:bg-indigo-800/30 rounded-full flex items-center justify-center mb-2">
-                                <Icon icon="hugeicons:add-01" class="text-5xl text-indigo-500 dark:text-indigo-300" />
-                            </div>
-                            <h3 class="font-medium text-indigo-600 dark:text-indigo-300 text-lg">Tipo de Declaración
-                            </h3>
-                            <p class="text-center text-gray-600 dark:text-gray-400 text-sm">
-                                Selecciona un tipo de declaraión.
-                            </p>
-                        </div>
-                    </template>
-                </ModalFiscal>
-            </template>
-
-            <!-- Botón para empezar con el ejercicio (solo visible cuando todos los pasos están completados) -->
-            <template v-if="tipoDeclaracionSeleccionado && tipoDeclaracionSeleccionado !== null">
-                <Link :href="route('index.ejercicio.obligacion.a')"
-                    class="relative h-80 w-64 border-3 overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex flex-col items-center justify-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl cursor-pointer group">
-                <!-- Elementos decorativos de fondo -->
-                <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300">
-                </div>
-                <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/20 to-transparent"></div>
-                <div
-                    class="absolute -inset-1 bg-emerald-500 opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-300">
-                </div>
-
-                <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-4 z-10">
-                    <Icon icon="hugeicons:play" class="text-white text-4xl" />
-                </div>
-                <h3 class="font-semibold text-white text-xl mb-2 z-10">¡Vamos a comenzar!</h3>
-                <p class="text-center text-white/80 text-sm z-10 px-6">
-                    Tu ejercicio está listo para ser rellenado.
-                </p>
-                </Link>
-            </template>
         </div>
     </Main>
 </template>
 
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
-import { ref, watch } from "vue";
+import { ref, computed } from "vue";
 import { Link } from "@inertiajs/vue3";
 import Main from "@/Layouts/Main.vue";
 import ModalFiscal from "@/Components/ModalFiscal.vue";
+import SelectorModal from "@/Components/SelectorModal.vue";
 
 // Definición de tipos
 interface Types {
@@ -285,83 +81,98 @@ interface Types {
     disponible: boolean;
 }
 
-const { tramites_servicios, declaraciones, tipo_obligacion, tipo_declaracion } = defineProps<{
+interface Paso {
+    id: string;
+    modalTitle: string;
+    data: Types[];
+    selectedId: number | null;
+    selectedData: Types | null;
+    label: string;
+    placeholder: string;
+}
+
+const props = defineProps<{
     tramites_servicios: Types[];
     declaraciones: Types[];
     tipo_obligacion: Types[];
     tipo_declaracion: Types[];
 }>();
 
-// tramites_servicios
-const tramiteSeleccionado = ref<number | null>(null);
-const selectedTramiteData = ref<Types | null>(null);
-const onTramiteSelected = (tramite: Types) => {
-    selectedTramiteData.value = tramite;
+
+// Configuración de los pasos
+const pasos = ref<Paso[]>([
+    {
+        id: 'tramite',
+        modalTitle: 'Selecciona un trámite o servicio fiscal',
+        data: props.tramites_servicios,
+        selectedId: null,
+        selectedData: null,
+        label: 'Trámite Fiscal',
+        placeholder: 'Selecciona un trámite o servicio fiscal.'
+    },
+    {
+        id: 'declaracion',
+        modalTitle: 'Selecciona un tipo de declaración',
+        data: props.declaraciones,
+        selectedId: null,
+        selectedData: null,
+        label: 'Tipo de Declaración',
+        placeholder: 'Selecciona un tipo de declaración.'
+    },
+    {
+        id: 'obligacion',
+        modalTitle: 'Selecciona un tipo de obligación',
+        data: props.tipo_obligacion,
+        selectedId: null,
+        selectedData: null,
+        label: 'Tipo de Obligación',
+        placeholder: 'Selecciona un tipo de obligación.'
+    },
+    {
+        id: 'tipo_declaracion',
+        modalTitle: 'Selecciona un tipo de declaración',
+        data: props.tipo_declaracion,
+        selectedId: null,
+        selectedData: null,
+        label: 'Tipo de Declaración',
+        placeholder: 'Selecciona un tipo de declaración.'
+    }
+]);
+
+// Método para mostrar un paso según el estado de los anteriores
+const debeMostrarPaso = (index: number): boolean => {
+    if (index === 0) return true;
+    return pasos.value[index - 1].selectedId !== null;
 };
-const quitarSeleccionTramite = (event: Event) => {
+
+// Método para manejar la selección de un item
+const onItemSelected = (pasoIndex: number, item: Types) => {
+    pasos.value[pasoIndex].selectedData = item;
+
+    // Resetear las selecciones posteriores cuando se cambia una anterior
+    for (let i = pasoIndex + 1; i < pasos.value.length; i++) {
+        pasos.value[i].selectedId = null;
+        pasos.value[i].selectedData = null;
+    }
+};
+
+// Método para quitar la selección de un paso
+const quitarSeleccion = (event: Event, pasoIndex: number) => {
     event.stopPropagation();
-    tramiteSeleccionado.value = null;
-    selectedTramiteData.value = null;
+    pasos.value[pasoIndex].selectedId = null;
+    pasos.value[pasoIndex].selectedData = null;
 
-    // Restablecer las selecciones dependientes
-    declaracionSeleccionado.value = null;
-    selectedDeclaracionData.value = null;
-    obligacionSeleccionado.value = null;
-    selectedObligacionData.value = null;
-    tipoDeclaracionSeleccionado.value = null;
-    selectedTipoDeclaracionData.value = null;
+    // Resetear las selecciones posteriores
+    for (let i = pasoIndex + 1; i < pasos.value.length; i++) {
+        pasos.value[i].selectedId = null;
+        pasos.value[i].selectedData = null;
+    }
 };
 
-// declaracion
-const declaracionSeleccionado = ref<number | null>(null);
-const selectedDeclaracionData = ref<Types | null>(null);
-const onDeclaracionSelected = (declaracion: Types) => {
-    selectedDeclaracionData.value = declaracion;
-};
-const quitarSeleccionDeclaracion = (event: Event) => {
-    event.stopPropagation();
-    declaracionSeleccionado.value = null;
-    selectedDeclaracionData.value = null;
-
-    // Restablecer las selecciones dependientes
-    obligacionSeleccionado.value = null;
-    selectedObligacionData.value = null;
-    tipoDeclaracionSeleccionado.value = null;
-    selectedTipoDeclaracionData.value = null;
-};
-
-// tipo_obligacion
-const obligacionSeleccionado = ref<number | null>(null);
-const selectedObligacionData = ref<Types | null>(null);
-const onObligacionSelected = (obligacion: Types) => {
-    selectedObligacionData.value = obligacion;
-};
-const quitarSeleccionObligacion = (event: Event) => {
-    event.stopPropagation();
-    obligacionSeleccionado.value = null;
-    selectedObligacionData.value = null;
-
-    // Restablecer las selecciones dependientes
-    tipoDeclaracionSeleccionado.value = null;
-    selectedTipoDeclaracionData.value = null;
-};
-
-// tipo_declaracion
-const tipoDeclaracionSeleccionado = ref<number | null>(null);
-const selectedTipoDeclaracionData = ref<Types | null>(null);
-const onTipoDeclaracionSelected = (tipoDeclaracion: Types) => {
-    selectedTipoDeclaracionData.value = tipoDeclaracion;
-};
-const quitarSeleccionTipoDeclaracion = (event: Event) => {
-    event.stopPropagation();
-    tipoDeclaracionSeleccionado.value = null;
-    selectedTipoDeclaracionData.value = null;
-    // Restablecer las selecciones dependientes
-
-};
-
-
-
+// Computar si todos los pasos están completados
+const todosLosPasosCompletados = computed(() => {
+    return pasos.value.every(paso => paso.selectedId !== null);
+});
 </script>
 
 <style></style>

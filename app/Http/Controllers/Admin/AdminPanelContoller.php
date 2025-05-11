@@ -22,7 +22,13 @@ class AdminPanelContoller extends Controller
     public function index()
     {
         //
-        return Inertia::render('Admin/Index');
+
+        // count users
+        $countUsers = count(User::all());
+
+        return Inertia::render('Admin/Index', [
+            'countUsers' => $countUsers,
+        ]);
     }
 
     /**
@@ -72,4 +78,14 @@ class AdminPanelContoller extends Controller
     {
         //
     }
+
+
+    public function vistaUsuarios()
+    {
+        $users = User::all();
+        return Inertia::render('Admin/Usuarios/Index', [
+            'users' => $users,
+        ]);
+    }
+
 }

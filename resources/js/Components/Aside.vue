@@ -2,7 +2,9 @@
 import { Icon } from "@iconify/vue";
 import { Link } from "@inertiajs/vue3";
 import { ref, onMounted, computed } from 'vue';
+import Can from "./Can.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
+import { usePage } from '@inertiajs/vue3'
 
 // Propiedades para el manejo del sidebar
 defineProps({
@@ -12,6 +14,8 @@ defineProps({
     },
 });
 
+const { props } = usePage()
+const user = props.auth.user
 const emit = defineEmits(["close", "toggleSidebar"]);
 
 // Estado para el menú inferior tipo sheet
@@ -64,7 +68,7 @@ const navigationItems = [
     },
     {
         name: 'Grupos',
-        route: 'dashboard', // Cambiar a la ruta real de grupos
+        route: 'vistaA', // Cambiar a la ruta real de grupos
         icon: 'mingcute:group-2-fill',
         active: computed(() => currentRoute.value === 'groups')
     },
@@ -90,7 +94,7 @@ onMounted(() => {
     <div class="app-container h-screen flex flex-col">
         <!-- Sidebar SOLO para escritorio -->
         <div :class="[
-            'fixed inset-y-0 bottom-0 left-0 z-30 w-64 transform transition-transform duration-300 ease-in-out dark:bg-[#141624] bg-white shadow-lg',
+            'fixed inset-y-0 bottom-0 left-0 z-30 w-64 transform transition-transform duration-300 ease-in-out dark:bg-gray-900 bg-white shadow-lg',
             'hidden md:block md:translate-x-0', // Solo visible en desktop
         ]">
             <div class="flex-1 flex flex-col h-full relative z-10">
@@ -110,17 +114,15 @@ onMounted(() => {
 
                     <div class="flex gap-2">
                         <div class="h-8 w-8 overflow-hidden rounded-full min-w-8">
-                            <img src="https://www.svgrepo.com/show/384670/account-avatar-profile-user.svg" alt="Avatar"
+                            <img src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" alt="Avatar"
                                 class="h-full w-full object-cover" />
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500 font-medium dark:text-gray-300 m-0 p-0">Usuario</p>
+                            <p class="text-sm text-gray-500 font-medium dark:text-gray-300 m-0 p-0">{{ user.name }}</p>
                             <div class="flex items-center">
-                                <p class="text-xs text-gray-600 dark:text-gray-300 p-0 m-0 truncate"
-                                    title="usuarioa@gmail.com" style="max-width: 50px;">
-                                    castiyo0429
+                                <p class="text-xs text-gray-600 dark:text-gray-300 p-0 m-0 truncate">
+                                    {{ user.email }}
                                 </p>
-                                <p class="text-xs text-gray-600 dark:text-gray-300 p-0 m-0">@gmail.com</p>
                             </div>
                         </div>
                         <div class="flex justify-end items-center w-full">
@@ -144,24 +146,30 @@ onMounted(() => {
 
 
                         <Can permission="panel-control">
-                            <Link :href="route('panel.admin')"
-                                class="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#1d2333] transition-colors">
+                            <Link :href="route('panel.admin')" :class="[
+                                'flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors',
+                                route().current('panel.admin')
+                                    ? 'bg-blue-100 dark:bg-[#1d2333] text-blue-600 dark:text-blue-400'
+                                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#1d2333]'
+                            ]">
                             <Icon icon="mingcute:user-setting-fill" class="text-xl" />
                             <span>Panel de Control</span>
                             </Link>
                         </Can>
 
+
                         <div v-for="item in navigationItems" :key="item.name">
                             <Link :href="route(item.route)" :class="[
-                                'flex items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#1d2333] transition-colors',
-                                item.active
-                                    ? ''
-                                    : ''
+                                'flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors',
+                                route().current(item.route)
+                                    ? 'bg-blue-100 dark:bg-[#1d2333] text-blue-600 dark:text-blue-400'
+                                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#1d2333]'
                             ]">
                             <Icon :icon="item.icon" class="text-xl" />
                             <span>{{ item.name }}</span>
                             </Link>
                         </div>
+
 
                         <div class="py-3">
                             <div class="px-3 text-xs font-medium uppercase text-gray-500 dark:text-gray-400">
@@ -202,7 +210,7 @@ onMounted(() => {
 
         <!-- Header para escritorio -->
         <header
-            class="fixed top-0 right-0 z-20 items-center justify-between px-4 py-4 md:px-6 left-0 bg-white dark:bg-[#141624] hidden">
+            class="fixed top-0 right-0 z-20 items-center justify-between px-4 py-4 md:px-6 left-0 bg-white dark:bg-gray-900 hidden">
             <!-- Mobile logo y menú -->
             <div class="flex items-center gap-2">
                 <div class="flex items-center gap-2">
@@ -229,7 +237,7 @@ onMounted(() => {
                 </button>
 
                 <div class="h-8 w-8 overflow-hidden rounded-full">
-                    <img src="https://www.svgrepo.com/show/384670/account-avatar-profile-user.svg" alt="Avatar"
+                    <img src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" alt="Avatar"
                         class="h-full w-full object-cover" />
                 </div>
             </div>
@@ -244,25 +252,43 @@ onMounted(() => {
         </main>
 
         <!-- Navegación de tipo app para móviles -->
-        <nav class="md:hidden fixed bottom-0 inset-x-0 z-30 dark:bg-[#141624] shadow-lg bg-white dark:text-white">
+        <nav class="md:hidden fixed bottom-0 inset-x-0 z-30 dark:bg-gray-900 shadow-lg bg-white dark:text-white">
             <div class="flex justify-around items-center h-16">
                 <Link v-for="(item, index) in navigationItems.slice(0, 3)" :key="item.name" :href="route(item.route)"
                     :class="[
-                        'flex flex-col items-center justify-center flex-1 py-2 px-1 text-gray-800 dark:text-gray-300',
-                        item.active
-                            ? ''
-                            : ''
+                        'flex flex-col items-center justify-center flex-1 py-2 px-1',
+                        route().current(item.route)
+                            ? 'text-blue-600 dark:text-blue-400'
+                            : 'text-gray-800 dark:text-gray-300'
                     ]">
                 <div :class="[
-                    'p-1 rounded-full transition-colors',
-                    item.active
+                    'rounded-full transition-colors',
+                    route().current(item.route)
                         ? ''
                         : ''
                 ]">
                     <Icon :icon="item.icon" class="text-2xl" />
                 </div>
-                <span class="text-xs mt-1">{{ item.name }}</span>
+                <span class="text-xs">{{ item.name }}</span>
                 </Link>
+
+
+                <!-- admin -->
+                <Can permission="panel-control">
+                    <Link :href="route('panel.admin')"
+                        class="flex flex-col items-center justify-center flex-1 py-2 px-1" :class="{
+                            'text-blue-600 dark:text-blue-400': route().current('panel.admin'),
+                            'text-gray-800 dark:text-gray-300': !route().current('panel.admin')
+                        }">
+                    <div class="p-1 rounded-full transition-colors" :class="{
+                        '': route().current('panel.admin')
+                    }">
+                        <Icon icon="mingcute:user-setting-fill" class="text-2xl" />
+                    </div>
+                    <span class="text-xs mt-1">Panel</span>
+                    </Link>
+                </Can>
+
 
                 <!-- Botón para abrir el Bottom Sheet -->
                 <button @click="toggleBottomSheet"
@@ -285,7 +311,7 @@ onMounted(() => {
             @click="toggleBottomSheet">
         </div>
         <div :class="[
-            'md:hidden fixed bottom-0 inset-x-0 z-50 bg-white dark:bg-[#141624] rounded-t-3xl shadow-lg',
+            'md:hidden fixed bottom-0 inset-x-0 z-50 bg-white dark:bg-gray-900 rounded-t-3xl shadow-lg',
             'transform transition-transform duration-300 ease-out',
             isBottomSheetOpen ? 'translate-y-0' : 'translate-y-full'
         ]" style="max-height: 75vh; overflow-y: auto;">
@@ -298,12 +324,12 @@ onMounted(() => {
             <div class="px-6 pb-4 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
                 <div class="flex items-center gap-3">
                     <div class="h-14 w-14 overflow-hidden rounded-full border-2 border-indigo-500">
-                        <img src="https://www.svgrepo.com/show/384670/account-avatar-profile-user.svg" alt="Avatar"
+                        <img src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" alt="Avatar"
                             class="h-full w-full object-cover" />
                     </div>
                     <div class="flex flex-col">
-                        <span class="text-lg font-medium dark:text-white">Usuario</span>
-                        <span class="text-sm text-gray-500 dark:text-gray-400">user@example.com</span>
+                        <span class="text-lg font-medium dark:text-white">{{ user.name }}</span>
+                        <span class="text-sm text-gray-500 dark:text-gray-400">{{ user.email }}</span>
                     </div>
                 </div>
 

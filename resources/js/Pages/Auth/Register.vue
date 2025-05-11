@@ -59,7 +59,7 @@ const submit = () => {
 
             <!-- Contenedor de la tarjeta de registro -->
             <div
-                class="flex flex-col lg:flex-row overflow-hidden bg-[#141624] bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-2xl">
+                class="flex flex-col lg:flex-row overflow-hidden bg-gray-900 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-2xl">
                 <!-- Columna izquierda (imagen/ilustración) -->
                 <div class="lg:w-1/2 relative overflow-hidden hidden lg:block">
                     <!-- Elementos decorativos -->

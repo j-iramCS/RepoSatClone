@@ -40,13 +40,14 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Rutas Admin
-    Route::get('/panel-admin', [AdminPanelContoller::class, 'index'])->name('panel.admin');
+    Route::prefix('/panel-admin')->group(function () {
+        Route::get('/', [AdminPanelContoller::class, 'index'])->name('panel.admin');
+        Route::get('/usuarios', [AdminPanelContoller::class, 'vistaUsuarios'])->name('panel.admin.usuarios');
+    });
 
 
 
     Route::get('/vistaA', function () {
         return Inertia::render('VistaA');
     })->name('vistaA');
-
-
 });

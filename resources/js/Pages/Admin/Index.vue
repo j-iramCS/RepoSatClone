@@ -1,17 +1,25 @@
 <template>
   <Main>
     <!-- Cabecera con efectos de degradado y mejora visual -->
-    <div class="flex flex-col md:flex-row flex-wrap justify-between items-start md:items-center mb-8">
-      <div>
-        <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Panel de Control</h1>
-        <p class="text-gray-600">Administración central del sistema</p>
+    <div class="flex flex-col md:flex-row flex-wrap justify-between items-start mb-8">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+        <div>
+          <div class="flex items-center mb-4 gap-4">
+            <div
+              class="bg-blue-500 dark:bg-gray-900 bg-opacity-20 w-12 h-12 rounded-lg flex items-center justify-center">
+              <Icon icon="mingcute:settings-3-fill" class="text-3xl text-blue-600 dark:text-gray-300" />
+            </div>
+            <h1 class="text-3xl font-bold dark:text-gray-300">Panel de Control </h1>
+          </div>
+          <p class="text-gray-600">Administración central del sistema</p>
+        </div>
       </div>
-      <div class="flex mt-3 flex-wrap">
-        <div class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm mr-2 flex items-center justify-center">
+      <div class="flex mt-3 flex-wrap dark:text-gray-300">
+        <div class="dark:bg-[#1d2333] bg-white shadow-sm px-3 py-1 rounded-full text-sm mr-2 flex items-center justify-center">
           <Icon icon="mdi:clock-outline" class="mr-1" />
           {{ currentDate }}
         </div>
-        <div class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm flex items-center justify-center">
+        <div class="dark:bg-[#1d2333] bg-white shadow-sm px-3 py-1 rounded-full text-sm flex items-center justify-center">
           <Icon icon="mdi:account" class="mr-1" />
           Admin
         </div>
@@ -19,18 +27,18 @@
     </div>
 
     <!-- Panel de métricas principales con mejores indicadores visuales -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+    <div class="grid gap-4 mb-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ">
       <!-- Usuarios -->
-      <div class="bg-white dark:bg-[#141624] p-5 rounded-lg shadow-md border-l-4 border-blue-500">
+      <div class="bg-white dark:bg-gray-900 p-5 rounded-lg shadow-md border-l-4 border-blue-500">
         <div class="flex items-center justify-between">
           <h2 class="text-lg font-semibold dark:text-white">Usuarios Registrados</h2>
-          <Icon icon="mdi:account-check" class="text-blue-500 text-2xl" />
+          <Icon icon="mingcute:user-3-fill" class="text-blue-500 text-2xl" />
         </div>
-        <p class="text-3xl font-bold mt-2 dark:text-white">9</p>
+        <p class="text-3xl font-bold mt-2 dark:text-white">{{ props.countUsers }}</p>
       </div>
 
       <!-- Tasa de Conversión -->
-      <div class="bg-white dark:bg-[#141624] p-5 rounded-lg shadow-md border-l-4 border-purple-500 hidden">
+      <div class="bg-white dark:bg-gray-900 p-5 rounded-lg shadow-md border-l-4 border-purple-500 hidden">
         <div class="flex items-center justify-between">
           <h2 class="text-lg font-semibold dark:text-white">Tasa de Conversión</h2>
           <Icon icon="mdi:chart-line" class="text-purple-500 text-2xl" />
@@ -39,7 +47,7 @@
       </div>
 
       <!-- Certificaciones -->
-      <div class="bg-white dark:bg-[#141624] p-5 rounded-lg shadow-md border-l-4 border-amber-500 hidden">
+      <div class="bg-white dark:bg-gray-900 p-5 rounded-lg shadow-md border-l-4 border-amber-500 hidden">
         <div class="flex items-center justify-between">
           <h2 class="text-lg font-semibold dark:text-white">Certificaciones</h2>
           <Icon icon="mdi:certificate" class="text-amber-500 text-2xl" />
@@ -48,7 +56,7 @@
       </div>
 
       <!-- Nuevo: Eficiencia del Sistema -->
-      <div class="bg-white dark:bg-[#141624] p-5 rounded-lg shadow-md border-l-4 border-green-500 hidden">
+      <div class="bg-white dark:bg-gray-900 p-5 rounded-lg shadow-md border-l-4 border-green-500 hidden">
         <div class="flex items-center justify-between">
           <h2 class="text-lg font-semibold dark:text-white">Eficiencia</h2>
           <Icon icon="mdi:gauge" class="text-green-500 text-2xl" />
@@ -58,12 +66,12 @@
     </div>
 
     <!-- Vista rápida y actividad reciente con tabs -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+    <div class="grid gap-6 mb-6 grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
       <!-- Gráfico de resumen (simplificado) -->
-      <Link href="/admin/usuarios"
-        class="bg-white dark:bg-[#141624] p-5 rounded-lg shadow-md flex flex-col items-center justify-center hover:shadow-lg transition-all duration-300">
+      <Link :href="route('panel.admin.usuarios')"
+        class="bg-white dark:bg-gray-900 p-5 rounded-lg shadow-md flex flex-col items-center justify-center hover:shadow-lg transition-all duration-300">
       <div class="bg-blue-100 p-3 rounded-full mb-3 dark:bg-blue-900">
-        <Icon icon="hugeicons:user-group-02" class="text-2xl text-blue-500 dark:text-blue-300" />
+        <Icon icon="mingcute:group-3-fill" class="text-5xl text-blue-500 dark:text-blue-300" />
       </div>
       <span class="text-sm font-semibold dark:text-white">Gestión de Usuarios</span>
       <div class="text-blue-500 text-xs flex items-center mt-2 dark:text-blue-300">
@@ -73,9 +81,9 @@
       </Link>
 
       <Link href="/admin/reportes"
-        class="bg-white dark:bg-[#141624] p-5 rounded-lg shadow-md flex flex-col items-center justify-center hover:shadow-lg transition-all duration-300">
+        class="bg-white dark:bg-gray-900 p-5 rounded-lg shadow-md flex flex-col items-center justify-center hover:shadow-lg transition-all duration-300">
       <div class="bg-red-100 p-3 rounded-full mb-3 dark:bg-red-900">
-        <Icon icon="hugeicons:access" class="text-2xl text-red-500 dark:text-red-300" />
+        <Icon icon="mingcute:key-1-fill" class="text-5xl text-red-500 dark:text-red-300" />
       </div>
       <span class="text-sm font-semibold dark:text-white">Roles y Permisos</span>
       <div class="text-red-500 text-xs flex items-center mt-2 dark:text-red-300">
@@ -85,7 +93,7 @@
       </Link>
 
       <!-- Actividad reciente mejorada -->
-      <div class="bg-white rounded-lg shadow-md dark:bg-[#141624]">
+      <div class="bg-white rounded-lg shadow-md hidden dark:bg-gray-900">
         <div class="p-4 border-b dark:border-gray-600">
           <h2 class="text-lg font-semibold dark:text-white">Actividad Reciente</h2>
         </div>
@@ -148,4 +156,14 @@ const currentDate = ref(new Date().toLocaleDateString('es-MX', {
 onMounted(() => {
   // Código de inicialización si es necesario
 });
+
+// props backend
+const props = defineProps({
+  countUsers: {
+    type: Number,
+    default: 0
+  },
+});
+
+
 </script>

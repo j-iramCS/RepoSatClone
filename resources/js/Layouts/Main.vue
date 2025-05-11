@@ -1,38 +1,8 @@
 <template>
-    <div class="min-h-screen overflow-hidden">
+    <div class="min-h-screen">
         <!-- Contenedor principal con gradiente de fondo -->
         <div
-            class="dark:bg-[#050714] bg-[#f5f6fa] relative transition-colors">
-            <!-- Elementos decorativos animados con pointer-events-none -->
-            <div class="absolute inset-0 overflow-hidden pointer-events-none">
-                <!-- Círculos decorativos animados -->
-                <!-- <div
-                    class="absolute top-10 left-10 w-64 h-64 bg-green-500 rounded-full animate-pulse-slow">
-                </div>
-                <div
-                    class="absolute top-40 right-20 w-96 h-96 bg-indigo-500 rounded-full animate-pulse-medium">
-                </div>
-                <div
-                    class="absolute bottom-20 left-1/3 w-72 h-72 bg-purple-500 rounded-full animate-pulse-fast">
-                </div> -->
-
-                <!-- Partículas flotantes -->
-                <!-- <div class="particles">
-                    <span class="particle bg-black dark:bg-white"></span>
-                    <span class="particle bg-black dark:bg-white"></span>
-                    <span class="particle bg-black dark:bg-white"></span>
-                    <span class="particle bg-black dark:bg-white"></span>
-                    <span class="particle bg-black dark:bg-white"></span>
-                    <span class="particle bg-black dark:bg-white"></span>
-                    <span class="particle bg-black dark:bg-white"></span>
-                    <span class="particle bg-black dark:bg-white"></span>
-                    <span class="particle bg-black dark:bg-white"></span>
-                    <span class="particle bg-black dark:bg-white"></span>
-                    <span class="particle bg-black dark:bg-white"></span>
-                    <span class="particle bg-black dark:bg-white"></span>
-                </div> -->
-            </div>
-
+            class="dark:bg-gray-950 bg-gray-50 relative transition-colors">
             <!-- Contenido principal -->
             <div class="flex relative z-10">
                 <Aside :isOpen="isSidebarOpen" @close="closeSidebar" @toggleSidebar="toggleSidebar" />
