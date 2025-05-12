@@ -8,7 +8,7 @@
                 <Aside :isOpen="isSidebarOpen" @close="closeSidebar" @toggleSidebar="toggleSidebar" />
 
                 <!-- Main content area -->
-                <main class="pb-16 md:pt-4 container mx-auto px-4 sm:px-6 lg:px-8">
+                <main class="pb-16 md:pt-4 container mx-auto px-4 sm:px-6 lg:px-8 mb-8">
                     <div class="max-w-6xl mx-auto mt-6">
                         <slot></slot>
                     </div>

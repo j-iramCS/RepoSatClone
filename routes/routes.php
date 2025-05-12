@@ -42,7 +42,8 @@ Route::middleware(['auth'])->group(function () {
     // Rutas Admin
     Route::prefix('/panel-admin')->group(function () {
         Route::get('/', [AdminPanelContoller::class, 'index'])->name('panel.admin');
-        Route::get('/usuarios', [AdminPanelContoller::class, 'vistaUsuarios'])->name('panel.admin.usuarios');
+        Route::get('/urp', [AdminPanelContoller::class, 'vistaURP'])->name('panel.admin.urp');
+        Route::get('/urp/rol/{id}', [AdminPanelContoller::class, 'vistaRol'])->name('panel.admin.rol');
     });
 
 

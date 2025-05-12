@@ -138,11 +138,11 @@ watch(searchQuery, () => {
 </script>
 
 <template>
-    <div class="w-full bg-white dark:bg-[#171b2e] rounded-lg shadow-lg">
+    <div class="w-full bg-white dark:bg-gray-900 rounded-lg shadow-lg">
         <!-- Header con búsqueda -->
         <div
-            class="p-4 border-b border-gray-200 dark:border-gray-700 flex flex-col md:flex-row justify-between items-center">
-            <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3 md:mb-0">
+            class="px-4 py-2 border-b border-gray-200 dark:border-gray-700 flex flex-row flex-wrap justify-between items-center gap-2">
+            <h2 class="text-lg md:text-base font-semibold text-gray-800 dark:text-gray-100 md:mb-0">
                 <slot name="title">Data Table</slot>
             </h2>
 
@@ -160,10 +160,10 @@ watch(searchQuery, () => {
                 <thead class="bg-gray-50 dark:bg-gray-800">
                     <tr>
                         <th v-for="column in columns" :key="column.key" @click="handleSort(column)" :class="[
-                            'px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider',
+                            'px-6 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider',
                             column.sortable ? 'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700' : ''
                         ]">
-                            <div class="flex items-center space-x-1">
+                            <div class="flex items-center space-x-1 justify-center">
                                 <span>{{ column.label }}</span>
                                 <span v-if="column.sortable" class="inline-flex flex-col">
                                     <Icon :icon="'material-symbols:arrow-drop-up-rounded'" :class="[
@@ -183,22 +183,26 @@ watch(searchQuery, () => {
                         </th>
                     </tr>
                 </thead>
-                <tbody class="bg-white dark:bg-[#171b2e] divide-y divide-gray-200 dark:divide-gray-700">
-                    <tr v-for="(row, rowIndex) in paginatedData" :key="rowIndex" @click="handleRowClick(row)"
-                        class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                        <td v-for="column in columns" :key="`${rowIndex}-${column.key}`"
-                            class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300 break-words whitespace-normal overflow-hidden">
-                            <slot :name="`cell-${column.key}`" :row="row" :value="row[column.key]">
-                                {{ row[column.key] }}
-                            </slot>
-                        </td>
-                    </tr>
-                    <tr v-if="!paginatedData.length">
-                        <td :colspan="columns.length" class="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
-                            No se encontraron registros
-                        </td>
-                    </tr>
+                <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+                    <slot name="body" :rows="paginatedData" :columns="columns">
+                        <tr v-for="(row, rowIndex) in paginatedData" :key="rowIndex" @click="handleRowClick(row)"
+                            class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
+                            <td v-for="column in columns" :key="`${rowIndex}-${column.key}`"
+                                class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300 break-words whitespace-normal overflow-hidden text-center">
+                                <slot :name="`cell-${column.key}`" :row="row" :value="row[column.key]">
+                                    {{ row[column.key] }}
+                                </slot>
+                            </td>
+                        </tr>
+                        <tr v-if="!paginatedData.length">
+                            <td :colspan="columns.length"
+                                class="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
+                                No se encontraron registros
+                            </td>
+                        </tr>
+                    </slot>
                 </tbody>
+
             </table>
         </div>
 

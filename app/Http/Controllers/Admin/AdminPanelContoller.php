@@ -8,7 +8,10 @@ use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use App\Models\User;
+
 
 class AdminPanelContoller extends Controller
 {
@@ -80,12 +83,31 @@ class AdminPanelContoller extends Controller
     }
 
 
-    public function vistaUsuarios()
+    public function vistaURP()
     {
-        $users = User::all();
-        return Inertia::render('Admin/Usuarios/Index', [
-            'users' => $users,
+        $permisos = Permission::all();
+        $roles = Role::with('permissions')->get();
+        $usuarios = User::with(['roles', 'permissions'])->get();
+        return Inertia::render('Admin/URP/Index', [
+            'permisos' => $permisos,
+            'roles' => $roles,
+            'usuarios' => $usuarios,
         ]);
     }
 
+    public function vistaRol($id)
+    {
+        $rol = Role::findOrFail($id);
+        $permisosAsignados = $rol->permissions()->get();
+        $todosPermisos = Permission::all();
+
+        $usersConRol = User::role($rol->name)->get();
+
+        return Inertia::render('Admin/URP/Rol', [
+            'rol' => $rol,
+            'permisosAsignados' => $permisosAsignados,
+            'todosPermisos' => $todosPermisos,
+            'usersConRol' => $usersConRol,
+        ]);
+    }
 }

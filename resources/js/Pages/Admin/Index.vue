@@ -68,7 +68,7 @@
     <!-- Vista rápida y actividad reciente con tabs -->
     <div class="grid gap-6 mb-6 grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
       <!-- Gráfico de resumen (simplificado) -->
-      <Link :href="route('panel.admin.usuarios')"
+      <!-- <Link :href="route('panel.admin.usuarios')"
         class="bg-white dark:bg-gray-900 p-5 rounded-lg shadow-md flex flex-col items-center justify-center hover:shadow-lg transition-all duration-300">
       <div class="bg-blue-100 p-3 rounded-full mb-3 dark:bg-blue-900">
         <Icon icon="mingcute:group-3-fill" class="text-5xl text-blue-500 dark:text-blue-300" />
@@ -78,9 +78,9 @@
         <Icon icon="mdi:arrow-right" class="mr-1" />
         <span>Administrar cuentas</span>
       </div>
-      </Link>
+      </Link> -->
 
-      <Link href="/admin/reportes"
+      <Link :href="route('panel.admin.urp')"
         class="bg-white dark:bg-gray-900 p-5 rounded-lg shadow-md flex flex-col items-center justify-center hover:shadow-lg transition-all duration-300">
       <div class="bg-red-100 p-3 rounded-full mb-3 dark:bg-red-900">
         <Icon icon="mingcute:key-1-fill" class="text-5xl text-red-500 dark:text-red-300" />
