@@ -31,8 +31,8 @@
       <!-- Usuarios -->
       <div class="bg-white dark:bg-gray-900 p-5 rounded-lg shadow-md border-l-4 border-blue-500">
         <div class="flex items-center justify-between">
-          <h2 class="text-lg font-semibold dark:text-white">Usuarios Registrados</h2>
-          <Icon icon="mingcute:user-3-fill" class="text-blue-500 text-2xl" />
+          <h2 class="text-lg dark:text-white">Usuarios Registrados</h2>
+          <Icon icon="mingcute:group-3-fill" class="text-blue-500 text-3xl" />
         </div>
         <p class="text-3xl font-bold mt-2 dark:text-white">{{ props.countUsers }}</p>
       </div>
@@ -83,12 +83,12 @@
       <Link :href="route('panel.admin.urp')"
         class="bg-white dark:bg-gray-900 p-5 rounded-lg shadow-md flex flex-col items-center justify-center hover:shadow-lg active:scale-90 transition-transform duration-100">
       <div class="bg-red-100 p-3 rounded-full mb-3 dark:bg-red-900">
-        <Icon icon="mingcute:key-1-fill" class="text-5xl text-red-500 dark:text-red-300" />
+        <Icon icon="mingcute:key-2-fill" class="text-5xl text-red-500 dark:text-red-300" />
       </div>
-      <span class="text-sm font-semibold dark:text-white">Roles y Permisos</span>
-      <div class="text-red-500 text-xs flex items-center mt-2 dark:text-red-300">
+      <span class="dark:text-white">Usuarios, Roles y Permisos</span>
+      <div class="text-gray-500 text-xs flex items-center mt-2 dark:text-red-300">
         <Icon icon="mdi:arrow-right" class="mr-1" />
-        <span>Configurar accesos</span>
+        <span>Configuración</span>
       </div>
       </Link>
 

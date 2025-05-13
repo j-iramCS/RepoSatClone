@@ -1,9 +1,15 @@
 <template>
     <Main>
+
+        <div class="py-5 flex gap-1 text-gray-600">
+            <Link :href="route('panel.admin')" class="hover:text-blue-500 hover:underline">Inicio</Link>/
+            <Link :href="route('panel.admin.urp')" class="hover:text-blue-500 hover:underline">URP</Link>/
+        </div>
+
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div class="bg-white dark:bg-gray-900 p-6 shadow-md rounded-lg dark:text-white">
                 <div class="flex gap-2 items-center">
-                    <Icon icon="mingcute:android-2-fill" class="text-5xl text-gray-600" />
+                    <Icon icon="mingcute:box-3-fill" class="text-5xl text-green-500" />
                     <h1 class="text-3xl font-bold text-gray-600">Rol</h1>
                 </div>
                 <p class="text-blue-500 font-bold text-xl">{{ props.rol.name }}</p>
@@ -16,6 +22,9 @@
                         <input type="checkbox" :id="'permiso-' + String(item.id)" class="ml-2" :value="item.id"
                             :checked="props.permisosAsignados.some((permiso) => permiso.id === item.id)" />
                         <label :for="'permiso-' + String(item.id)">{{ item.name }}</label>
+                        <Link :href="route('panel.admin.permiso', item.id)" class="">
+                        <Icon icon="mingcute:external-link-line" class="text-blue-500" />
+                        </Link>
                     </div>
                 </div>
 
@@ -31,7 +40,11 @@
             <DataTable :columns="usersColum" :data="usuariosConRol">
                 <!-- Titulo -->
                 <template #title>
-                    <p class="dark:text-white px-3 rounded-lg py-1 my-1 font-normal">Usuarios que contienen el rol</p>
+                    <div class="flex gap-2 items-center">
+                        <Icon icon="mingcute:group-3-fill" class="text-2xl text-blue-500" />
+                        <p class="dark:text-white px-3 rounded-lg py-1 my-1 font-normal">Usuarios con el Rol
+                        </p>
+                    </div>
                 </template>
 
                 <!-- Contenido -->

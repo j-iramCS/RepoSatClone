@@ -52,8 +52,9 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/urp/usuario/{id}', [AdminPanelContoller::class, 'vistaUsuario'])->name('panel.admin.usuario');
 
+        Route::get('/urp/permiso/{id}', [AdminPanelContoller::class, 'vistaPermiso'])->name('panel.admin.permiso');
         Route::post('/urp/guardar-permisos', [AdminPanelContoller::class, 'guardarPermisos'])->name('panel.admin.guardar.permisos');
-
+        Route::post('/urp/permiso/{id}/guardar-rol', [AdminPanelContoller::class, 'guardarRolesDelPermiso'])->name('panel.admin.permiso.guardarRol');
 
 
     });

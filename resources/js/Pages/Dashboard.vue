@@ -103,7 +103,7 @@
                         <div class="flex justify-between items-center flex-wrap gap-">
                             <Link :href="route('vistaA')"
                                 class="px-4 py-2 bg-white text-green-600 font-medium rounded-md flex items-center active:scale-90 transition-transform duration-100">
-                            <span>Crear</span>
+                            <span>Explorar</span>
                             <Icon icon="mdi:arrow-right" class="ml-1" />
                             </Link>
                             <!-- <span class="text-white text-opacity-70 flex items-center">

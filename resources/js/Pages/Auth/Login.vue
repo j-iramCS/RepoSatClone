@@ -214,7 +214,7 @@ const submit = () => {
                         <!-- Botón de ingreso -->
                         <div>
                             <button type="submit" :disabled="form.processing"
-                                class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800"
+                                class="w-full flex justify-center bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800"
                                 :class="{
                                     'opacity-75 cursor-not-allowed':
                                         form.processing,

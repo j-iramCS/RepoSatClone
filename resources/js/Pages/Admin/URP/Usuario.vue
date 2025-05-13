@@ -1,5 +1,21 @@
 <template>
     <Main>
+
+        <div class="py-5 flex gap-1 text-gray-600 dark:text-green-300">
+            <Link :href="route('panel.admin')" class="hover:text-blue-500 hover:underline">Inicio</Link>/
+            <Link :href="route('panel.admin.urp')" class="hover:text-blue-500 hover:underline">URP</Link>/
+        </div>
+
+        <div class="mb-8">
+            <div class="flex items-center mb-4 gap-4">
+                <div
+                    class="bg-blue-500 dark:bg-gray-900 bg-opacity-20 w-12 h-12 rounded-lg flex items-center justify-center">
+                    <Icon icon="mingcute:ai-fill" class="text-3xl text-blue-600 dark:text-gray-300" />
+                </div>
+                <h1 class="text-3xl font-bold dark:text-gray-300">Administración del Usuario</h1>
+            </div>
+        </div>
+
         <div class="bg-white dark:bg-gray-900 p-6 shadow-md rounded-lg dark:text-white">
             <div class="flex gap-2 items-center">
                 <Icon icon="mingcute:user-3-fill" class="text-5xl text-blue-500" />
@@ -55,7 +71,6 @@
                     <Icon icon="mingcute:bookmark-add-fill" />
                     <p class="m-0 p-0 font-bold">Guardar</p>
                 </button>
-
             </div>
 
         </div>
@@ -74,6 +89,9 @@
                     <input type="checkbox" :id="'permiso-' + String(item.id)" class="ml-2" :value="item.id"
                         :checked="props.permisos.some((permiso) => permiso.id === item.id)" />
                     <label :for="'permiso-' + String(item.id)">{{ item.name }}</label>
+                    <Link :href="route('panel.admin.permiso', item.id)" class="">
+                    <Icon icon="mingcute:external-link-line" class="text-blue-500" />
+                    </Link>
                 </div>
             </div>
 

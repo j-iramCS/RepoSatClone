@@ -1,52 +1,111 @@
 <template>
     <Main>
-        <div
-            class="fixed left-0 top-0 right-0 flex justify-between md:hidden items-center bg-gray-50 dark:bg-gray-950 p-3 z-10">
-            <Link :href="route('panel.admin')" class="dark:text-gray-300 py-2 px-4">
-            <Icon icon="hugeicons:arrow-left-02" class="text-3xl" />
-            </Link>
-            <h2 class="text-xl font-bold dark:text-gray-300">Administrar Permisos</h2>
+
+        <div class="py-5 flex gap-1 text-gray-600 dark:text-gray-300">
+            <Link :href="route('panel.admin')" class="hover:text-blue-500 hover:underline">Inicio</Link>/
         </div>
 
-        <div class="bg-white dark:bg-gray-900 p-6 shadow-md rounded-lg dark:text-white mt-20 md:mt-0">
-            <h1 class="text-2xl font-semibold text-gray-600 dark:text-white">Asignación de roles masivos</h1>
-            <p class="text-xs">Selecciona a N usuarios y N roles para asignarse en conjunto</p>
-            <div class="grid grid-cols-2 my-5">
-                <!-- Roles -->
-                <div ref="checksRoles">
-                    <h1>Roles</h1>
-                    <p class="text-xs">Todos los roles creados actualmente</p>
-                    <div v-for="rol in props.todosRoles" :key="rol.id" class="flex items-center gap-2 my-2">
-                        <input type="checkbox" :id="'rol-' + String(rol.id)" class="ml-2" :value="rol.id" />
-                        <label :for="'rol-' + String(rol.id)">{{ rol.name }}</label>
-                        <Link :href="route('panel.admin.rol', rol.id)" class="">
-                        <Icon icon="mingcute:external-link-line" class="text-blue-500" />
-                        </Link>
-                    </div>
+        <div class="flex items-center mb-4 gap-4">
+            <div
+                class="bg-blue-500 dark:bg-gray-900 bg-opacity-20 w-12 h-12 rounded-lg flex items-center justify-center">
+                <Icon icon="mingcute:ai-fill" class="text-3xl text-blue-600 dark:text-gray-300" />
+            </div>
+            <h1 class="text-3xl font-bold dark:text-gray-300">Usuarios, Roles y Permisos</h1>
+        </div>
+        <p class="text-gray-600 dark:text-gray-300">Administracion de todo el URP</p>
+
+        <div class="grid grid-cols-2 gap-4 py-5">
+
+            <!-- Caja 1 -->
+            <div class="flex gap-2 items-start">
+                <!-- Tabs RP -->
+                <div class="flex flex-col gap-2 bg-white p-2 rounded-lg shadow-md dark:bg-gray-900">
+                    <button @click="tabRP = 'permisos'"
+                        class="bg-red-100 dark:bg-opacity-10 p-1 rounded-lg active:scale-90 transition-transform duration-100"
+                        title="Agregar nuevo Permiso">
+                        <Icon icon="mingcute:key-2-fill" class="text-2xl text-red-500" />
+                    </button>
+                    <button @click="tabRP = 'roles'"
+                        class="bg-green-100 dark:bg-opacity-10 p-1 rounded-lg active:scale-90 transition-transform duration-100"
+                        title="Agregar nuevo Rol">
+                        <Icon icon="mingcute:box-3-fill" class="text-2xl text-green-500" />
+                    </button>
                 </div>
 
-                <!-- Usuarios -->
-                <div ref="checksUsers">
-                    <h1>Usuarios</h1>
-                    <p class="text-xs">Todos los usuarios disponibles actualmente</p>
-                    <div v-for="user in props.todosUsers" :key="user.id" class="flex items-center gap-2 my-2">
-                        <input type="checkbox" :id="'user-' + String(user.id)" class="ml-2" :value="user.id" />
-                        <label :for="'user-' + String(user.id)">{{ user.name }}</label>
-                        <Link :href="route('panel.admin.usuario', user.id)" class="">
-                        <Icon icon="mingcute:external-link-line" class="text-blue-500" />
-                        </Link>
+                <!-- Contenido principal -->
+                <div class="px-6 py-4 bg-white rounded-lg shadow-md dark:bg-gray-900 w-full h-full">
+                    <div v-if="tabRP === 'permisos'">
+                        <h1 class="text-xl font-semibold dark:text-white">Crear Permiso</h1>
+                        <p class="text-xs text-gray-600 dark:text-gray-300">Crear un nuevo permiso para el sistema</p>
+                        <Input type="text" v-model="formCrearPermiso.permiso_nombre" custom-class="mt-2" :class="'my-2'"
+                            placeholder="Nombre del permiso" clearable />
+
+                        <button @click="crearPermiso" disabled
+                            class="cursor-not-allowed bg-blue-500 text-white px-2 py-2 flex gap-2 items-center justify-center rounded-md shadow-sm active:scale-90 transition-transform duration-100">
+                            <Icon icon="mingcute:bookmark-add-fill" class="text-xl" />
+                            <p class="m-0 p-0 font-bold text-md">Guardar</p>
+                        </button>
+                    </div>
+                    <div v-if="tabRP === 'roles'">
+                        <h1 class="text-xl font-semibold dark:text-white">Crear Rol</h1>
+                        <p class="text-xs text-gray-600 dark:text-gray-300">Crear un nuevo rol para el sistema</p>
+                        <Input type="text" v-model="formCrearRol.rol_nombre" custom-class="mt-2" :class="'my-2'"
+                            placeholder="Nombre del Rol" clearable />
+
+                        <button @click="crearPermiso" disabled
+                            class="cursor-not-allowed bg-blue-500 text-white px-2 py-2 flex gap-2 items-center justify-center rounded-md shadow-sm active:scale-90 transition-transform duration-100">
+                            <Icon icon="mingcute:bookmark-add-fill" class="text-xl" />
+                            <p class="m-0 p-0 font-bold text-md">Guardar</p>
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <div>
-                <button @click="obtenerCheckeadosMasivo"
-                    class="bg-blue-500 text-white px-2 py-2 flex gap-2 items-center justify-center rounded-md shadow-sm mt-5 active:scale-90 transition-transform duration-100">
-                    <Icon icon="mingcute:bookmark-add-fill" class="text-xl" />
-                    <p class="m-0 p-0 font-bold text-md">Guardar</p>
-                </button>
+            <!-- Caja 2 -->
+            <div class="bg-white dark:bg-gray-900 p-6 shadow-md rounded-lg dark:text-white mt-20 md:mt-0">
+                <h1 class="text-xl font-semibold dark:text-white">Asignación de roles masivos</h1>
+                <p class="text-xs text-gray-600 dark:text-gray-300">Selecciona a N usuarios y N roles para asignarse en conjunto</p>
+                <div class="grid grid-cols-2 my-5">
+                    <!-- Roles -->
+                    <div ref="checksRoles">
+                        <h1>Roles</h1>
+                        <p class="text-xs">Todos los roles creados actualmente</p>
+                        <div v-for="rol in props.todosRoles" :key="rol.id" class="flex items-center gap-2 my-2">
+                            <input type="checkbox" :id="'rol-' + String(rol.id)" class="ml-2" :value="rol.id" />
+                            <label :for="'rol-' + String(rol.id)">{{ rol.name }}</label>
+                            <Link :href="route('panel.admin.rol', rol.id)" class="">
+                            <Icon icon="mingcute:external-link-line" class="text-blue-500" />
+                            </Link>
+                        </div>
+                    </div>
+
+                    <!-- Usuarios -->
+                    <div ref="checksUsers">
+                        <h1>Usuarios</h1>
+                        <p class="text-xs">Todos los usuarios disponibles actualmente</p>
+                        <div v-for="user in props.todosUsers" :key="user.id" class="flex items-center gap-2 my-2">
+                            <input type="checkbox" :id="'user-' + String(user.id)" class="ml-2" :value="user.id" />
+                            <label :for="'user-' + String(user.id)">{{ user.name }}</label>
+                            <Link :href="route('panel.admin.usuario', user.id)" class="">
+                            <Icon icon="mingcute:external-link-line" class="text-blue-500" />
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button @click="obtenerCheckeadosMasivo"
+                        class="bg-blue-500 text-white px-2 py-2 flex gap-2 items-center justify-center rounded-md shadow-sm mt-5 active:scale-90 transition-transform duration-100">
+                        <Icon icon="mingcute:bookmark-add-fill" class="text-xl" />
+                        <p class="m-0 p-0 font-bold text-md">Guardar</p>
+                    </button>
+                </div>
             </div>
+
+
         </div>
+
+
 
         <!-- Tabs -->
         <div class="border-b dark:border-gray-600 mb-5 flex gap-1 flex-wrap mt-5">
@@ -56,8 +115,8 @@
                     : 'bg-gray-200 dark:bg-gray-900 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-800'">
                 Usuarios
             </button>
-            <button @click="tabActive = 'roles'" class="px-3 py-2 rounded-t-md active:scale-90 transition-transform duration-100"
-                :class="tabActive === 'roles'
+            <button @click="tabActive = 'roles'"
+                class="px-3 py-2 rounded-t-md active:scale-90 transition-transform duration-100" :class="tabActive === 'roles'
                     ? 'bg-blue-500 text-white shadow-md'
                     : 'bg-gray-200 dark:bg-gray-900 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-800'">
                 Roles
@@ -74,7 +133,11 @@
             <DataTable :columns="permisosColum" :data="props.permisos">
                 <!-- Titulo -->
                 <template #title>
-                    <p>Todos los Permisos</p>
+                    <div class="flex gap-2 items-center">
+                        <Icon icon="mingcute:key-2-fill" class="text-2xl text-red-500" />
+                        <p class="dark:text-white px-3 rounded-lg py-1 my-1 font-normal">Permisos
+                        </p>
+                    </div>
                 </template>
                 <!-- Contenido -->
                 <template #body="{ rows }">
@@ -84,11 +147,11 @@
                             {{ row.name }}</td>
                         <td
                             class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300 break-words whitespace-normal overflow-hidden flex gap-2 justify-center flex-wrap">
-                            <button disabled
-                                class="bg-gray-500 text-white px-2 py-2 flex gap-2 items-center justify-center rounded-md shadow-sm active:scale-90 transition-transform duration-100 cursor-not-allowed">
-                                <Icon icon="mingcute:settings-3-fill" class="text-xl" />
-                                <p class="m-0 p-0 font-bold text-md">Ajustes</p>
-                            </button>
+                            <Link :href="route('panel.admin.permiso', row.id)"
+                                class="bg-gray-500 text-white px-2 py-2 flex gap-2 items-center justify-center rounded-md shadow-sm active:scale-90 transition-transform duration-100">
+                            <Icon icon="mingcute:settings-3-fill" class="text-xl" />
+                            <p class="m-0 p-0 font-bold text-md">Ajustes</p>
+                            </Link>
                         </td>
                     </tr>
                 </template>
@@ -98,7 +161,11 @@
             <DataTable :columns="rolesColum" :data="props.roles">
                 <!-- Titulo -->
                 <template #title>
-                    <p>Todos los Roles</p>
+                    <div class="flex gap-2 items-center">
+                        <Icon icon="mingcute:box-3-fill" class="text-2xl text-green-500" />
+                        <p class="dark:text-white px-3 rounded-lg py-1 my-1 font-normal">Roles
+                        </p>
+                    </div>
                 </template>
                 <!-- Contenido -->
                 <template #body="{ rows }">
@@ -122,7 +189,11 @@
             <DataTable :columns="usuariosColum" :data="props.usuarios">
                 <!-- Titulo -->
                 <template #title>
-                    <p>Todos los Usuarios</p>
+                    <div class="flex gap-2 items-center">
+                        <Icon icon="mingcute:group-3-fill" class="text-2xl text-blue-500" />
+                        <p class="dark:text-white px-3 rounded-lg py-1 my-1 font-normal">Usuarios
+                        </p>
+                    </div>
                 </template>
                 <!-- Contenido -->
                 <template #body="{ rows }">
@@ -156,6 +227,8 @@
 </template>
 
 <script setup lang='ts'>
+
+// Composables
 import { Link } from '@inertiajs/vue3';
 import { Icon } from '@iconify/vue';
 import { ref } from 'vue';
@@ -163,9 +236,13 @@ import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import axios from 'axios';
 
+// Componentes
 import Main from '@/Layouts/Main.vue';
 import DataTable from '@/Components/DataTable.vue';
+import Input from '@/Components/Input.vue';
 
+
+// Interfaces
 interface Permiso {
     id: number;
     name: string;
@@ -179,6 +256,7 @@ interface User {
     name: string;
 }
 
+// Props
 const props = defineProps<{
     permisos: Permiso[];
     roles: Rol[];
@@ -187,6 +265,22 @@ const props = defineProps<{
     todosRoles: Rol[];
 }>();
 
+
+// Variables
+const tabActive = ref('usuarios');
+const tabRP = ref('permisos');
+const formCrearPermiso = ref({
+    permiso_nombre: '',
+
+});
+const formCrearRol = ref({
+    rol_nombre: '',
+});
+const checksUsers = ref<HTMLElement | null>(null);
+const checksRoles = ref<HTMLElement | null>(null);
+
+
+// Columnas de la tablas
 const permisosColum = [
     { key: 'name', name: 'name', label: 'Permiso', sortable: true },
     { key: 'acciones', name: 'acciones', label: 'Acciones', sortable: false },
@@ -202,12 +296,7 @@ const usuariosColum = [
     { key: 'acciones', name: 'acciones', label: 'Acciones', sortable: false },
 ];
 
-const tabActive = ref('usuarios');
-
-
-const checksUsers = ref<HTMLElement | null>(null);
-const checksRoles = ref<HTMLElement | null>(null);
-
+// Funciones
 const obtenerCheckeadosMasivo = async () => {
     try {
         // Obtener los checkboxes marcados
@@ -276,7 +365,28 @@ const obtenerCheckeadosMasivo = async () => {
     }
 };
 
+const crearPermiso = async () => {
+    try {
 
+        if (formCrearPermiso.value.permiso_nombre == '') {
+            toast('Debes ingresar el nombre del permiso', {
+                theme: "dark",
+                type: "error",
+                position: "bottom-center"
+            });
+            return;
+        }
+
+        console.log(formCrearPermiso.value);
+        // formCrearPermiso.value.permiso_nombre = '';
+    } catch (error: any) {
+        console.error(error);
+        toast(error.response.data.message, {
+            theme: "dark",
+            type: "error"
+        });
+    }
+};
 
 </script>
 

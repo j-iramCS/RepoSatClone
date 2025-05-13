@@ -2,7 +2,7 @@
     <section
         class="min-h-screen bg-gradient-to-br from-[#050714] to-[#050714] text-white overflow-hidden relative flex items-center justify-center px-4">
         <!-- Partículas de fondo -->
-        <div class="absolute inset-0 overflow-hidden">
+        <!-- <div class="absolute inset-0 overflow-hidden">
             <div v-for="i in 30" :key="i" class="absolute rounded-full bg-blue-500 opacity-10" :style="{
                 width: `${Math.random() * 10 + 2}px`,
                 height: `${Math.random() * 10 + 2}px`,
@@ -11,7 +11,7 @@
                 animation: `float ${Math.random() * 10 + 10}s linear infinite`,
                 animationDelay: `${Math.random() * 5}s`
             }"></div>
-        </div>
+        </div> -->
         
         <div class="max-w-4xl mx-auto text-center relative z-10">
             <!-- Título con animación -->

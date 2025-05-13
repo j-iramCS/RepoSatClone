@@ -115,9 +115,7 @@ class AdminPanelContoller extends Controller
     {
         $rol = Role::findOrFail($id);
         $permisosAsignados = $rol->permissions()->get();
-
         $usersConRol = User::role($rol->name)->get();
-
         $todosPermisos = Permission::all();
 
 
@@ -277,6 +275,22 @@ class AdminPanelContoller extends Controller
     }
 
     // Permisos
+    public function vistaPermiso($id) // Vista de permisos
+    {
+        $permiso = Permission::findOrFail($id);
+        $roles = Role::whereHas('permissions', function ($query) use ($permiso) {
+            $query->where('id', $permiso->id);
+        })->get();
+
+        $todosRoles = Role::all();
+
+        return Inertia::render('Admin/URP/Permiso', [
+            'permiso' => $permiso,
+            'roles' => $roles,
+            'todosRoles' => $todosRoles,
+        ]);
+    }
+
     public function guardarPermisos(Request $request) // Guardar permisos seleccionados para un usuario
     {
         DB::beginTransaction();
@@ -301,6 +315,30 @@ class AdminPanelContoller extends Controller
             DB::rollBack();
             return response()->json([
                 'message' => 'Error al guardar los permisos',
+                'error' => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function guardarRolesDelPermiso(Request $request, $id)
+    {
+        DB::beginTransaction();
+
+        try {
+            $permiso = Permission::findOrFail($id);
+            $roles = Role::whereIn('id', $request->roles)->get();
+            $permiso->syncRoles($roles);
+            DB::commit();
+            return response()->json([
+                'message' => 'Roles guardados correctamente.',
+                'permiso' => $permiso,
+                'roles' => $roles,
+            ], 200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return response()->json([
+                'message' => 'Error al guardar los roles',
                 'error' => $th->getMessage(),
             ], 500);
         }
