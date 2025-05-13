@@ -138,7 +138,7 @@ watch(searchQuery, () => {
 </script>
 
 <template>
-    <div class="w-full bg-white dark:bg-gray-900 rounded-lg shadow-lg">
+    <div class="w-full bg-white dark:bg-gray-900 rounded-lg shadow-md">
         <!-- Header con búsqueda -->
         <div
             class="px-4 py-2 border-b border-gray-200 dark:border-gray-700 flex flex-row flex-wrap justify-between items-center gap-2">

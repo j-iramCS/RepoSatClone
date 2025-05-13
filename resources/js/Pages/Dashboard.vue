@@ -38,7 +38,7 @@
 
                         <div class="flex justify-between items-center flex-wrap gap-">
                             <Link :href="route('index.crear.actividad')"
-                                class="px-4 py-2 bg-white text-blue-600 font-medium rounded-lg hover:bg-opacity-90 transition-colors flex items-center">
+                                class="px-4 py-2 bg-white text-red-600 font-medium rounded-md flex items-center active:scale-90 transition-transform duration-100">
                             <span class="font-bold">Comenzar</span>
                             <Icon icon="mdi:arrow-right" class="ml-1" />
                             </Link>
@@ -70,7 +70,7 @@
 
                         <div class="flex justify-between items-center flex-wrap gap-">
                             <Link :href="route('index.crear.ejercicio')"
-                                class="px-4 py-2 bg-white text-blue-600 font-medium rounded-lg hover:bg-opacity-90 transition-colors flex items-center">
+                                class="px-4 py-2 bg-white text-blue-600 font-medium rounded-md flex items-center active:scale-90 transition-transform duration-100">
                             <span>Crear</span>
                             <Icon icon="mdi:arrow-right" class="ml-1" />
                             </Link>
@@ -102,7 +102,7 @@
 
                         <div class="flex justify-between items-center flex-wrap gap-">
                             <Link :href="route('vistaA')"
-                                class="px-4 py-2 bg-white text-blue-600 font-medium rounded-lg hover:bg-opacity-90 transition-colors flex items-center">
+                                class="px-4 py-2 bg-white text-green-600 font-medium rounded-md flex items-center active:scale-90 transition-transform duration-100">
                             <span>Crear</span>
                             <Icon icon="mdi:arrow-right" class="ml-1" />
                             </Link>
@@ -116,7 +116,7 @@
 
                 <!-- Favoritos -->
                 <div
-                    class="text-xs md:text-base group relative overflow-hidden bg-gradient-to-br from-purple-500 to-pink-600 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    class="text-xs md:text-base group relative overflow-hidden bg-gradient-to-br from-purple-500 to-purple-600 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16"></div>
                     <div class="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -ml-12 -mb-12">
                     </div>
@@ -134,7 +134,7 @@
 
                         <div class="flex justify-between items-center flex-wrap gap-">
                             <button
-                                class="px-4 py-2 bg-white text-purple-600 font-medium rounded-lg hover:bg-opacity-90 transition-colors flex items-center">
+                                class="px-4 py-2 bg-white text-purple-600 font-medium rounded-md flex items-center active:scale-90 transition-transform duration-100">
                                 <span>Ver favoritos</span>
                                 <Icon icon="mdi:arrow-right" class="ml-1" />
                             </button>
@@ -146,7 +146,7 @@
                 </div>
 
                 <div
-                    class="col-span-2 text-xs md:text-base group relative overflow-hidden bg-gradient-to-br from-amber-500 to-orange-600 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    class="col-span-2 text-xs md:text-base group relative overflow-hidden bg-gradient-to-br from-amber-500 to-amber-600 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16"></div>
                     <div class="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -ml-12 -mb-12">
                     </div>
@@ -209,7 +209,7 @@
                             </Link>
 
                             <button
-                                class="px-4 py-2 bg-white bg-opacity-20 text-white font-medium rounded-lg hover:bg-opacity-30 transition-colors flex items-center">
+                                class="px-4 py-2 bg-white text-orange-600 font-medium rounded-md flex items-center active:scale-90 transition-transform duration-100">
                                 <Icon icon="mdi:plus" class="mr-1" />
                                 <span>Nuevo ejercicio</span>
                             </button>

@@ -81,7 +81,7 @@
       </Link> -->
 
       <Link :href="route('panel.admin.urp')"
-        class="bg-white dark:bg-gray-900 p-5 rounded-lg shadow-md flex flex-col items-center justify-center hover:shadow-lg transition-all duration-300">
+        class="bg-white dark:bg-gray-900 p-5 rounded-lg shadow-md flex flex-col items-center justify-center hover:shadow-lg active:scale-90 transition-transform duration-100">
       <div class="bg-red-100 p-3 rounded-full mb-3 dark:bg-red-900">
         <Icon icon="mingcute:key-1-fill" class="text-5xl text-red-500 dark:text-red-300" />
       </div>

@@ -132,7 +132,7 @@ onMounted(() => {
                             </button>
 
                             <button @click="toggleDarkMode"
-                                class="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-[#1d2333] rounded-full transition-colors">
+                                class="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-[#1d2333] rounded-full active:scale-90 transition-transform duration-100">
                                 <Icon :icon="darkMode ? 'ph:sun' : 'ph:moon'" class="text-lg" />
                             </button>
                         </div>
@@ -147,7 +147,7 @@ onMounted(() => {
 
                         <Can permission="panel-control">
                             <Link :href="route('panel.admin')" :class="[
-                                'flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors',
+                                'flex items-center gap-2 rounded-md px-3 py-2 text-sm active:scale-90 transition-transform duration-100',
                                 route().current('panel.admin')
                                     ? 'bg-blue-100 dark:bg-[#1d2333] text-blue-600 dark:text-blue-400'
                                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#1d2333]'
@@ -160,7 +160,7 @@ onMounted(() => {
 
                         <div v-for="item in navigationItems" :key="item.name">
                             <Link :href="route(item.route)" :class="[
-                                'flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors',
+                                'flex items-center gap-2 rounded-md px-3 py-2 text-sm active:scale-90 transition-transform duration-100',
                                 route().current(item.route)
                                     ? 'bg-blue-100 dark:bg-[#1d2333] text-blue-600 dark:text-blue-400'
                                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#1d2333]'
@@ -232,7 +232,7 @@ onMounted(() => {
                 </button>
 
                 <button @click="toggleDarkMode"
-                    class="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-[#1d2333] rounded-full transition-colors">
+                    class="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-[#1d2333] rounded-full active:scale-90 transition-transform duration-100">
                     <Icon :icon="darkMode ? 'ph:sun' : 'ph:moon'" class="text-xl" />
                 </button>
 
@@ -256,7 +256,7 @@ onMounted(() => {
             <div class="flex justify-around items-center h-16">
                 <Link v-for="(item, index) in navigationItems.slice(0, 3)" :key="item.name" :href="route(item.route)"
                     :class="[
-                        'flex flex-col items-center justify-center flex-1 py-2 px-1',
+                        'flex flex-col items-center justify-center flex-1 py-2 px-1 active:scale-90 transition-transform duration-100',
                         route().current(item.route)
                             ? 'text-blue-600 dark:text-blue-400'
                             : 'text-gray-800 dark:text-gray-300'
@@ -276,7 +276,7 @@ onMounted(() => {
                 <!-- admin -->
                 <Can permission="panel-control">
                     <Link :href="route('panel.admin')"
-                        class="flex flex-col items-center justify-center flex-1 py-2 px-1" :class="{
+                        class="flex flex-col items-center justify-center flex-1 py-2 px-1 active:scale-90 transition-transform duration-100" :class="{
                             'text-blue-600 dark:text-blue-400': route().current('panel.admin'),
                             'text-gray-800 dark:text-gray-300': !route().current('panel.admin')
                         }">

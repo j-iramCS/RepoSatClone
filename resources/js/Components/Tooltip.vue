@@ -4,14 +4,10 @@
         <slot />
         <div
             v-if="text"
-            class="absolute max-w-[30rem] text-wrap opacity-100 text-center bg-white text-slate-900 z-50 min-w-[20rem] hidden group-hover:block px-3 py-2 text-sm font-medium rounded-lg shadow-sm whitespace-nowrap"
+            class="absolute z-50 max-w-[30rem] text-wrap opacity-100 text-center bg-yellow-100 dark:text-slate-900 min-w-[12rem] hidden group-hover:block px-3 py-2 text-sm font-medium rounded-lg shadow-sm whitespace-nowrap"
             :class="positionClasses"
         >
             {{ text }}
-            <div
-                class="absolute w-2 h-2 bg-white transform rotate-45 -translate-x-1/2"
-                :class="arrowClasses"
-            ></div>
         </div>
     </div>
 </template>

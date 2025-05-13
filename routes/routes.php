@@ -43,7 +43,19 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('/panel-admin')->group(function () {
         Route::get('/', [AdminPanelContoller::class, 'index'])->name('panel.admin');
         Route::get('/urp', [AdminPanelContoller::class, 'vistaURP'])->name('panel.admin.urp');
+
         Route::get('/urp/rol/{id}', [AdminPanelContoller::class, 'vistaRol'])->name('panel.admin.rol');
+        Route::post('/urp/rol/{id}/guardar-permisos', [AdminPanelContoller::class, 'guardarPermisosDelRol'])->name('panel.admin.rol.guardarPermisos');
+        Route::post('/urp/guardar-roles-masivos', [AdminPanelContoller::class, 'guardarRolesMasivos'])->name('panel.admin.guardar.rolesMasivos');
+        Route::post('/urp/guardar-roles', [AdminPanelContoller::class, 'guardarRoles'])->name('panel.admin.guardar.roles');
+        Route::post('/urp/eliminar/rol/{rolId}/{userId}', [AdminPanelContoller::class, 'eliminarRol'])->name('panel.admin.eliminar.rol');
+
+        Route::get('/urp/usuario/{id}', [AdminPanelContoller::class, 'vistaUsuario'])->name('panel.admin.usuario');
+
+        Route::post('/urp/guardar-permisos', [AdminPanelContoller::class, 'guardarPermisos'])->name('panel.admin.guardar.permisos');
+
+
+
     });
 
 

@@ -45,7 +45,7 @@
             <!-- CTA con hover effect -->
             <div class="mt-12 opacity-0 animate-fadeInUp delay-1100">
                 <Link :href="route('login')"
-                    class="relative bg inline-flex items-center justify-center px-8 py-4 overflow-hidden font-bold text-white rounded-xl group bg-gray-900">
+                    class="relative bg inline-flex items-center justify-center px-8 py-4 overflow-hidden font-bold text-white rounded-xl group bg-gray-900 active:scale-90 transition-transform duration-100">
                 <!-- <span class="absolute inset-0 w-full h-full transition-all duration-300 ease-out bg-gradient-to-r from-indigo-600 to-indigo-600 group-hover:from-indigo-700 group-hover:to-indigo-700"></span> -->
                 <span class="relative flex items-center gap-2">
                     <span>Empezar</span>
