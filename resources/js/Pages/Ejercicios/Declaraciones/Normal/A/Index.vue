@@ -980,10 +980,10 @@
 
 <script setup lang="ts">
 
-// Notificaciones Toastify
-import { toast } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
 import axios from 'axios';
+import ToastLoading from "@/Components/ToastLoading.vue";
+import { useToast, POSITION } from "vue-toastification";
+const toast = useToast();
 
 // Composables
 import { Icon } from "@iconify/vue";
@@ -1165,9 +1165,8 @@ const cambiarTab = async (tabDestino: string) => {
     if (esValido) {
         activeTab.value = tabDestino;
     } else {
-        toast("Completa esta sección primero", {
-            theme: "dark",
-            type: "error"
+        toast.warning(`Completa ${tabActual.toUpperCase()}`, {
+            timeout: 3000,
         });
     }
 };
@@ -1190,10 +1189,10 @@ const guardar = async () => {
         tabsValidados.value[currentTab] = validoActual;
 
         if (!validoActual) {
-            toast(`Hay errores en "${currentTab}" revisa los campos que faltan`, {
-                theme: "dark",
-                type: "error"
+            toast.error(`Hay errores en "${currentTab}" revisa los campos que faltan`, {
+                timeout: 3000,
             });
+
             return;
         }
     }
@@ -1212,9 +1211,8 @@ const guardar = async () => {
                 formEjercicio: formEjercicio.value,
             });
 
-            toast("Formulario guardado con éxito", {
-                theme: "dark",
-                type: "success"
+            toast.success(response.data.message, {
+                timeout: 3000,
             });
 
             console.log(response.data);
@@ -1222,10 +1220,9 @@ const guardar = async () => {
             // Mostrar modal de éxito
             continuar.value = true;
 
-        } catch (error) {
-            toast("Error al guardar el formulario", {
-                theme: "dark",
-                type: "error"
+        } catch (error: any) {
+            toast.error(error.response.data.message, {
+                timeout: 3000,
             });
             console.error(error);
 
@@ -1241,9 +1238,8 @@ const guardar = async () => {
 
         if (siguienteTabIncompleto) {
             activeTab.value = siguienteTabIncompleto;
-            toast(`Completa ${siguienteTabIncompleto.toUpperCase()}`, {
-                theme: "dark",
-                type: "warning"
+            toast.warning(`Completa ${siguienteTabIncompleto.toUpperCase()}`, {
+                timeout: 3000,
             });
         }
     }
