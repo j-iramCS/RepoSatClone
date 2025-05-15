@@ -28,12 +28,18 @@
                     </div>
                 </div>
 
-                <div class="border-t">
-                    <button @click="obtenerCheckeados"
+                <div class="border-t flex gap-2">
+                    <button @click="obtenerCheckeados()"
                         class="bg-blue-500 text-white px-2 py-2 flex gap-2 items-center justify-center rounded-md shadow-sm mt-5 active:scale-90 transition-transform duration-100">
                         <Icon icon="mingcute:bookmark-add-fill" class="text-xl" />
                         <p class="m-0 p-0 font-bold text-md">Guardar</p>
                     </button>
+                    <button @click="eliminarRol()"
+                        class="bg-red-500 text-white px-2 py-2 flex gap-2 items-center justify-center rounded-md shadow-sm mt-5 active:scale-90 transition-transform duration-100">
+                        <Icon icon="mingcute:delete-2-fill" class="text-xl" />
+                        <p class="m-0 p-0 font-bold text-md">Eliminar Rol</p>
+                    </button>
+
                 </div>
             </div>
 
@@ -49,13 +55,7 @@
 
                 <!-- Contenido -->
                 <template #body="{ rows }">
-                    <tr v-if="isLoading">
-                        <td colspan="4" class="text-center py-4 flex gap-2">
-                            <Icon icon="line-md:loading-loop" class="text-2xl animate-spin text-blue-500" />
-                            <p class="text-sm text-gray-500 dark:text-gray-300">Actualizando...</p>
-                        </td>
-                    </tr>
-                    <tr v-for="row in usuariosConRol" :key="row.id" v-else>
+                    <tr v-for="row in usuariosConRol" :key="row.id">
                         <td
                             class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300 break-words whitespace-normal overflow-hidden text-center">
                             {{ row.id }}
@@ -70,7 +70,7 @@
                         </td>
                         <td
                             class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300 break-words whitespace-normal overflow-hidden flex gap-2 justify-center flex-wrap">
-                            <button @click="eliminarRol(props.rol.id, row.id)" title="Eliminar rol del usuario"
+                            <button @click="eliminarRolUsuario(props.rol.id, row.id)" title="Eliminar rol del usuario"
                                 class="bg-red-500 text-white p-2 flex gap-2 items-center justify-center rounded-md shadow-sm active:scale-90 transition-transform duration-100">
                                 <Icon icon="mingcute:delete-2-fill" class="text-lg" />
                                 <!-- <p class="m-0 p-0 font-bold text-md">Quitar rol</p> -->
@@ -97,13 +97,15 @@
 <script setup lang='ts'>
 import Main from '@/Layouts/Main.vue';
 import DataTable from '@/Components/DataTable.vue';
+import ToastLoading from '@/Components/ToastLoading.vue';
 
 import { Link } from '@inertiajs/vue3';
 import { Icon } from '@iconify/vue';
 import { ref } from 'vue';
-import { toast } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
 import axios from 'axios';
+
+import { useToast, POSITION } from "vue-toastification";
+const toast = useToast();
 
 interface Rol {
     id: number;
@@ -136,6 +138,14 @@ const usersColum = [
 
 const checksPermisos = ref<HTMLElement | null>(null);
 const obtenerCheckeados = async () => {
+    toast.info(ToastLoading, {
+        closeOnClick: false,
+        hideProgressBar: true,
+        timeout: 0,
+        draggable: false,
+        closeButton: false,
+        icon: false,
+    });
     try {
         // Obtener los checkboxes marcados
         const marcados: number[] = [];
@@ -153,42 +163,75 @@ const obtenerCheckeados = async () => {
         const response = await axios.post(route('panel.admin.rol.guardarPermisos', props.rol.id), {
             permisos: marcados
         });
-        console.log(response.data);
-        toast(response.data.message, {
-            theme: "dark",
-            type: "success"
+        toast.clear();
+        toast.success(response.data.message, {
+            timeout: 2000,
         });
     } catch (error: any) {
-        console.error(error);
-        toast(error.response.data.message, {
-            theme: "dark",
-            type: "error"
+        toast.clear();
+        toast.error(error.response.data.message, {
+            timeout: 2000,
         });
     }
 };
 
 const usuariosConRol = ref<User[]>([...props.usersConRol]);
-const isLoading = ref(false);
-const eliminarRol = async (rolId: number, userId: number) => {
-    isLoading.value = true;
+const eliminarRolUsuario = async (rolId: number, userId: number) => {
+
+    toast.info(ToastLoading, {
+        closeOnClick: false,
+        hideProgressBar: true,
+        timeout: 0,
+        draggable: false,
+        closeButton: false,
+        icon: false,
+    });
+
     try {
-        const response = await axios.post(route('panel.admin.eliminar.rol', [rolId, userId]));
+        const response = await axios.post(route('panel.admin.eliminar.rol.usuario', [rolId, userId]));
 
         // Eliminar al usuario de la lista
         usuariosConRol.value = usuariosConRol.value.filter(user => user.id !== userId);
-
-        toast(response.data.message, {
-            theme: "dark",
-            type: "success"
+        toast.clear();
+        toast.success(response.data.message, {
+            timeout: 2000,
         });
     } catch (error: any) {
-        console.error(error);
-        toast(error.response.data.message, {
-            theme: "dark",
-            type: "error"
+        toast.clear();
+        toast.error(error.response.data.message, {
+            timeout: 2000,
         });
-    } finally {
-        isLoading.value = false;
+    }
+};
+
+const eliminarRol = async () => {
+    toast.info(ToastLoading, {
+        closeOnClick: false,
+        hideProgressBar: true,
+        timeout: 0,
+        draggable: false,
+        closeButton: false,
+        icon: false,
+    });
+
+    try {
+        const response = await axios.post(route('panel.admin.eliminar.rol'), {
+            id: props.rol.id
+        });
+        toast.clear();
+        toast.success(response.data.message, {
+            timeout: 2000,
+        });
+        setTimeout(() => {
+            window.location.href = route('panel.admin.urp');
+        }, 500);
+
+
+    } catch (error: any) {
+        toast.clear();
+        toast.error(error.response.data.message, {
+            timeout: 2000,
+        });
     }
 };
 

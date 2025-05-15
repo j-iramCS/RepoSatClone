@@ -109,14 +109,15 @@
 
 <script setup lang='ts'>
 import Main from '@/Layouts/Main.vue';
+import ToastLoading from '@/Components/ToastLoading.vue';
 
 // Composables
 import { Link } from '@inertiajs/vue3';
 import { Icon } from '@iconify/vue';
 import { ref } from 'vue';
 import axios from 'axios';
-import { toast } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
+import { useToast, POSITION } from "vue-toastification";
+const toast = useToast();
 
 interface User {
     id: number;
@@ -137,6 +138,14 @@ const tabActive = ref<string>('roles');
 
 const checksRoles = ref<HTMLElement | null>(null);
 const checkeadosRoles = async () => {
+    toast.info(ToastLoading, {
+        closeOnClick: false,
+        hideProgressBar: true,
+        timeout: 0,
+        draggable: false,
+        closeButton: false,
+        icon: false,
+    });
     try {
         // Obtener los checkboxes marcados
         const marcados: number[] = [];
@@ -155,24 +164,28 @@ const checkeadosRoles = async () => {
             usuario: props.usuario.id,
             roles: marcados,
         });
-        toast(response.data.message, {
-            theme: "dark",
-            type: "success",
-            position: "bottom-center"
+        toast.clear();
+        toast.success(response.data.message, {
+            timeout: 2000,
         });
     } catch (error: any) {
-        // console.error('Error al guardar los permisos:', error);
-        toast(error.response.data.message, {
-            theme: "dark",
-            type: "error",
-            position: "bottom-center"
-
+        toast.clear();
+        toast.error(error.response.data.message, {
+            timeout: 2000,
         });
     }
 };
 
 const checksPermisos = ref<HTMLElement | null>(null);
 const checkeadosPermisos = async () => {
+    toast.info(ToastLoading, {
+        closeOnClick: false,
+        hideProgressBar: true,
+        timeout: 0,
+        draggable: false,
+        closeButton: false,
+        icon: false,
+    });
     try {
         // Obtener los checkboxes marcados
         const marcados: number[] = [];
@@ -191,13 +204,15 @@ const checkeadosPermisos = async () => {
             usuario: props.usuario.id,
             permisos: marcados
         });
-        console.log(response.data);
-        toast(response.data.message, {
-            theme: "dark",
-            type: "success"
+        toast.clear();
+        toast.success(response.data.message, {
+            timeout: 2000,
         });
     } catch (error: any) {
-        console.error(error);
+        toast.clear();
+        toast.error(error.response.data.message, {
+            timeout: 2000,
+        });
     }
 };
 

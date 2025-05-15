@@ -95,20 +95,17 @@ class AdminPanelContoller extends Controller
 
     public function vistaURP()
     {
-        $permisos = Permission::all();
-        $roles = Role::with('permissions')->get();
-        $usuarios = User::with(['roles', 'permissions'])->get();
+        // $permisos = Permission::all();
+        // $roles = Role::with('permissions')->get();
         $todosUsers = User::all();
         $todosRoles = Role::all();
+        $todosPermisos = Permission::all();
         return Inertia::render('Admin/URP/Index', [
-            'permisos' => $permisos,
-            'roles' => $roles,
-            'usuarios' => $usuarios,
             'todosUsers' => $todosUsers,
             'todosRoles' => $todosRoles,
+            'todosPermisos' => $todosPermisos,
         ]);
     }
-
 
     // Roles
     public function vistaRol($id) // Vista de un rol específico
@@ -127,6 +124,63 @@ class AdminPanelContoller extends Controller
 
         ]);
     }
+
+    public function crearRol(Request $request) // Crear un nuevo rol
+    {
+        DB::beginTransaction();
+        try {
+            Role::create([
+                'name' => $request->name,
+                'guard_name' => 'web',
+            ]);
+            DB::commit();
+            return response()->json([
+                'message' => 'Rol creado correctamente',
+                'update' => Role::all(),
+            ], 200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Error al crear el rol',
+                'error' => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function eliminarRol(Request $request) // Eliminar un rol
+    {
+        DB::beginTransaction();
+        try {
+            $rol = Role::findOrFail($request->id);
+            // Verificar si el rol es "super-admin"
+            if ($rol->name === 'super-admin') {
+                return response()->json([
+                    'message' => 'No se puede eliminar el rol "super-admin"',
+                ], 403);
+            }
+
+            // Verificar si el rol está asociado a algún usuario
+            if ($rol->users()->count() > 0) {
+                return response()->json([
+                    'message' => 'No se puede eliminar el rol porque está asociado a uno o más usuarios',
+                ], 403);
+            }
+
+            $rol->delete();
+            DB::commit();
+            return response()->json([
+                'message' => 'Rol eliminado correctamente',
+                'update' => Role::all(),
+            ], 200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Error al eliminar el rol',
+                'error' => $th->getMessage(),
+            ], 500);
+        }
+    }
+
 
     public function guardarPermisosDelRol(Request $request, $id) // Guardar permisos seleccionados para X rol
     {
@@ -223,7 +277,7 @@ class AdminPanelContoller extends Controller
         }
     }
 
-    public function eliminarRol($rolId, $userId) // Eliminar rol de un usuario
+    public function eliminarRoldelUsuario($rolId, $userId) // Eliminar rol de un usuario
     {
         DB::beginTransaction();
         try {
@@ -281,14 +335,73 @@ class AdminPanelContoller extends Controller
         $roles = Role::whereHas('permissions', function ($query) use ($permiso) {
             $query->where('id', $permiso->id);
         })->get();
-
         $todosRoles = Role::all();
+        $usuariosPermiso = User::whereHas('permissions', function ($query) use ($permiso) {
+            $query->where('id', $permiso->id);
+        })->get();
 
         return Inertia::render('Admin/URP/Permiso', [
             'permiso' => $permiso,
             'roles' => $roles,
             'todosRoles' => $todosRoles,
+            'usuariosPermiso' => $usuariosPermiso,
         ]);
+    }
+
+    public function crearPermiso(Request $request) // Crear un nuevo permiso
+    {
+        DB::beginTransaction();
+        try {
+            Permission::create([
+                'name' => $request->name,
+                'guard_name' => 'web',
+            ]);
+            DB::commit();
+            return response()->json([
+                'message' => 'Permiso creado correctamente',
+                'update' => Permission::all(),
+            ], 200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Error al crear el permiso',
+                'error' => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function eliminarPermiso(Request $request) // Eliminar un permiso
+    {
+        DB::beginTransaction();
+        try {
+            $permiso = Permission::findOrFail($request->id);
+
+            // Verificar si el permiso está asociado a algún rol
+            if ($permiso->roles()->count() > 0) {
+                return response()->json([
+                    'message' => 'No se puede eliminar el permiso porque está asociado a uno o más roles',
+                ], 403);
+            }
+
+            if ($permiso->users()->count() > 0) {
+                return response()->json([
+                    'message' => 'No se puede eliminar el permiso porque está asociado directamente a uno o más usuarios',
+                ], 403);
+            }
+
+            $permiso->delete();
+            DB::commit();
+            return response()->json([
+                'message' => 'Permiso eliminado correctamente',
+                'update' => Permission::all(),
+            ], 200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Error al eliminar el permiso',
+                'error' => $th->getMessage(),
+            ], 500);
+        }
     }
 
     public function guardarPermisos(Request $request) // Guardar permisos seleccionados para un usuario
@@ -339,6 +452,32 @@ class AdminPanelContoller extends Controller
 
             return response()->json([
                 'message' => 'Error al guardar los roles',
+                'error' => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function eliminarPermisodelUsuario(Request $request) // Eliminar permiso de un usuario
+    {
+        DB::beginTransaction();
+        try {
+            $usuario = User::findOrFail($request->usuarioId);
+            $permiso = Permission::findOrFail($request->permisoId);
+
+            $usuario->revokePermissionTo($permiso);
+            DB::commit();
+            $usuariosPermiso = User::whereHas('permissions', function ($query) use ($permiso) {
+                $query->where('id', $permiso->id);
+            })->get();
+
+            return response()->json([
+                'message' => 'Permiso eliminado correctamente',
+                'update' => $usuariosPermiso,
+            ], 200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Error al eliminar el permiso',
                 'error' => $th->getMessage(),
             ], 500);
         }

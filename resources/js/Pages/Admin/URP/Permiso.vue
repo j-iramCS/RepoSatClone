@@ -28,35 +28,33 @@
                     </div>
                 </div>
 
-                <div class="border-t">
+                <div class="border-t flex gap-2">
                     <button @click="guardarCheckRoles"
                         class="bg-blue-500 text-white px-2 py-2 flex gap-2 items-center justify-center rounded-md shadow-sm mt-5 active:scale-90 transition-transform duration-100">
                         <Icon icon="mingcute:bookmark-add-fill" class="text-xl" />
-                        <p class="m-0 p-0 font-bold text-md">Guardar</p>
+                        <p class="m-0 p-0 font-bold text-md">Guardar Roles</p>
+                    </button>
+                    <button @click="eliminarPermiso"
+                        class="bg-red-500 text-white px-2 py-2 flex gap-2 items-center justify-center rounded-md shadow-sm mt-5 active:scale-90 transition-transform duration-100">
+                        <Icon icon="mingcute:delete-2-fill" class="text-xl" />
+                        <p class="m-0 p-0 font-bold text-md">Eliminar Permiso</p>
                     </button>
                 </div>
-
-
             </div>
 
-            <DataTable :columns="rolesColum" :data="roles">
+            <DataTable :columns="usersColum" :data="usuariosPermiso">
                 <!-- Titulo -->
                 <template #title>
                     <div class="flex gap-2 items-center">
-                        <Icon icon="mingcute:box-3-fill" class="text-green-500 text-2xl" />
-                        <p class="dark:text-white px-3 rounded-lg py-1 my-1 font-normal">Roles con el permiso</p>
+                        <Icon icon="mingcute:group-3-fill" class="text-2xl text-blue-500" />
+                        <p class="dark:text-white px-3 rounded-lg py-1 my-1 font-normal">Usuarios con el Permiso
+                        </p>
                     </div>
                 </template>
 
                 <!-- Contenido -->
                 <template #body="{ rows }">
-                    <tr v-if="isLoading">
-                        <td colspan="4" class="text-center py-4 flex gap-2">
-                            <Icon icon="line-md:loading-loop" class="text-2xl animate-spin text-blue-500" />
-                            <p class="text-sm text-gray-500 dark:text-gray-300">Actualizando...</p>
-                        </td>
-                    </tr>
-                    <tr v-for="row in roles" :key="row.id" v-else>
+                    <tr v-for="row in usuariosPermiso" :key="row.id">
                         <td
                             class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300 break-words whitespace-normal overflow-hidden text-center">
                             {{ row.id }}
@@ -66,14 +64,18 @@
                             {{ row.name }}
                         </td>
                         <td
+                            class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300 break-words whitespace-normal overflow-hidden text-center">
+                            {{ row.email }}
+                        </td>
+                        <td
                             class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300 break-words whitespace-normal overflow-hidden flex gap-2 justify-center flex-wrap">
-                            <button @click="" title="Eliminar rol del usuario"
+                            <button @click="eliminarPermisoDelUsuario(row.id)" title="Eliminar rol del usuario"
                                 class="bg-red-500 text-white p-2 flex gap-2 items-center justify-center rounded-md shadow-sm active:scale-90 transition-transform duration-100">
                                 <Icon icon="mingcute:delete-2-fill" class="text-lg" />
                                 <!-- <p class="m-0 p-0 font-bold text-md">Quitar rol</p> -->
                             </button>
 
-                            <Link :href="route('panel.admin.rol', row.id)" title="Ver Rol"
+                            <Link :href="route('panel.admin.usuario', row.id)" title="Ver usuario"
                                 class="bg-blue-500 text-white p-2 flex gap-2 items-center justify-center rounded-md shadow-sm active:scale-90 transition-transform duration-100">
                             <Icon icon="mingcute:external-link-line" class="text-lg" />
                             <!-- <p class="m-0 p-0 font-bold text-md">Ver usuario</p> -->
@@ -85,6 +87,7 @@
 
 
             </DataTable>
+
         </div>
         <!-- {{ props.rol }} -->
 
@@ -94,13 +97,15 @@
 <script setup lang='ts'>
 import Main from '@/Layouts/Main.vue';
 import DataTable from '@/Components/DataTable.vue';
+import ToastLoading from '@/Components/ToastLoading.vue';
 
 import { Link } from '@inertiajs/vue3';
 import { Icon } from '@iconify/vue';
 import { ref } from 'vue';
-import { toast } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
 import axios from 'axios';
+
+import { useToast, POSITION } from "vue-toastification";
+const toast = useToast();
 
 interface Rol {
     id: number;
@@ -115,17 +120,30 @@ const props = defineProps<{
     permiso: Permiso;
     roles: Rol[];
     todosRoles: Rol[];
+    usuariosPermiso: Array<any>;
 }>();
 
-const rolesColum = [
-    { key: 'id', name: 'id', label: 'ID', sortable: true },
-    { key: 'name', name: 'name', label: 'Nombre', sortable: true },
-    { key: 'acciones', name: 'acciones', label: 'Acciones', sortable: false },
-];
+const usuariosPermiso = ref(props.usuariosPermiso);
+
 const isLoading = ref(false);
 
+const usersColum = [
+    { key: 'id', name: 'id', label: 'ID', sortable: true },
+    { key: 'name', name: 'name', label: 'Nombre', sortable: true },
+    { key: 'email', name: 'email', label: 'E-mail', sortable: true },
+    { key: 'acciones', name: 'acciones', label: 'Acciones', sortable: false },
+];
+
 const checksRoles = ref<HTMLElement | null>(null);
-    const guardarCheckRoles = async () => {
+const guardarCheckRoles = async () => {
+    toast.info(ToastLoading, {
+        closeOnClick: false,
+        hideProgressBar: true,
+        timeout: 0,
+        draggable: false,
+        closeButton: false,
+        icon: false,
+    });
     try {
         // Obtener los checkboxes marcados
         const marcados: number[] = [];
@@ -143,19 +161,73 @@ const checksRoles = ref<HTMLElement | null>(null);
         const response = await axios.post(route('panel.admin.permiso.guardarRol', props.permiso.id), {
             roles: marcados
         });
-        console.log(response.data);
-        toast(response.data.message, {
-            theme: "dark",
-            type: "success",
-            position: "bottom-center"
+        toast.clear();
+        toast.success(response.data.message, {
+            timeout: 2000,
         });
+
     } catch (error: any) {
         console.error(error);
-        toast(error.response.data.message, {
-            theme: "dark",
-            type: "error",
-            position: "bottom-center"
+    }
+};
+
+const eliminarPermiso = async () => {
+    toast.info(ToastLoading, {
+        closeOnClick: false,
+        hideProgressBar: true,
+        timeout: 0,
+        draggable: false,
+        closeButton: false,
+        icon: false,
+    });
+
+    try {
+        isLoading.value = true;
+        const response = await axios.post(route('panel.admin.permiso.eliminar'), {
+            id: props.permiso.id
         });
+        toast.clear();
+        toast.success(response.data.message, {
+            timeout: 2000,
+        });
+
+        setTimeout(() => {
+            window.location.href = route('panel.admin.urp');
+        }, 500);
+
+
+    } catch (error: any) {
+        console.error(error);
+        toast.clear();
+        toast.error(error.response.data.message, {
+            timeout: 2000,
+        });
+    }
+};
+
+const eliminarPermisoDelUsuario = async (id: number) => {
+    toast.info(ToastLoading, {
+        closeOnClick: false,
+        hideProgressBar: true,
+        timeout: 0,
+        draggable: false,
+        closeButton: false,
+        icon: false,
+    });
+
+    try {
+        const response = await axios.post(route('panel.admin.eliminar.permiso.usuario', ), {
+            permisoId: props.permiso.id,
+            usuarioId: id
+        });
+        toast.clear();
+        toast.success(response.data.message, {
+            timeout: 2000,
+        });
+        usuariosPermiso.value = response.data.update;
+
+    } catch (error: any) {
+        console.error(error);
     }
 };
 

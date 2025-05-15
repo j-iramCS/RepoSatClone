@@ -48,14 +48,23 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/urp/rol/{id}/guardar-permisos', [AdminPanelContoller::class, 'guardarPermisosDelRol'])->name('panel.admin.rol.guardarPermisos');
         Route::post('/urp/guardar-roles-masivos', [AdminPanelContoller::class, 'guardarRolesMasivos'])->name('panel.admin.guardar.rolesMasivos');
         Route::post('/urp/guardar-roles', [AdminPanelContoller::class, 'guardarRoles'])->name('panel.admin.guardar.roles');
-        Route::post('/urp/eliminar/rol/{rolId}/{userId}', [AdminPanelContoller::class, 'eliminarRol'])->name('panel.admin.eliminar.rol');
+        Route::post('/urp/eliminar/rol/{rolId}/{userId}', [AdminPanelContoller::class, 'eliminarRoldelUsuario'])->name('panel.admin.eliminar.rol.usuario');
+        Route::post('/urp/crear-rol', [AdminPanelContoller::class, 'crearRol'])->name('panel.admin.crear.rol');
+        Route::post('/urp/eliminar-rol', [AdminPanelContoller::class, 'eliminarRol'])->name('panel.admin.eliminar.rol');
 
         Route::get('/urp/usuario/{id}', [AdminPanelContoller::class, 'vistaUsuario'])->name('panel.admin.usuario');
 
         Route::get('/urp/permiso/{id}', [AdminPanelContoller::class, 'vistaPermiso'])->name('panel.admin.permiso');
         Route::post('/urp/guardar-permisos', [AdminPanelContoller::class, 'guardarPermisos'])->name('panel.admin.guardar.permisos');
         Route::post('/urp/permiso/{id}/guardar-rol', [AdminPanelContoller::class, 'guardarRolesDelPermiso'])->name('panel.admin.permiso.guardarRol');
+        Route::post('/urp/crear-permiso', [AdminPanelContoller::class, 'crearPermiso'])->name('panel.admin.crear.permiso');
+        Route::post('/urp/eliminar-permiso', [AdminPanelContoller::class, 'eliminarPermiso'])->name('panel.admin.permiso.eliminar');
+        Route::post('/urp/eliminar/permiso-del-usuario', [AdminPanelContoller::class, 'eliminarPermisodelUsuario'])->name('panel.admin.eliminar.permiso.usuario');
 
+
+
+        // apis
+        Route::post('/api/urp', [AdminPanelContoller::class, 'apiURP'])->name('panel.admin.api.urp');
 
     });
 
