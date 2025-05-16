@@ -13,8 +13,9 @@ use App\Http\Controllers\Admin\AdminPanelContoller;
 use App\Http\Controllers\TramitesServicios\Ejercicios\Declaraciones\Normal\EjercicioAController;
 use App\Http\Controllers\TramitesServicios\Actividades\Declaraciones\Normal\ActividadAController;
 use App\Http\Controllers\usersEjerciciosController;
+use App\Http\Middleware\CheckCanLogin;
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', CheckCanLogin::class])->group(function () {
 
     // Ruta de Creación
     Route::get('/crear/ejercicio', [CrearEjercicioController::class, 'index'])->name('index.crear.ejercicio');
@@ -61,6 +62,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/urp/eliminar-permiso', [AdminPanelContoller::class, 'eliminarPermiso'])->name('panel.admin.permiso.eliminar');
         Route::post('/urp/eliminar/permiso-del-usuario', [AdminPanelContoller::class, 'eliminarPermisodelUsuario'])->name('panel.admin.eliminar.permiso.usuario');
 
+
+        Route::post('/urp/permitir-acceso', [AdminPanelContoller::class, 'permitirAcceso'])->name('panel.admin.permitir.acceso');
 
 
         // apis

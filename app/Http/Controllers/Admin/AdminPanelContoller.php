@@ -23,13 +23,19 @@ class AdminPanelContoller extends Controller
 
         $this->middleware('can:panel-control')->only('vistaURP');
         $this->middleware('can:panel-control')->only('vistaRol');
-        $this->middleware('can:panel-control')->only('vistaUsuario');
+        $this->middleware('can:panel-control')->only('crearRol');
+        $this->middleware('can:panel-control')->only('eliminarRol');
         $this->middleware('can:panel-control')->only('guardarPermisosDelRol');
         $this->middleware('can:panel-control')->only('guardarRolesMasivos');
         $this->middleware('can:panel-control')->only('guardarRoles');
-        $this->middleware('can:panel-control')->only('eliminarRol');
-
+        $this->middleware('can:panel-control')->only('eliminarRoldelUsuario');
+        $this->middleware('can:panel-control')->only('vistaUsuario');
+        $this->middleware('can:panel-control')->only('vistaPermiso');
+        $this->middleware('can:panel-control')->only('crearPermiso');
+        $this->middleware('can:panel-control')->only('eliminarPermiso');
         $this->middleware('can:panel-control')->only('guardarPermisos');
+        $this->middleware('can:panel-control')->only('guardarRolesDelPermiso');
+        $this->middleware('can:panel-control')->only('eliminarPermisodelUsuario');
     }
 
     public function index()
@@ -433,7 +439,7 @@ class AdminPanelContoller extends Controller
         }
     }
 
-    public function guardarRolesDelPermiso(Request $request, $id)
+    public function guardarRolesDelPermiso(Request $request, $id) // Guarda los roles seleccionados para un permiso
     {
         DB::beginTransaction();
 
@@ -478,6 +484,48 @@ class AdminPanelContoller extends Controller
             DB::rollBack();
             return response()->json([
                 'message' => 'Error al eliminar el permiso',
+                'error' => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+
+    public function permitirAcceso(Request $request) // Permitir acceso a un usuario
+    {
+        DB::beginTransaction();
+        try {
+            $usuario = User::findOrFail($request->usuarioId);
+            $estado = $request->estado;
+
+            // Verificar si el usuario es "admin@gmail.com"
+            if ($usuario->email === 'admin@gmail.com') {
+                return response()->json([
+                    'message' => 'No se puede modificar el acceso del usuario "admin"',
+                ], 403);
+            }
+
+            if (!$estado == 1) {
+                $usuario->can_login = 1;
+                $usuario->save();
+                DB::commit();
+                return response()->json([
+                    'message' => 'Acceso permitido correctamente',
+                    'update' => $usuario,
+                ], 200);
+            } else {
+                // Si el estado es 0, se deniega el acceso
+                $usuario->can_login = 0;
+                $usuario->save();
+                DB::commit();
+                return response()->json([
+                    'message' => 'Acceso denegado correctamente',
+                    'update' => $usuario,
+                ], 200);
+            }
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Error al permitir el acceso',
                 'error' => $th->getMessage(),
             ], 500);
         }

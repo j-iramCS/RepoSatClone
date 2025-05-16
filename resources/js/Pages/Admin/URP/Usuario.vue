@@ -17,19 +17,41 @@
         </div>
 
         <div class="bg-white dark:bg-gray-900 p-6 shadow-md rounded-lg dark:text-white">
-            <div class="flex gap-2 items-center">
-                <Icon icon="mingcute:user-3-fill" class="text-5xl text-blue-500" />
-                <div class="">
-                    <p class="uppercase font-bold text-xl">{{ props.usuario.name }}</p>
-                    <p class="text-gray-500">{{ props.usuario.email }}</p>
+            <div class="flex gap-2 items-center justify-between">
+                <div class="flex gap-2 items-center">
+                    <Icon icon="mingcute:user-3-fill" class="text-5xl text-blue-500" />
+                    <div class="">
+                        <p class="uppercase font-bold text-xl">{{ props.usuario.name }}</p>
+                        <p class="text-gray-500">{{ props.usuario.email }}</p>
+                    </div>
                 </div>
+
+                <label class="flex items-center" :class="props.usuario.id === 1 ? 'cursor-not-allowed' : 'cursor-pointer'">
+                    <!-- Switch -->
+                    <div class="relative">
+                        <input @click="permitirAcceso(props.usuario.can_login)" type="checkbox" class="sr-only peer"
+                            :checked="props.usuario.can_login" :disabled="props.usuario.id === 1" />
+                        <div class="w-11 h-6 bg-gray-300 rounded-full peer-checked:bg-blue-500 transition-colors">
+                        </div>
+                        <div
+                            class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-all peer-checked:translate-x-5">
+                        </div>
+                    </div>
+                    <!-- Label opcional -->
+                    <span class="ml-3 text-gray-700">Permitir Acceso</span>
+                </label>
             </div>
 
-            <p class="pt-5">Fecha del registro</p>
-            <p class="text-gray-500">
-                {{ new Date(props.usuario.created_at).toLocaleDateString('es-ES') }}
-            </p>
+            <div>
+                <p class="pt-5">Fecha del registro</p>
+                <p class="text-gray-500">
+                    {{ new Date(props.usuario.created_at).toLocaleDateString('es-ES') }}
+                </p>
+            </div>
         </div>
+
+
+
 
         <!-- Tabs -->
         <div class="border-b dark:border-gray-600 mb-5 flex gap-1 flex-wrap mt-5">
@@ -123,6 +145,7 @@ interface User {
     id: number;
     name: string;
     email: string;
+    can_login: boolean;
     created_at: string;
 }
 
@@ -216,6 +239,31 @@ const checkeadosPermisos = async () => {
     }
 };
 
+const permitirAcceso = async (estado: boolean) => {
+    toast.info(ToastLoading, {
+        closeOnClick: false,
+        hideProgressBar: true,
+        timeout: 0,
+        draggable: false,
+        closeButton: false,
+        icon: false,
+    });
+    try {
+        const response = await axios.post(route('panel.admin.permitir.acceso'), {
+            usuarioId: props.usuario.id,
+            estado: estado
+        });
+        toast.clear();
+        toast.success(response.data.message, {
+            timeout: 2000,
+        });
+    } catch (error: any) {
+        toast.clear();
+        toast.error(error.response.data.message, {
+            timeout: 2000,
+        });
+    }
+};
 
 
 </script>
