@@ -2,8 +2,9 @@
     <Main>
 
         <div class="py-5 flex gap-1 text-gray-600">
-            <Link :href="route('panel.admin')" class="hover:text-blue-500 hover:underline">Inicio</Link>/
+            <Link :href="route('panel.admin')" class="hover:text-blue-500 hover:underline">Panel-Control</Link>/
             <Link :href="route('panel.admin.urp')" class="hover:text-blue-500 hover:underline">URP</Link>/
+            <span class="hover:text-blue-500 hover:underline font-bold text-blue-500">Permiso - {{ props.permiso.name }}</span>/
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -32,7 +33,7 @@
                     <button @click="guardarCheckRoles"
                         class="bg-blue-500 text-white px-2 py-2 flex gap-2 items-center justify-center rounded-md shadow-sm mt-5 active:scale-90 transition-transform duration-100">
                         <Icon icon="mingcute:bookmark-add-fill" class="text-xl" />
-                        <p class="m-0 p-0 font-bold text-md">Guardar Roles</p>
+                        <p class="m-0 p-0 font-bold text-md">Aplicar</p>
                     </button>
                     <button @click="eliminarPermiso"
                         class="bg-red-500 text-white px-2 py-2 flex gap-2 items-center justify-center rounded-md shadow-sm mt-5 active:scale-90 transition-transform duration-100">

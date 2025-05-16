@@ -2,8 +2,9 @@
     <Main>
 
         <div class="py-5 flex gap-1 text-gray-600 dark:text-green-300">
-            <Link :href="route('panel.admin')" class="hover:text-blue-500 hover:underline">Inicio</Link>/
+            <Link :href="route('panel.admin')" class="hover:text-blue-500 hover:underline">Panel-Control</Link>/
             <Link :href="route('panel.admin.urp')" class="hover:text-blue-500 hover:underline">URP</Link>/
+            <span class="hover:text-blue-500 hover:underline font-bold text-blue-500">Administración-Usuario</span>/
         </div>
 
         <div class="mb-8">

@@ -14,26 +14,54 @@
         </div>
 
         <!-- Modal en medio que muestra un mensaje si tiene_ejercicios  == false -->
-        <div v-if="!tiene_ejercicios" class="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-xl mx-auto text-center relative">
+        <div v-if="!tiene_ejercicios"
+            class="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-md z-50 animate-fadeIn"
+            @click="tiene_ejercicios = true">
+
+            <!-- Modal Card -->
+            <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-8 max-w-md w-11/12 text-center relative border border-indigo-100 dark:border-indigo-900 animate-zoomIn overflow-hidden"
+                @click.stop>
+
+                <!-- Decorative Background Pattern -->
+                <!-- <div class="absolute -top-32 -right-32 w-64 h-64 bg-indigo-600/10 rounded-full"></div>
+                <div class="absolute -bottom-32 -left-32 w-64 h-64 bg-indigo-600/10 rounded-full"></div> -->
+
+                <!-- Close Button -->
                 <button @click="tiene_ejercicios = true"
-                    class="absolute top-2 right-2 p-1 rounded-full text-gray-500 hover:bg-gray-100 hover:text-gray-700 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-500">
-                    <Icon icon="material-symbols:close" class="text-lg" />
+                    class="absolute top-3 right-3 p-1.5 rounded-full text-gray-400 hover:text-gray-700 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
                 </button>
-                <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Aún no tienes ejercicios creados
-                </h2>
-                <p class="text-gray-600 dark:text-gray-400 mb-4">
-                    Para comenzar una actividad necesitas al menos un ejercicio creado. ¿Qué te parece si primero
-                    creamos uno?
+
+                <!-- Content -->
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">Aún no tienes ejercicios</h2>
+
+                <p class="text-gray-500 dark:text-gray-400 mb-6 max-w-xs mx-auto">
+                    Para comenzar una actividad necesitas crear al menos un ejercicio.
                 </p>
+
+                <!-- Info Box -->
+                <div
+                    class="mb-8 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/30 dark:to-purple-900/30 p-5 rounded-xl border border-indigo-100 dark:border-indigo-800/50">
+                    <span class="font-semibold text-indigo-700 dark:text-indigo-300">No te preocupes, Te guiaremos para
+                        crear tu primer ejercicio. ¡Es muy sencillo!</span>
+                </div>
+
+                <!-- Action Button -->
                 <Link :href="route('index.crear.ejercicio')"
-                    class="text-indigo-500 hover:underline flex gap-2 justify-center items-center">
-                <span>
-                    Crear mi primer ejercicio
-                </span>
-                <!-- icon arrow -->
-                <Icon icon="material-symbols:arrow-right-alt" class="text-indigo-500 ml-2" />
+                    class="group w-full bg-blue-600 text-white py-3.5 px-6 rounded-xl font-medium duration-100 hover:shadow-xl flex items-center justify-center relative overflow-hidden active:scale-90 transition-all">
+
+                <span class="relative text-base font-bold">Comenzar</span>
+                <Icon icon="mingcute:arrow-right-fill" class="text-2xl relative ml-2" />
                 </Link>
+
+                <!-- Bottom Text -->
+                <p class="mt-4 text-xs text-gray-500 dark:text-gray-500">
+                    Podrás crear más ejercicios después
+                </p>
             </div>
         </div>
 
@@ -47,9 +75,10 @@
                         <h2 class="text-2xl font-bold dark:text-gray-300">Crear Actividad</h2>
                     </div>
                 </div>
-                <h1 class="text-3xl md:text-4xl font-bold mb-4 dark:text-white text-center md:text-start">¡Comencemos a <span
-                        class="underline decoration-red-500">definir</span> que tipo de <span
-                        class=" rounded-lg text-red-500">Actividad</span> quieres realizar!</h1>
+                <h1 class="text-3xl md:text-4xl font-bold mb-4 dark:text-white text-center md:text-start">¡Comencemos a
+                    <span class="underline decoration-red-500">definir</span> que tipo de <span
+                        class=" rounded-lg text-red-500">Actividad</span> quieres realizar!
+                </h1>
                 <p class="text-blue-600 text-center md:text-start">Sigue las indicaciones para continuar.</p>
             </div>
             <!-- Contenedor principal de tarjetas -->

@@ -2,7 +2,8 @@
     <Main>
 
         <div class="py-5 flex gap-1 text-gray-600 dark:text-gray-300">
-            <Link :href="route('panel.admin')" class="hover:text-blue-500 hover:underline">Inicio</Link>/
+            <Link :href="route('panel.admin')" class="hover:text-blue-500 hover:underline">Panel-Control</Link>/
+            <Link :href="route('panel.admin.urp')" class="hover:text-blue-500 hover:underline font-bold text-blue-500">URP</Link>/
         </div>
 
         <div class="flex items-center mb-4 gap-4">
@@ -14,7 +15,7 @@
         </div>
         <p class="text-gray-600 dark:text-gray-300">Administracion de todo el URP</p>
 
-        <div class="grid grid-cols-2 gap-4 py-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 py-5">
             <!-- Caja 1 -->
             <div class="flex gap-2 items-start">
                 <!-- Tabs RP -->
@@ -32,9 +33,13 @@
                 </div>
 
                 <!-- Contenido principal -->
-                <div class="px-6 py-4 bg-white rounded-lg shadow-md dark:bg-gray-900 w-full">
-                    <div v-if="tabRP === 'permisos'">
-                        <h1 class="text-xl font-semibold dark:text-white">Crear Permiso</h1>
+                <div class="bg-white rounded-lg shadow-md dark:bg-gray-900 w-full">
+                    <div v-if="tabRP === 'permisos'" class="relative overflow-hidden px-6 py-4">
+                        <div class="absolute -top-40 -left-32 w-64 h-64 bg-red-600/10 rounded-full -z-0"></div>
+                        <div class="flex gap-2 items-center">
+                            <Icon icon="mingcute:key-2-fill" class="text-2xl text-red-500" />
+                            <h1 class="text-xl font-semibold dark:text-white">Crear Permiso</h1>
+                        </div>
                         <p class="text-xs text-gray-600 dark:text-gray-300">Crear un nuevo permiso para el sistema</p>
                         <Input type="text" v-model="formCrearPermiso.permiso_nombre" custom-class="mt-2" :class="'my-2'"
                             placeholder="Nombre del permiso" clearable />
@@ -45,8 +50,12 @@
                             <p class="m-0 p-0 font-bold text-md">Guardar</p>
                         </button>
                     </div>
-                    <div v-if="tabRP === 'roles'">
-                        <h1 class="text-xl font-semibold dark:text-white">Crear Rol</h1>
+                    <div v-if="tabRP === 'roles'" class="relative overflow-hidden px-6 py-4">
+                        <div class="absolute -top-40 -left-32 w-64 h-64 bg-green-600/10 rounded-full -z-0"></div>
+                        <div class="flex gap-2 items-center">
+                            <Icon icon="mingcute:box-3-fill" class="text-2xl text-green-500" />
+                            <h1 class="text-xl font-semibold dark:text-white">Crear Rol</h1>
+                        </div>
                         <p class="text-xs text-gray-600 dark:text-gray-300">Crear un nuevo rol para el sistema</p>
                         <Input type="text" v-model="formCrearRol.rol_nombre" custom-class="mt-2" :class="'my-2'"
                             placeholder="Nombre del Rol" clearable />
@@ -184,7 +193,7 @@
         </div>
 
 
-        <div class="bg-white dark:bg-gray-900 p-6 shadow-md rounded-lg dark:text-white mt-20 md:mt-0">
+        <div class="bg-white dark:bg-gray-900 p-6 shadow-md rounded-lg dark:text-white">
             <h1 class="text-xl font-semibold dark:text-white">Asignación de roles masivos</h1>
             <div class="grid grid-cols-2 my-5">
                 <!-- Roles -->
