@@ -92,7 +92,7 @@
                 <!-- Botón para empezar con el ejercicio (solo visible cuando todos los pasos están completados) -->
                 <template v-if="todosLosPasosCompletados">
                     <Link :href="route('index.actividad.declaracion.a')"
-                        class="relative h-64 w-52 border-3 overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex flex-col items-center justify-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl cursor-pointer group">
+                        class="relative h-64 w-52 border-3 overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex flex-col items-center justify-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl cursor-pointer group active:scale-90">
                     <!-- Elementos decorativos de fondo -->
                     <div
                         class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300">

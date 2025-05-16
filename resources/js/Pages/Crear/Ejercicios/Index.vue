@@ -55,7 +55,7 @@
                     </div>
                     <h3 class="font-semibold text-white text-xl mb-2 z-10">¡Vamos a comenzar!</h3>
                     <p class="text-center text-white/80 text-sm z-10 px-6">
-                        Tu actividad está lista para ser rellenada.
+                        Tu ejercicio está lista para ser rellenado.
                     </p>
                     </Link>
                 </template>
