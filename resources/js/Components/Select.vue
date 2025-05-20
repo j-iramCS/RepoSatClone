@@ -1,19 +1,14 @@
 <template>
     <div class="w-full">
-        <label
-            v-if="label"
-            :for="id"
-            class="block mb-1 text-sm font-medium text-white"
-        >
+        <label v-if="label" :for="id" class="block mb-1 text-sm font-medium dark:text-white">
             {{ label }}
             <span v-if="required" class="text-red-500">*</span>
         </label>
 
         <div class="relative w-full" ref="selectRef">
             <!-- Campo de selección principal -->
-            <div
-                @click="toggleDropdown"
-                class="flex mt-2 items-center justify-between dark:text-white w-full px-3 py-2 bg-transparent border rounded-md cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            <div @click="toggleDropdown"
+                class="flex items-center justify-between dark:text-white w-full px-3 py-2 bg-transparent border rounded-md cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 :class="[
                     isOpen ? 'border-blue-500' : 'border-gray-300 dark:border-gray-600',
                     v$.$error
@@ -21,39 +16,24 @@
                         : '',
                     disabled ? 'bg-gray-100 cursor-not-allowed text-white' : '',
                     customClass,
-                ]"
-            >
-                <div
-                    class="flex flex-wrap gap-1 items-center max-w-full overflow-hidden"
-                >
+                ]">
+                <div class="flex flex-wrap gap-1 items-center max-w-full overflow-hidden">
                     <!-- Mostrar etiquetas seleccionadas si es multiple -->
-                    <div
-                        v-if="multiple && selectedOptions.length > 0"
-                        class="flex flex-wrap gap-1"
-                    >
-                        <div
-                            v-for="option in selectedOptions"
-                            :key="option.value"
-                            class="flex items-center px-2 py-1 text-sm bg-blue-100 text-blue-800 rounded-md"
-                        >
+                    <div v-if="multiple && selectedOptions.length > 0" class="flex flex-wrap gap-1">
+                        <div v-for="option in selectedOptions" :key="option.value"
+                            class="flex items-center px-2 py-1 text-sm bg-blue-100 text-blue-800 rounded-md">
                             <span class="max-w-xs truncate">{{
                                 option.label
-                            }}</span>
-                            <button
-                                @click.stop="removeOption(option)"
-                                class="ml-1 text-blue-500 hover:text-blue-700"
-                                :disabled="disabled"
-                            >
+                                }}</span>
+                            <button @click.stop="removeOption(option)" class="ml-1 text-blue-500 hover:text-blue-700"
+                                :disabled="disabled">
                                 &times;
                             </button>
                         </div>
                     </div>
 
                     <!-- Mostrar opción seleccionada si no es multiple -->
-                    <div
-                        v-else-if="!multiple && internalValue"
-                        class="truncate"
-                    >
+                    <div v-else-if="!multiple && internalValue" class="truncate">
                         {{ getSelectedLabel }}
                     </div>
 
@@ -61,60 +41,36 @@
                     <div v-else class="text-gray-400">{{ placeholder }}</div>
                 </div>
 
-                <svg
-                    class="w-5 h-5 text-gray-400 transition-transform duration-150"
-                    :class="{ 'transform rotate-180': isOpen }"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M19 9l-7 7-7-7"
-                    ></path>
+                <svg class="w-5 h-5 text-gray-400 transition-transform duration-150"
+                    :class="{ 'transform rotate-180': isOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
             </div>
 
             <!-- Dropdown con las opciones -->
-            <div
-                v-show="isOpen && !disabled"
-                class="absolute z-10 w-full mt-1 dark:bg-slate-800 border border-gray-300 dark:border-gray-600 bg-white dark:text-white rounded-md shadow-lg max-h-60 overflow-auto"
-            >
+            <div v-show="isOpen && !disabled"
+                class="absolute z-10 w-full mt-1 dark:bg-slate-800 border border-gray-300 dark:border-gray-600 bg-white dark:text-white rounded-md shadow-lg max-h-60 overflow-auto">
                 <!-- Barra de búsqueda -->
-                <div
-                    v-if="searchable"
-                    class="sticky top-0 p-2  border-gray-300 dark:border-gray-600"
-                >
-                    <input
-                        v-model="searchQuery"
-                        type="text"
+                <div v-if="searchable" class="sticky top-0 p-2  border-gray-300 dark:border-gray-600">
+                    <input v-model="searchQuery" type="text"
                         class="w-full px-3 py-2 text-sm border bg-transparent border-gray-300 dark:border-gray-600 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        :placeholder="searchPlaceholder"
-                        @click.stop
-                        ref="searchInput"
-                    />
+                        :placeholder="searchPlaceholder" @click.stop ref="searchInput" />
                 </div>
 
                 <!-- Lista de opciones -->
                 <div v-if="filteredOptions.length > 0" class="py-1">
-                    <div
-                        v-for="option in filteredOptions"
-                        :key="option.value"
-                        @click.stop="selectOption(option)"
+                    <div v-for="option in filteredOptions" :key="option.value"
+                        @click.stop="!option.disabled && selectOption(option)"
                         class="px-3 py-2 cursor-pointer hover:bg-indigo-100 hover:text-slate-900 dark:text-white dark:hover:bg-slate-500"
-                        :class="{ 'bg-indigo-400 dark:bg-slate-600 text-white': isSelected(option) }"
-                    >
+                        :class="[
+                            isSelected(option) ? 'bg-indigo-400 dark:bg-slate-600 text-white' : '',
+                            option.disabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : ''
+                        ]">
                         <div class="flex items-center">
-                            <input
-                                v-if="multiple"
-                                type="checkbox"
-                                :checked="isSelected(option)"
+                            <input v-if="multiple" type="checkbox" :checked="isSelected(option)"
                                 class="w-4 h-4 mr-2 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                                @click.stop
-                            />
+                                @click.stop />
                             {{ option.label }}
                         </div>
                     </div>
@@ -129,11 +85,7 @@
 
         <!-- Mensajes de error de validación -->
         <template v-if="v$.$error">
-            <p
-                v-for="error in v$.$errors"
-                :key="error.$uid"
-                class="mt-1 text-sm text-red-600"
-            >
+            <p v-for="error in v$.$errors" :key="error.$uid" class="mt-1 text-sm text-red-600">
                 {{ getErrorMessage(error.$validator, error.$params) }}
             </p>
         </template>
@@ -218,12 +170,10 @@ if (
 const errorMessages = {
     required: "Este campo es obligatorio",
     minLength: (params: any) =>
-        `Debes seleccionar al menos ${params.min} ${
-            params.min === 1 ? "opción" : "opciones"
+        `Debes seleccionar al menos ${params.min} ${params.min === 1 ? "opción" : "opciones"
         }`,
     maxLength: (params: any) =>
-        `No puedes seleccionar más de ${params.max} ${
-            params.max === 1 ? "opción" : "opciones"
+        `No puedes seleccionar más de ${params.max} ${params.max === 1 ? "opción" : "opciones"
         }`,
 };
 

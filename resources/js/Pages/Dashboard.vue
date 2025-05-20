@@ -25,12 +25,14 @@
                     </div>
 
                     <div class="flex flex-col h-full">
-                        <div
-                            class="bg-white bg-opacity-20 w-8 h-8 md:w-12 md:h-12 rounded-lg flex items-center justify-center">
-                            <Icon icon="mdi:pencil-plus" class="text-white text-lg  md:text-2xl" />
-                        </div>
+                        <div class="flex gap-2 flex-wrap items-center mb-2">
+                            <div
+                                class="bg-white bg-opacity-20 w-8 h-8 md:w-12 md:h-12 rounded-lg flex items-center justify-center">
+                                <Icon icon="mdi:pencil-plus" class="text-white text-lg  md:text-2xl" />
+                            </div>
+                            <h3 class="text-lg md:text-xl font-bold text-white">Crear Actividad</h3>
 
-                        <h3 class="text-lg md:text-xl font-bold mb-2 text-white">Crear Actividad</h3>
+                        </div>
                         <p class="text-white text-opacity-80 mb-4 flex-grow">
                             Diseña actividades personalizadas y compártelas con toda la comunidad o con tu grupo de
                             estudio.
@@ -51,7 +53,7 @@
                 </div>
 
                 <!-- Crear Ejercicios -->
-                <div
+                <!-- <div
                     class="text-xs md:text-base group relative overflow-hidden bg-gradient-to-br from-blue-500 to-indigo-600 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16"></div>
                     <div class="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -ml-12 -mb-12">
@@ -74,13 +76,9 @@
                             <span>Crear</span>
                             <Icon icon="mdi:arrow-right" class="ml-1" />
                             </Link>
-                            <!-- <span class="text-white text-opacity-70 flex items-center">
-                                <Icon icon="mdi:star" class="mr-1" />
-                                Gratis
-                            </span> -->
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Ejercicios de la Comunidad -->
                 <div
@@ -90,12 +88,14 @@
                     </div>
 
                     <div class="flex flex-col h-full">
-                        <div
-                            class="bg-white bg-opacity-20 w-8 h-8 md:w-12 md:h-12 rounded-lg flex items-center justify-center">
-                            <Icon icon="mdi:pencil-plus" class="text-white text-lg  md:text-2xl" />
+                        <div class="flex gap-2 flex-wrap items-center mb-2">
+                            <div
+                                class="bg-white bg-opacity-20 w-8 h-8 md:w-12 md:h-12 rounded-lg flex items-center justify-center">
+                                <Icon icon="mdi:pencil-plus" class="text-white text-lg  md:text-2xl" />
+                            </div>
+                            <h3 class="text-lg md:text-xl font-bold text-white">Ejercicios de la Comunidad</h3>
                         </div>
 
-                        <h3 class="text-lg md:text-xl font-bold mb-2 text-white">Ejercicios de la Comunidad</h3>
                         <p class="text-white text-opacity-80 mb-4 flex-grow">
                             Explora ejercicios creados por otros usuarios. Practica con retos reales y variados.
                         </p>

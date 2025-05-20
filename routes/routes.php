@@ -11,7 +11,6 @@ use App\Http\Controllers\CrearActividadContoller;
 
 use App\Http\Controllers\Admin\AdminPanelContoller;
 use App\Http\Controllers\TramitesServicios\Ejercicios\Declaraciones\Normal\EjercicioAController;
-use App\Http\Controllers\TramitesServicios\Actividades\Declaraciones\Normal\ActividadAController;
 use App\Http\Controllers\usersEjerciciosController;
 use App\Http\Middleware\CheckCanLogin;
 
@@ -21,15 +20,12 @@ Route::middleware(['auth', CheckCanLogin::class])->group(function () {
     Route::get('/crear/ejercicio', [CrearEjercicioController::class, 'index'])->name('index.crear.ejercicio');
     Route::prefix('/crear/ejercicio/declaracion')->group(function () {
         // Ejercicio Obligacion A
-        Route::get('/provisional-normal-impuesto-valor-agregado-personas-fisicas', [EjercicioAController::class, 'index'])->name('index.ejercicio.obligacion.a');
-        Route::post('/provisional-normal-impuesto-valor-agregado-personas-fisicas', [EjercicioAController::class, 'store'])->name('store.ejercicio.obligacion.a');
+        Route::get('/provisional', [EjercicioAController::class, 'index'])->name('index.ejercicio.obligacion.a');
+        Route::post('/provisional', [EjercicioAController::class, 'store'])->name('store.ejercicio.obligacion.a');
     });
 
     Route::get('/crear/actividad', [CrearActividadContoller::class, 'index'])->name('index.crear.actividad');
     Route::prefix('/crear/actividad/declaracion')->group(function () {
-        // Actividad Declaracion A
-        Route::get('/provisional-normal-impuesto-valor-agregado-personas-fisicas', [ActividadAController::class, 'index'])->name('index.actividad.declaracion.a');
-        Route::post('/provisional-normal-impuesto-valor-agregado-personas-fisicas', [ActividadAController::class, 'store'])->name('store.actividad.declaracion.a');
     });
 
 

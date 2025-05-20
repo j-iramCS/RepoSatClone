@@ -1,6 +1,6 @@
 <template>
     <div class="w-full">
-        <label v-if="label" :for="id" class="block mb-1 text-sm font-medium text-white">
+        <label v-if="label" :for="id" class="block mb-1 text-sm font-medium dark:text-white">
             {{ label }}
             <span v-if="required" class="text-red-500">*</span>
         </label>
@@ -473,3 +473,23 @@ defineExpose({
     v$,
 });
 </script>
+
+
+
+
+<!-- COMO USAR EL INPUT  -->
+
+<!-- <Input
+  v-model="valor"
+  type="text" Tipo de input: text, number, email, password, etc.
+  label="Nombre completo" Etiqueta del campo 
+  placeholder="Ingresa tu nombre" Texto de placeholder 
+  required Marca el campo como obligatorio 
+  disabled Deshabilita el input 
+  readonly Hace el input de solo lectura 
+  clearable Muestra botón para limpiar el contenido
+  id="nombre-input" ID personalizado
+  maxlength="50" Máximo de caracteres permitidos
+  leftIcon="@" Icono a la izquierda 
+  rightIcon="mdi:email"  Icono a la derecha
+/> -->

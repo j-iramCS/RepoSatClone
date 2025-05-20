@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\TramitesServicios\Actividades\Declaraciones\Normal;
+namespace App\Http\Controllers\TramitesServicios\Actividades\Declaraciones\Anuales;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,7 +13,7 @@ use App\Models\Ejercicios;
 use App\Models\PeriodosHasPeriodicidades;
 use App\Models\TramitesServicios;
 
-class ActividadAController extends Controller
+class DeclaracionProvisionalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -71,13 +71,13 @@ class ActividadAController extends Controller
         ->where('A.tipo_ejercicio_id', 3)
         ->get();
 
-        return Inertia::render('Actividades/Declaraciones/Normal/A/Index', [
-            'catalogo_anios' => $catalogo_anios,
-            'catalogo_periodicidades' => $catalogo_periodicidades,
-            'total_periodos' => $total_periodos,
-            'tipos_declaracion' => $tipos_declaracion,
-            'ejercicios_impuesto_valor_agregado' => $ejercicios_impuesto_valor_agregado
-        ]);
+        // return Inertia::render('Actividades/Declaraciones/Normal/A/Index', [
+        //     'catalogo_anios' => $catalogo_anios,
+        //     'catalogo_periodicidades' => $catalogo_periodicidades,
+        //     'total_periodos' => $total_periodos,
+        //     'tipos_declaracion' => $tipos_declaracion,
+        //     'ejercicios_impuesto_valor_agregado' => $ejercicios_impuesto_valor_agregado
+        // ]);
     }
 
     /**

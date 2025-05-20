@@ -44,7 +44,7 @@ class InicialesSeeder extends Seeder
         $para_tramites = [
             ['titulo' => 'Provisionales y definitivas', 'disponible' => 1],
             ['titulo' => 'Declaraciones de plataformas tecnológicas', 'disponible' => 0],
-            ['titulo' => 'Anual', 'disponible' => 0],
+            ['titulo' => 'Anual', 'disponible' => 1],
             ['titulo' => 'Informativas', 'disponible' => 0],
             ['titulo' => 'Visores', 'disponible' => 0],
             ['titulo' => 'Derechos, productos y aprovechamientos (DPA)', 'disponible' => 0],

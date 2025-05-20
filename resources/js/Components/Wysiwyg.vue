@@ -20,9 +20,6 @@
                 <select @change="formatBlock(($event.target as HTMLSelectElement)?.value)"
                     class="p-1 border border-gray-300  rounded text-sm bg-transparent dark:border-gray-600 w-28" :value="currentBlockFormat">
                     <option value="" selected disabled>Formatos</option>
-                    <!-- <option value="h1">Título 1</option> -->
-                    <!-- <option value="h2">Título 2</option> -->
-                    <!-- <option value="h3">Título 3</option> -->
                     <option value="p">Párrafo</option>
                     <option value="blockquote">Cita</option>
                     <option value="pre">Código</option>
@@ -85,10 +82,6 @@
 
             <!-- Opciones adicionales -->
             <div class="flex items-center">
-                <!-- <button @click.prevent="execCommand('removeFormat')"
-                    class="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors" title="Limpiar formato" type="button">
-                    <Icon icon="mdi:eraser" class="w-4 h-4" />
-                </button> -->
                 <button @click.prevent="execCommand('undo')" class="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors"
                     title="Deshacer" type="button">
                     <Icon icon="mdi:undo" class="w-4 h-4" />
@@ -127,9 +120,6 @@
                     <Icon :icon="format.icon" class="w-4 h-4" />
                 </button>
             </div>
-
-            <!-- Resto de la barra de herramientas (código igual que la barra superior) -->
-            <!-- Omitido para brevedad -->
         </div>
 
         <!-- Contador de caracteres -->

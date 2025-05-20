@@ -31,3 +31,4 @@ Route::middleware(['auth', CheckCanLogin::class])->group(function () {
 
 require __DIR__.'/auth.php';
 require __DIR__.'/routes.php';
+require __DIR__.'/routesDeclaracionAnual.php';

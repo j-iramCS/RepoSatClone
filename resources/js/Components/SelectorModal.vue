@@ -1,6 +1,6 @@
 <!-- SelectorPaso.vue -->
 <template>
-    <ModalFiscal :title="title" :data="data" :modelValue="modelValue" @update:modelValue="$emit('update:modelValue', $event)" @select-tramite="onItemSelected">
+    <ModalFiscal :title="title" :data="data" :modelValue="modelValue" :disponible="disponible" @update:modelValue="$emit('update:modelValue', $event)" @select-tramite="onItemSelected">
         <template #button-open="{ selectedDato }">
             <div v-if="selectedDato"
                 class="h-64 w-52 group relative overflow-hidden bg-gradient-to-br from-indigo-500 to-indigo-700 dark:from-indigo-700 dark:to-indigo-900 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
@@ -39,7 +39,13 @@
                 </div>
             </div>
             <div v-else
-                class="relative border-2 h-64 w-52 border-3 border-dashed rounded-2xl bg-white/5 dark:bg-indigo-900/10 border-indigo-300 dark:border-indigo-600 flex flex-col items-center justify-center gap-4 p-6 transition-all duration-300 hover:border-indigo-400 dark:hover:border-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-800/20 transform hover:-translate-y-1 shadow-sm hover:shadow-lg active:scale-90 cursor-pointer">
+                :class="{
+                    'relative border-2 h-64 w-52 border-3 border-dashed rounded-2xl bg-white/5 dark:bg-indigo-900/10 border-indigo-300 dark:border-indigo-600 flex flex-col items-center justify-center gap-4 p-6 transition-all duration-300 hover:border-indigo-400 dark:hover:border-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-800/20 transform hover:-translate-y-1 shadow-sm hover:shadow-lg active:scale-90 cursor-pointer': disponible,
+                    'relative border-2 h-64 w-52 border-3 border-dashed rounded-2xl bg-gray-200 dark:bg-gray-700 border-gray-400 dark:border-gray-600 flex flex-col items-center justify-center gap-4 p-6 cursor-not-allowed opacity-50': !disponible
+                }"
+                :tabindex="disponible ? 0 : -1"
+                :aria-disabled="!disponible"
+            >
                 <div
                     class="w-16 h-16 bg-indigo-100 dark:bg-indigo-800/30 rounded-full flex items-center justify-center mb-2">
                     <Icon icon="hugeicons:add-01" class="text-4xl text-indigo-500 dark:text-indigo-300" />
@@ -62,7 +68,6 @@ interface Types {
     id: number;
     titulo: string;
     descripcion: string;
-    disponible: boolean;
 }
 
 interface Paso {
@@ -80,6 +85,7 @@ const props = defineProps<{
     title: string;
     data: Types[];
     modelValue: number | null;
+    disponible: boolean;
 }>();
 
 const emit = defineEmits<{

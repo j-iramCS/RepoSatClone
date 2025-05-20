@@ -15,7 +15,7 @@
 
         <!-- Modal en medio que muestra un mensaje si tiene_ejercicios  == false -->
         <div v-if="!tiene_ejercicios"
-            class="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-md z-50 animate-fadeIn"
+            class="hidden fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-md z-50 animate-fadeIn"
             @click="tiene_ejercicios = true">
 
             <!-- Modal Card -->
@@ -85,22 +85,16 @@
             <div class="flex flex-wrap gap-6 justify-center w-full text-white mt-24 lg:mt-6">
                 <!-- Componente genérico para cada paso del flujo de selección -->
                 <SelectorModal v-for="(paso, index) in pasos" :key="paso.id" v-show="debeMostrarPaso(index)"
-                    :paso="paso" :title="paso.modalTitle" :data="paso.data" v-model="paso.selectedId"
-                    @select-item="(item) => onItemSelected(index, item)"
+                    :disponible="paso.disponible" :paso="paso" :title="paso.modalTitle" :data="paso.data"
+                    v-model="paso.selectedId" @select-item="(item: any) => onItemSelected(index, item)"
                     @remove-selection="(e) => quitarSeleccion(e, index)" />
 
                 <!-- Botón para empezar con el ejercicio (solo visible cuando todos los pasos están completados) -->
                 <template v-if="todosLosPasosCompletados">
-                    <Link :href="route('index.actividad.declaracion.a')"
-                        class="relative h-64 w-52 border-3 overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex flex-col items-center justify-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl cursor-pointer group active:scale-90">
+                    <Link :href="route(routeLink)"
+                        class="relative h-64 w-52 border-3 overflow-hidden bg-red-500 rounded-2xl flex flex-col items-center justify-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl cursor-pointer group active:scale-90">
                     <!-- Elementos decorativos de fondo -->
-                    <div
-                        class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/20 to-transparent">
-                    </div>
-                    <div
-                        class="absolute -inset-1 bg-emerald-500 opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-300">
+                    <div class="absolute bottom-0 left-0 right-0 h-1/2">
                     </div>
 
                     <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-4 z-10">
@@ -120,10 +114,9 @@
 
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { Link } from "@inertiajs/vue3";
 import Main from "@/Layouts/Main.vue";
-import ModalFiscal from "@/Components/ModalFiscal.vue";
 import SelectorModal from "@/Components/SelectorModal.vue";
 
 // Definición de tipos
@@ -142,6 +135,7 @@ interface Paso {
     selectedData: Types | null;
     label: string;
     placeholder: string;
+    disponible: boolean;
 }
 
 const props = defineProps<{
@@ -153,6 +147,8 @@ const props = defineProps<{
 }>();
 
 const tiene_ejercicios = ref(props.tiene_ejercicios);
+const ultimosDatos = ref<any[]>([]);
+const routeLink = ref<string>('');
 
 // Configuración de los pasos
 const pasos = ref<Paso[]>([
@@ -163,7 +159,8 @@ const pasos = ref<Paso[]>([
         selectedId: null,
         selectedData: null,
         label: 'Trámite Fiscal',
-        placeholder: 'Selecciona un trámite o servicio fiscal.'
+        placeholder: 'Selecciona un trámite o servicio fiscal.',
+        disponible: true
     },
     {
         id: 'declaracion',
@@ -172,26 +169,27 @@ const pasos = ref<Paso[]>([
         selectedId: null,
         selectedData: null,
         label: 'Tipo de Declaración',
-        placeholder: 'Selecciona un tipo de declaración.'
+        placeholder: 'Selecciona un tipo de declaración.',
+        disponible: true
     },
-    {
-        id: 'obligacion',
-        modalTitle: 'Selecciona un tipo de obligación',
-        data: props.tipo_obligacion,
-        selectedId: null,
-        selectedData: null,
-        label: 'Tipo de Obligación',
-        placeholder: 'Selecciona un tipo de obligación.'
-    },
-    {
-        id: 'tipo_declaracion',
-        modalTitle: 'Selecciona un tipo de declaración',
-        data: props.tipo_declaracion,
-        selectedId: null,
-        selectedData: null,
-        label: 'Tipo de Declaración',
-        placeholder: 'Selecciona un tipo de declaración.'
-    }
+    // {
+    //     id: 'obligacion',
+    //     modalTitle: 'Selecciona un tipo de obligación',
+    //     data: props.tipo_obligacion,
+    //     selectedId: null,
+    //     selectedData: null,
+    //     label: 'Tipo de Obligación',
+    //     placeholder: 'Selecciona un tipo de obligación.'
+    // },
+    // {
+    //     id: 'tipo_declaracion',
+    //     modalTitle: 'Selecciona un tipo de declaración',
+    //     data: props.tipo_declaracion,
+    //     selectedId: null,
+    //     selectedData: null,
+    //     label: 'Tipo de Declaración',
+    //     placeholder: 'Selecciona un tipo de declaración.'
+    // }
 ]);
 
 // Método para mostrar un paso según el estado de los anteriores
@@ -228,6 +226,30 @@ const quitarSeleccion = (event: Event, pasoIndex: number) => {
 const todosLosPasosCompletados = computed(() => {
     return pasos.value.every(paso => paso.selectedId !== null);
 });
+
+// Watcher para detectar cambios en los pasos
+watch(
+    () => pasos.value.map(paso => paso.selectedId),
+    (newValues, oldValues) => {
+        ultimosDatos.value = newValues;
+
+        // Definir las combinaciones y sus rutas correspondientes
+        const routeCombinations = {
+            '1,9': 'index.declaracion.anual',  // Ruta cuando la combinación es [1, 9]
+            // '1,1': 'ruta.para.ti',  // Ruta cuando la combinación es [1, 1]
+        };
+
+        // Convertir el array a string para comparar
+        const currentCombination = newValues.join(',');
+
+        // Buscar la ruta correspondiente o usar una por defecto
+        routeLink.value = routeCombinations[currentCombination as keyof typeof routeCombinations] || 'ruta.por.defecto';
+    },
+    { deep: true }
+);
+
+
+
 </script>
 
 <style></style>
